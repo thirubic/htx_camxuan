@@ -4,7 +4,7 @@ import { CardSettingsModel, SwimlaneSettingsModel, DialogSettingsModel, DialogEv
 import { DataManager, UrlAdaptor } from '@syncfusion/ej2-data';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 // import { Ins_gsluongComponent } from './ins_gsluongi.component';
-// import { View_GsluongComponent } from './view_cvcuatoi.component';
+import { View_ctluongComponent } from './view_ctluong.component';
 import { Options } from '@angular-slider/ngx-slider';
 import { CongviecphatsinhService } from '@app/_services/congviec/congviecphatsinh.service';
 import { environment } from '@environments/environment';
@@ -17,6 +17,7 @@ import { PhanxuongService } from "@app/_services/danhmuc/phanxuong.service";
 import { NhapluongService } from '@app/_services/danhmuc/nhapluong.service';
 import { DuongService } from '@app/_services/danhmuc/a_duong.service';
 import { LuongphanService } from '@app/_services/danhmuc/luongphan.service';
+import { GiamsatluongService } from '@app/_services/danhmuc/giamsatluong.service';
 
 @Component({
   selector: 'app-gsluong',
@@ -38,6 +39,7 @@ export class GsluongComponent {
     private xuongService: PhanxuongService,
     private duongService: DuongService,
     private luongphanService: LuongphanService,
+    private giamsatluongService: GiamsatluongService,
   ) { }  
   macongviec_input = '';
   myParam: any;
@@ -62,7 +64,7 @@ export class GsluongComponent {
   totalItems = 0;
   term : string = '';
   p: number = 1;
-  
+
   options: Options = {
     floor: 0,
     ceil: 100,
@@ -87,9 +89,9 @@ export class GsluongComponent {
 
   ];
   public cardSettings: CardSettingsModel = {
-    contentField: 'noidung',
-    headerField: 'ma_congviec',
-    showHeader: true
+    contentField: 'mota',
+    headerField: 'ma_luong',
+    showHeader: false
   };
   public swimlaneSettings: SwimlaneSettingsModel = {
     keyField: '',
@@ -156,23 +158,23 @@ export class GsluongComponent {
   }
 
   editcard(data) {
-    // const initialState = { title: "Chỉnh sửa công việc", data: data };
-    // this.hide_title = false;
-    // this.modalRef = this.modalService.show(
-    //   Ins_gsluongComponent,
-    //   Object.assign({}, {
-    //     animated: true, keyboard: false, backdrop: false, ignoreBackdropClick: true
-    //   }, {
-    //     class: 'modal-lg xlg', initialState
-    //   }));
+    const initialState = { title: "Chi tiết luống", data: data };
+    this.hide_title = false;
+    this.modalRef = this.modalService.show(
+      View_ctluongComponent,
+      Object.assign({}, {
+        animated: true, keyboard: false, backdrop: false, ignoreBackdropClick: true
+      }, {
+        class: 'modal-lg xlg', initialState
+      }));
 
-    // this.modalRef.content.event
-    //   .subscribe(arg => {
-    //     if (arg) {
-    //       this.get_danhsachcongviecgiao();
-    //       this.hide_title = true;
-    //     }
-    //   });
+    this.modalRef.content.event
+      .subscribe(arg => {
+        if (arg) {
+          this.get_danhsachcongviecgiao();
+          this.hide_title = true;
+        }
+      });
   }
   public Delete(key) {
     console.log(key);
@@ -218,41 +220,45 @@ export class GsluongComponent {
 
   }
   onKanbanBDragStop(args: DragEventArgs) {
-    var ma_congviecDrag = args.data[0].ma_congviec;
-    var nguoi_chutriDrag = args.data[0].nguoi_chutri;
-    var trangthaiDrag = args.data[0].keyfield;
-    var tylehoanthanh = Number(args.data[0].tile_hoanthanh);
-    if (nguoi_chutriDrag != this.Ma_nhanvien) {
-      this.get_danhsachcongviecgiao();
-      this.toastr.warning(
-        'Chỉ được thay đổi trạng thái công việc anh/chị chủ trì',
-        'Cảnh báo',
-        {
-          timeOut: 3000,
-          closeButton: true,
-          positionClass: 'toast-bottom-right',
-        }
-      );
-      return;
-    }
-    if (trangthaiDrag == '2' && tylehoanthanh < 100) {
-      this.get_danhsachcongviecgiao();
-      this.toastr.warning(
-        'Tỷ lệ hoàn thành nhỏ hơn 100 nên không thể chuyển trạng thái của công việc sang hoàn thành',
-        'Cảnh báo',
-        {
-          timeOut: 3000,
-          closeButton: true,
-          positionClass: 'toast-bottom-right',
-        }
-      );
-      return;
-    }
+    var ma_luong = args.data[0].ma_luong;    
+    var trangthai = args.data[0].keyfield;    
+    // if (nguoi_chutriDrag != this.Ma_nhanvien) {
+    //   this.get_danhsachcongviecgiao();
+    //   this.toastr.warning(
+    //     'Chỉ được thay đổi trạng thái công việc anh/chị chủ trì',
+    //     'Cảnh báo',
+    //     {
+    //       timeOut: 3000,
+    //       closeButton: true,
+    //       positionClass: 'toast-bottom-right',
+    //     }
+    //   );
+    //   return;
+    // }
+    // if (trangthaiDrag == '2' && tylehoanthanh < 100) {
+    //   this.get_danhsachcongviecgiao();
+    //   this.toastr.warning(
+    //     'Tỷ lệ hoàn thành nhỏ hơn 100 nên không thể chuyển trạng thái của công việc sang hoàn thành',
+    //     'Cảnh báo',
+    //     {
+    //       timeOut: 3000,
+    //       closeButton: true,
+    //       positionClass: 'toast-bottom-right',
+    //     }
+    //   );
+    //   return;
+    // }
 
-    this.congviecPSService.up_trangthai(ma_congviecDrag, trangthaiDrag, args.data[0].tile_hoanthanh)
+    const obj = {}
+    var model = {
+      "ma_luong": ma_luong,
+      "trangthai": trangthai}
+      ;    
+
+    this.giamsatluongService.capnhatrangthai(model)
       .subscribe(
         _data => {
-          this.send_data_realtime(args.data[0]);
+          this.getluong_trongduong();
         }
       );
 
@@ -264,6 +270,7 @@ export class GsluongComponent {
     // })
     //this.get_danhsachcongviecgiao(); 
     this.ma_xuong_select = this.ma_xuong_user;
+    console.log(this.ma_xuong_select);
     this.get_danhsachxuong();
     this.getduong_byphanxuong();
     this.getluong_trongduong();
@@ -386,9 +393,24 @@ export class GsluongComponent {
       this.luongphanService.get_byduong({"ma_duong":this.ma_duong_select})
         .subscribe(
           _data => {
-            this.dataluongs = _data;     
-                this.totalItems = _data.length;
-            this.p = 1;
+
+            this.data = [];
+            _data.forEach(element => {
+              if (element.keyfield == 1) {
+                element.keyfield = '1';
+              }
+              if (element.keyfield == 2) {
+                element.keyfield = '2';
+              }
+              if (element.keyfield == 3) {
+                element.keyfield = '3';
+              }
+              this.data.push(element);
+            }
+              );
+            console.log(this.data);   
+            //     this.totalItems = _data.length;
+            // this.p = 1;
           }
         );
     })

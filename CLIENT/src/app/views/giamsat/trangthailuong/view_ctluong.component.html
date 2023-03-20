@@ -1,0 +1,293 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="modal-header" style="display: flow-root;">
+    <button type="button" class="close" (click)="closed()">
+      <span aria-hidden="true">×</span>
+    </button>
+    <h4 class="modal-title" style="margin-bottom: 0px;">
+      <i style="margin-right: 10px; color: #17b799; font-size: 20px;" class="fa fa-plus-square"></i> {{title}}
+    </h4>
+  </div>
+  <div class="modal-body" style="background-color:#f2f2f2">
+    <div class="clearfix">
+      <div class="row">
+        <div class="col-sm-3" style="padding-right: 0;">
+          <div style="position: relative;overflow: hidden;width: auto;height: auto;">
+            <div
+              style="background-color: rgb(255, 255, 255); border-radius: 3px; overflow: hidden; width: auto; height: auto;">
+              <!-- Đơn vị chủ trì -->
+              <div style="position: relative; padding: 10px; border-bottom: 1px solid #f2f2f2;">
+                <h4 class="title-assignto">Đơn vị chủ trì</h4>
+                <div class="assignto-list">
+                  <ul class="products-list product-list-in-box todo-list">
+                    <li class="item">
+                      <div class="product-img">
+                        <img src="../../../../assets/images/home.PNG" alt="Giám đốc Công ty" style="cursor: pointer">
+                      </div>
+                      <div class="product-info"><span class="">{{donvichutri}}</span></div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- Đơn vị phối hợp-->
+              <div style="position: relative; padding: 10px; border-bottom: 1px solid #f2f2f2;">
+                <h4 class="title-assignto">Đơn vị phối hợp</h4>
+                <div class="assignto-list">
+                  <ul class="products-list product-list-in-box todo-list">
+                    <li *ngFor="let donviphoihop of danhsachdonviphoihop; let i = index" class="item">
+                      <div class="product-img">
+                        <img src="../../../../assets/images/home-alt.svg" style="cursor: pointer">
+                      </div>
+                      <div class="product-info"><span class="">{{donviphoihop.ten_dv}}</span></div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- người chủ trì -->
+              <div style="position: relative; padding: 10px; border-bottom: 1px solid #f2f2f2;">
+                <h4 class="title-assignto">Người chủ trì</h4>
+                <div class="assignto-list">
+                  <ul class="products-list product-list-in-box todo-list">
+                    <li class="item">
+                      <div class="product-img">
+                        <img src="{{serviceBase}}/{{anh_chutri}}"
+                          onerror="this.src='../../../../assets/images/icon_account.png';" style="cursor: pointer">
+                      </div>
+                      <div class="product-info"><span class="">{{ten_nguoichutri}}</span></div>
+                    </li>
+                  </ul>
+                </div>
+                <!-- danh sach nguoi thuc hien -->               
+              </div>
+              <!-- danh sách nguoi theo doi -->
+              <div style="position: relative; padding: 10px; border-bottom: 1px solid #f2f2f2;">
+                <h4 class="title-assignto">Danh sách người
+                  phối hợp</h4>
+                <div class="assignto-list">
+                  <ul class="products-list product-list-in-box todo-list">
+                    <li *ngFor="let nguoiphoihop of danhsachnguoiphoihop; let i = index" class="item">
+                      <div class="product-img">
+                        <img src="{{serviceBase}}/{{nguoiphoihop.hinhanh_phoihop}}"
+                          onerror="this.src='../../../../assets/images/icon_account.png';" style="cursor: pointer">
+                      </div>
+                      <div class="product-info"><span class="">{{nguoiphoihop.ten_phoihop}}</span></div>
+                    </li>
+                  </ul>
+                </div>                
+              </div>
+
+              <!-- Thông tin người giao -->
+              <div style="position: relative; padding: 10px; border-bottom: 1px solid #f2f2f2;">
+                <h4 class="title-assignto">Người
+                  giao việc</h4>
+
+                <div class="form-horizontal create-task" style="width: 100%;">
+                  <div class="assignto-list">
+                    <ul class="products-list product-list-in-box todo-list">
+                      <li class="item">
+                        <div class="product-img">
+                          <img src="{{serviceBase}}/{{anh_nguoigiao}}"
+                            onerror="this.src='../../../../assets/images/icon_account.png';" style="cursor: pointer">
+                        </div>
+                        <div class="product-info"><span class="">{{ten_nguoigiao}}</span></div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="form-group thongtinnguoigiao">
+                    <div class="col-sm-12"> <strong>Ngày giao: {{ngaygiao}}</strong></div>
+                  </div>
+                </div>
+              </div>
+              <!-- người giam sát -->
+              <div style="position: relative; padding: 10px; border-bottom: 1px solid #f2f2f2;">
+                <h4 class="title-assignto">Người giám sát</h4>
+
+                <div class="form-horizontal create-task" style="width: 100%;">
+                  <div class="assignto-list">
+                    <ul class="products-list product-list-in-box todo-list">
+                      <li class="item">
+                        <div class="product-img">
+                          <img src="{{serviceBase}}/{{anh_nguoigiamsat}}"
+                            onerror="this.src='../../../../assets/images/icon_account.png';" style="cursor: pointer">
+                        </div>
+                        <div class="product-info"><span class="">{{ten_nguoigiamsat}}</span></div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-9" style="padding-left: 0;">
+          <div style="position: relative; overflow: hidden; width: auto; height: auto;">
+            <div class="chitietcongviec">
+              <div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="row row-frm">
+                      <div class="col-sm-12">
+                        <div class="float-input" title="Tên công việc">
+                          <label class="disabled">Tên công việc:</label>
+                          <input readonly type="text" class="form-control unreadonly" formControlName="tencongviec" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row row-frm">
+                      <div class="col-sm-12">
+                        <div class="float-input" title="Nội dung thực hiện">
+                          <label class="disabled">Nội dung thực hiện</label>
+                          <textarea readonly type="text" placeholder="Nội dung thực hiện ..."
+                            class="textarea-dit noidungcongviec" formControlName="noidungcongviec"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="row row-frm">
+                      <div class="col-sm-8">
+                        <div class="float-input" title="Nguồn phát sinh">
+                          <label class="disabled">Nguồn phát sinh:</label>
+                          <input readonly type="text" class="form-control unreadonly" formControlName="nguonphatsinh" />
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="float-input" title="Độ ưu tiên">
+                          <label class="disabled">Độ ưu tiên:</label>
+                          <input readonly type="text" class="form-control unreadonly" formControlName="douutien" />
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <div class="row row-frm">
+                                        <div class="col-sm-12">
+                                          <div class="float-input" title="Văn bản liên quan">
+                                            <label class="disabled">Văn bản liên quan<span class="required"></span></label>
+                                            <input type="text" class="form-control">
+                                            <a (click)="attachfile()" style="position: absolute; z-index: 9; top: 4px; right: 5px;"><i
+                                                class="fa fa-file-text-o" style="color: #17b799; font-size: 25px;"></i> </a>
+                                          </div>
+                                        </div>
+                                      </div> -->
+                    <div class="row row-frm">
+                      <div class="col-sm-12">
+                        <div class="float-input" title="Văn bản đính kèm">
+
+                          <table class="table table-condensed table-striped table-bordered">
+                            <thead>
+                              <tr>
+                                <th class="col-sm-1">STT</th>
+                                <th class="col-sm-7">Tên File</th>
+                                <!-- <th class="col-sm-1"></th> -->
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let fileat of danhsachfile; let i = index">
+                                <td>{{i + 1 }}</td>
+                                <td>
+                                  <a *ngIf="fileat.id_file != null" href="{{serviceBase}}/{{fileat.duongdan_file_view}}"
+                                    target="_blank">{{ fileat.name }}</a>
+                                  <span *ngIf="fileat.id_file == null">{{ fileat.name }}</span>
+                                </td>
+                                <!-- <td>
+                                  <a href="javascript:void(0);">
+                                    <img src="../../../../assets/images/trash_16.png" alt="" (click)="deletefile(fileat, i)" />
+                                  </a>
+                                </td> -->
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <div class="row row-frm">
+                      <div class="col-sm-3">
+                        <div class="float-input" title="Ngày bắt đầu">
+                          <label class="disabled">Ngày bắt đầu</label>
+                            <input readonly type="text" class="form-control unreadonly" formControlName="ngaybatdau" />
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="float-input" title="Ngày kết thúc">
+                          <label class="disabled">Ngày kết thúc</label>
+                          <input readonly type="text" class="form-control unreadonly" formControlName="ngayketthuc" />              
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="float-input trangthai" title="Hoàn thành">
+                          <ngx-slider [options]="options" [formControl]="sliderControl" (mouseup)="onChangetyle()" ></ngx-slider>
+                        </div>
+                      </div>
+                      <!-- <div class="col-sm-2" style="text-align: right;">                    
+                        <button type="submit" class="btn btn-sm btn-primary save-task" style="background-color: #17B799;
+                        border-color: #109D90; height: 30px; padding-top: 0px;"><i class="fa fa-check"></i> Lưu</button>
+                      
+                    </div> -->
+                    </div>
+                  </div>
+                </div>
+
+                <!-- trao đổi công việc -->
+                <div class="borBot"></div>
+                <div id="divComments" class="box-collapse">
+                  <h4 class="title-task"><i class="fa fa-comments"></i>Trao đổi
+                    <button type="button" (click)="antraodoi()" title="Ẩn" class="btn btn-box-tool pull-right">
+                      <i *ngIf="showtraodoi==true" class="fa fa-minus"></i>
+                      <i *ngIf="showtraodoi==false" class="fa fa-plus"></i>
+                    </button>
+                  </h4>
+                  <div *ngIf="showtraodoi==true" class="box-task-comments">
+                    <div class="textarea-wrapper">
+                      <!-- <a *ngIf="showbtngui==true" (click)="anbuttongui()">
+                        <i class="fa fa-times" style="font-size: 16px; color: red;"></i>
+                      </a> -->
+                      <textarea class="textarea-dit" placeholder="Nội dung trao đổi ..." type="text"
+                      formControlName="noidung_binhluan" ></textarea>
+                        <a *ngIf="filedinhkem_bl!=''" (click)="deletefile()" class="xoa-file-bl">
+                          <i class="fa fa-times" style="font-size: 16px; color: red;"></i>
+                        </a>
+                      <span class="filedinhkem-bl">
+                        
+                        {{filedinhkem_bl}}</span>
+                      <div *ngIf="showbtngui==true" class="div-btn">
+                        <button type="button" (click)="guitraodoi()" class="btn btn-box-tool pull-right save-task">
+                          <i class="fa fa-paper-plane-o"> Gửi</i>
+                        </button>
+                        <input id="attachfiles" class="hidden" type="file" (change)="attachfile($event)"
+                          accept=".pdf,.doc*,.xls*" />
+                        <label for="attachfiles" class="pull-right save-task">
+                          <i class="fa fa-file-text-o btn-sen-file"> Đính kèm</i> </label>
+                      </div>
+                    </div>
+                    <div class="borBot"></div>
+                    <div class="assignto-list">
+                      <ul class="products-list product-list-in-box todo-list">
+                        <li class="item" *ngFor="let binhluan of danhsachbinhluan; let j = index">
+                          <div class="product-img">
+                            <img src="{{serviceBase}}/{{binhluan.hinhanh}}"
+                            onerror="this.src='../../../../assets/images/icon_account.png';" 
+                              style="cursor: pointer">
+                          </div>
+                          <div class="contentcomment">
+                            <p class="name-comment">{{binhluan.ten_nd}}</p>
+                            <p>
+                              <a href="{{serviceBase}}/{{binhluan.filedinhkem}}" target="_blank">{{binhluan.ten_file}}</a>
+                            </p>
+                            <p>{{binhluan.noidung_thaoluan}}
+                            </p>
+                            <p class="ngaycomment">{{binhluan.thoigian}}</p>
+                          </div>
+                          <div class="borBot"></div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

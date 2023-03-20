@@ -14,7 +14,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 //giám sát trạng thái luống phân
 import { GsluongComponent } from './trangthailuong/gsluong.component';
-// import { Ins_cvcuatoiComponent } from './cuatoi/ins_cvcuatoi.component';
+import { View_ctluongComponent } from './trangthailuong/view_ctluong.component';
 // import { View_cvcuatoiComponent  } from './cuatoi/view_cvcuatoi.component';
 // //Công việc chủ trì
 // import { CvduocgiaoComponent } from './cvduocgiao/cvduocgiao.component';
@@ -46,7 +46,7 @@ import { GsluongComponent } from './trangthailuong/gsluong.component';
         // CvphoihopComponent,Ins_cvphoihopComponent,
         // CvgiamsatComponent
 
-        GsluongComponent
+        GsluongComponent, View_ctluongComponent
         ]
 })
 export class AppGsModulue { }

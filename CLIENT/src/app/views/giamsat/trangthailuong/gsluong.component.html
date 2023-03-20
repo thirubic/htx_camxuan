@@ -74,34 +74,34 @@
     <ejs-kanban keyField='keyfield' [dataSource]='data' [cardSettings]='cardSettings'
       [swimlaneSettings]='swimlaneSettings' (dragStop)='onKanbanBDragStop($event)' (dialogOpen)="dialogOpen($event)">
       <e-columns>
-        <e-column headerText='Mới' keyField='0'></e-column>
-        <e-column headerText='Đang thực hiện' keyField='1'></e-column>
+        <e-column headerText='Mới' keyField= '1'></e-column>
+        <e-column headerText='Đang xử lý' keyField='2'></e-column>
         <!-- <e-column headerText='Chờ đánh giá' keyField='Testing'></e-column> -->
-        <e-column headerText='Hoàn thành' keyField='2'></e-column>
+        <e-column headerText='Hoàn thành' keyField='3'></e-column>
       </e-columns>
       <ng-template #cardSettingsTemplate let-data>
         <div class='e-card-content'>
-          <div *ngIf="data.trangthai != 2" class="edit-card-custom">
+          <div class="edit-card-custom">
             <a class="text-center tooltips c-pointer" (click)="editcard(data)"
               style="position: absolute; right: 30px; cursor:pointer;">              
               <i class="fa fa-edit" style="color: #11A34F; font-size: 20px;"></i>
             </a>
-            <a  class="text-center tooltips c-pointer" (click)="deleteCard(data)"
+            <!-- <a  class="text-center tooltips c-pointer" (click)="deleteCard(data)"
               style="position: absolute; right: 8px; cursor:pointer;">              
               <i class="fa fa-times-circle" style="color: red; font-size: 20px;"></i>
 
-            </a>
+            </a> -->
           </div>
           <table class="card-template-wrap">
             <tbody>
               <tr>
-                <td class="card-name-cs">{{data.ten_cv}}</td>
+                <td class="card-name-cs"> Tên Luống: {{data.ten_luong}}</td>
               </tr>
               <tr>
-                <td>{{data.noidung}}</td>
+                <td> Tên đường: {{data.ten_duong}}</td>
               </tr>
               <tr>
-                <div class="c-assignee">
+                <!-- <div class="c-assignee">
                   <td style="float: left;">
                     <img class="icon-assignee" src="{{serviceBase}}/{{data.hinhanh}}"
                     onerror="this.src='../../../../assets/images/icon_account.png';" alt="Ảnh đại diện" />
@@ -110,16 +110,16 @@
                   <td  *ngIf="data.tinh_chat==1" style="float: right;">
                     <p class="text-assignee do-uu-tien-cao"> Ưu tiên</p>
                   </td>
-                </div>
+                </div> -->
               </tr>
               <tr>
                 <div class="c-assignee">
                   <td>                    
-                    <p>{{data.ten_dv}}</p>
+                    <p>Mô tả: {{data.mota}}</p>
                   </td>
                 </div>
               </tr>
-              <tr>
+              <!-- <tr>
                 <td>
                   <img class="icon-time" src="../../../../assets/images/time.png" alt="Thời gian thực hiện" />
                   <p class="text-time">{{data.ngay_batdau}} -{{data.ngay_ketthuc}} </p>
@@ -129,7 +129,7 @@
                 <div class="float-input trangthai" title="Hoàn thành">
                   <ngx-slider [options]="options" [(value)]="data.tile_hoanthanh"></ngx-slider>
                 </div>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -139,14 +139,14 @@
           <div class="swimlane-template e-swimlane-template-table">
             <div class="e-swimlane-row-text">
               <img class="icon-time" src="../../../../assets/images/time.png"
-              alt="{{data.keyField}}" /><span>{{data.textField}}</span>
+              alt="{{data.ten_trangthai}}" /><span>{{data.ten_trangthai}}</span>
             </div>
           </div>
         </div>
       </ng-template>
     </ejs-kanban>
   </div>
-  <div class="sidebar-right">
+  <!-- <div class="sidebar-right">
     <ul class="sidebar-menu tree" data-widget="tree">
       <li class="treeview-dashboard" data-toggle="tooltip" data-placement="auto" title=""
         data-original-title="Xem công việc dạng tổng quan">
@@ -167,5 +167,5 @@
         </a>
       </li>
     </ul>
-  </div>
+  </div> -->
 </section>

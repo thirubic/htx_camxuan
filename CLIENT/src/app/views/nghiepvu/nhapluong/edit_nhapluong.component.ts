@@ -42,12 +42,12 @@ export class Edit_NhapluongComponent implements OnInit {
   fileattachs: any = [];
   danhsachfile: any = [];
   datavattu: any = [];
-  dataduong: any = [];
+  dataduongs: any = [];
   datadonvitinh: any = [];
   dataxuong: any = [];
   datakho: any = [];
   nhaptukho = 1;
-  dataluong: any = [];
+  dataluongs: any = [];
   loai_vattu = 1;
   dataloaivattu = [{ "loaivt_id": 1, "ten_loaivt": "Vật tư phục vụ sản xuất" }, { "loaivt_id": 2, "ten_loaivt": "Nguyên liệu" }];
   datatinhtrang = [{ "ttcl_id": 1, "ten_ttcl": "Tốt" }, { "ttcl_id": 2, "ten_ttcl": "Hỏng" }, { "ttcl_id": 3, "ten_ttcl": "Sắp hết hạn sử dụng" }]
@@ -251,7 +251,7 @@ export class Edit_NhapluongComponent implements OnInit {
     this.duongService.get_byphanxuong({ma_xuong:this.phanxuong})
       .subscribe(
         _data => {
-          this.dataduong = _data;
+          this.dataduongs = _data;
         }
       );
   }
@@ -260,7 +260,7 @@ export class Edit_NhapluongComponent implements OnInit {
       this.luongphanService.get_byduong({"ma_duong":this.ma_duong})
         .subscribe(
           _data => {
-            this.dataluong = _data;    
+            this.dataluongs = _data;    
           }
         );
     })

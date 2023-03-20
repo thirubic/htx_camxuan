@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TreeModule } from '@circlon/angular-tree-component';
 
 import { GsluongComponent } from "./trangthailuong/gsluong.component";
-// import { CvphoihopComponent } from "./cvphoihop/cvphoihop.component";
+import { View_ctluongComponent } from "./trangthailuong/view_ctluong.component";
 // import { CvgiamsatComponent } from "./cvgiamsat/cvgiamsat.component";
 
 const routes: Routes = [        
