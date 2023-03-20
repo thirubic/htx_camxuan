@@ -21,9 +21,21 @@ export class NhapluongService {
       formData
     );
   }
+  get_nguyenlieu_byluong(formData: any): Observable<any> {
+    return this.http.post(
+      `${baseUrl}/get_nguyenlieu_byluong`,
+      formData
+    );
+  }
   get_bymakho(formData: any): Observable<any> {
     return this.http.post(
       `${baseUrl}/getbymakho`,
+      formData
+    );
+  }
+  getsoluong(formData: any): Observable<any> {
+    return this.http.post(
+      `${baseUrl}/getsoluong`,
       formData
     );
   }
@@ -33,16 +45,9 @@ export class NhapluongService {
       formData
     );
   }
-  nhapkho(formData: any): Observable<any> {
+  nhapnguyenlieu_tukho(formData: any): Observable<any> {
     return this.http.post(
-      `${baseUrl}/nhapkho`,
-      formData
-    );
-  }
-
-  nhapkho_up(formData: any): Observable<any> {
-    return this.http.post(
-      `${baseUrl}/nhapkho`,
+      `${baseUrl}/nhapnguyenlieu_tukho`,
       formData
     );
   } 
