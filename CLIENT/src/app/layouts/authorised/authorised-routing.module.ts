@@ -7,6 +7,7 @@ const qlhethong = () => import('../../views/qlhethong/app.qlhethong.module').the
 const qlnghiepvu = () => import('../../views/nghiepvu/app.nghiepvu.module').then(x => x.AppNghiepvuModulue);
 const dmModule = () => import('../../views/cat/app.dm.module').then(x => x.AppDmModulue);
 const cvModule = () => import('../../views/congviec/app.cv.module').then(x => x.AppCvModulue);
+const gsModule = () => import('../../views/giamsat/app.gs.module').then(x => x.AppGsModulue);
 const qtnoidungModule = () => import('../../views/quantrinoidung/app.qtnoidung.module').then(x => x.AppqtnoidungModulue);
 const qtdanhmucModule = () => import('../../views/quantridanhmuc/app.qtdanhmuc.module').then(x => x.AppqtdanhmucModulue);
 const baocao = () => import('../../views/baocao/app.baocao.module').then(x => x.AppbaocaoModulue);
@@ -40,6 +41,10 @@ const routes: Routes = [
     { 
         path: 'Nghiepvu', 
         loadChildren: qlnghiepvu
+    },
+    { 
+        path: 'Giamsat', 
+        loadChildren: gsModule
     }
     
     

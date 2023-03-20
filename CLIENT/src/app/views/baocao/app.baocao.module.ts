@@ -17,7 +17,7 @@ import { Bc_congviecphatsinhComponent } from './congviecphatsinh/bc_congviecphat
 import { Bc_donviComponent } from './congviecphatsinh/bc_donvicomponent';
 import { Bc_nhanvienComponent } from './congviecphatsinh/bc_nhanvien.component';
 import { Bc_nguonphatsinhComponent } from './congviecphatsinh/bc_nguonphatsinh.component';
-import { QuillModule } from 'ngx-quill';
+// import { QuillModule } from 'ngx-quill';
 import { HttpClientModule} from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
@@ -37,8 +37,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
         HttpClientModule,
         AngularEditorModule,
         
-    QuillModule.forRoot(),
-    QuillModule
+    // QuillModule.forRoot(),
+    // QuillModule
     ], 
     declarations: [ Bc_congviecphatsinhComponent, Bc_donviComponent, Bc_nhanvienComponent, Bc_nguonphatsinhComponent
        
