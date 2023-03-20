@@ -249,6 +249,7 @@
     <Compile Include="Controllers\Danhmuc\DonviController.cs" />
     <Compile Include="Controllers\Danhmuc\DuanController.cs" />
     <Compile Include="Controllers\Nghiepvu\GiamsatController.cs" />
+    <Compile Include="Controllers\Nghiepvu\NhapluongController.cs" />
     <Compile Include="Controllers\Nghiepvu\NhapkhoController.cs" />
     <Compile Include="Controllers\UPLOAD\AmthanhController.cs" />
     <Compile Include="Controllers\UPLOAD\AnhController.cs" />
