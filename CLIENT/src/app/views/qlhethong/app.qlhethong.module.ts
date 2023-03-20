@@ -16,7 +16,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { QldonviComponent } from './qlnhansu/donvi.component';
 import { Edit_nhansuComponent } from './qlnhansu/edit_nhansu.component';
 
-import { QuillModule } from 'ngx-quill';
+// import { QuillModule } from 'ngx-quill';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
@@ -36,8 +36,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
         HttpClientModule,
         AngularEditorModule,
 
-        QuillModule.forRoot(),
-        QuillModule
+        // QuillModule.forRoot(),
+        // QuillModule
     ],
     declarations: [
         QldonviComponent, Edit_nhansuComponent

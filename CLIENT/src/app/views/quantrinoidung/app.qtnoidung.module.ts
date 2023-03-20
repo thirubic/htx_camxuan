@@ -17,7 +17,7 @@ import { QlthongbaoComponent } from './thongbao/qlthongbao.component';
 import { Ins_qlthongbaoComponent } from './thongbao/ins_qlthongbao.component';
 import { View_qlthongbaoComponent  } from './thongbao/view_qlthongbao.component';
 import { Edit_qlthongbaoComponent  } from './thongbao/edit_qlthongbao.component';
-import { QuillModule } from 'ngx-quill';
+// import { QuillModule } from 'ngx-quill';
 import { HttpClientModule} from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
@@ -37,8 +37,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
         HttpClientModule,
         AngularEditorModule,
         
-    QuillModule.forRoot(),
-    QuillModule
+    // QuillModule.forRoot(),
+    // QuillModule
     ], 
     declarations: [ QlthongbaoComponent,Ins_qlthongbaoComponent,View_qlthongbaoComponent, Edit_qlthongbaoComponent
        

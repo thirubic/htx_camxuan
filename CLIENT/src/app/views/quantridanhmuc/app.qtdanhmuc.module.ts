@@ -13,7 +13,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NumbersDirectivesModule } from '@app/_services/Directive/number.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TreeModule } from '@circlon/angular-tree-component';
-import { QuillModule } from 'ngx-quill';
+// import { QuillModule } from 'ngx-quill';
 import { HttpClientModule} from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
@@ -48,8 +48,8 @@ import { TuyenduongComponent } from './tuyenduong/tuyenduoing.component';
         AngularEditorModule,
         TreeModule,
         
-    QuillModule.forRoot(),
-    QuillModule
+    // QuillModule.forRoot(),
+    // QuillModule
     ], 
     declarations: [
         // nguon phat sinh

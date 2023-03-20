@@ -14,7 +14,7 @@ import { NumbersDirectivesModule } from '@app/_services/Directive/number.module'
 import { NgSelectModule } from '@ng-select/ng-select';
 
 
-import { QuillModule } from 'ngx-quill';
+// import { QuillModule } from 'ngx-quill';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { Edit_NhapkhoComponent } from './nhapkho/edit_nhapkho.component';
@@ -38,8 +38,8 @@ import { Edit_NhapluongComponent } from './nhapluong/edit_nhapluong.component';
         HttpClientModule,
         AngularEditorModule,
 
-        QuillModule.forRoot(),
-        QuillModule
+        // QuillModule.forRoot(),
+        // QuillModule
     ],
     declarations: [
         Edit_NhapkhoComponent,NhapkhoComponent,NhapluongComponent,Edit_NhapluongComponent
