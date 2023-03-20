@@ -158,7 +158,7 @@ export class GsluongComponent {
   }
 
   editcard(data) {
-    const initialState = { title: "Chi tiết luống", data: data };
+    const initialState = { title: "Chi tiết: " + data.ten_luong, data: data };
     this.hide_title = false;
     this.modalRef = this.modalService.show(
       View_ctluongComponent,

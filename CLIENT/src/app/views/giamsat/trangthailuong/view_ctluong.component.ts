@@ -9,6 +9,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { Options } from '@angular-slider/ngx-slider';
 import { CongviecphatsinhService } from '@app/_services/congviec/congviecphatsinh.service';
+import { Tr_NhapluongService } from '@app/_services/danhmuc/Tr_nhapluong.service';
 import { environment } from '@environments/environment';
 import { Router } from '@angular/router';
 @Component({
@@ -36,6 +37,7 @@ export class View_ctluongComponent implements OnInit {
   countitem_data: any = [];
   itype = 0;
 
+  ct_vattus: any = [];
   filedinhkem_bl = '';
   filedinhkem: any = [];
   //
@@ -86,7 +88,8 @@ export class View_ctluongComponent implements OnInit {
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
     private congviecPSService: CongviecphatsinhService,
-    private router: Router
+    private router: Router,
+    private tr_NhapluongService: Tr_NhapluongService
   ) { }
 
   get f() { return this.form.controls; }
@@ -101,6 +104,8 @@ export class View_ctluongComponent implements OnInit {
       douutien: [],
       noidung_binhluan: [],
     });
+    console.log(this.data);
+    this.get_bynguyenlieu();
     // this.get_chitietcongviec();
     // this.get_congviec_file();
     // this.get_congviec_nguoiphoihop();
@@ -396,6 +401,21 @@ export class View_ctluongComponent implements OnInit {
               Nguoigiamsat: data_in.nguoi_giamsat
               
             }
+        }
+      );
+  }
+
+  // get nguoi phoi hop
+  get_bynguyenlieu() {
+    var model = {
+      "ma_luong": this.data.ma_luong}
+      ;    
+
+    this.tr_NhapluongService.get_bynguyenlieu(model)
+      .subscribe(
+        _data => {
+          console.log(_data);
+          this.ct_vattus = _data;
         }
       );
   }
