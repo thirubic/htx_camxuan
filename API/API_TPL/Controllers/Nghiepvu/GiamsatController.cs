@@ -30,11 +30,12 @@ namespace API_TPL.Controllers.Danhmuc
         {
             string query_str = "hoso_luongphan_capnhattrangthai";
 
-            object[] aParams = new object[2];
+            object[] aParams = new object[3];
             try
             {
                 aParams[0] = helper.BuildParameter("ma_luong", obj.ma_luong, System.Data.SqlDbType.NVarChar);
                 aParams[1] = helper.BuildParameter("trangthai", obj.trangthai, System.Data.SqlDbType.Int);
+                aParams[2] = helper.BuildParameter("nguoi_capnhat", obj.nguoi_capnhat, System.Data.SqlDbType.NVarChar);
 
                 DataTable kq = helper.ExecuteQueryStoreProcedure(query_str, aParams);
 
