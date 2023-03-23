@@ -84,7 +84,7 @@
           <div class="edit-card-custom">
             <a class="text-center tooltips c-pointer" (click)="editcard(data)"
               style="position: absolute; right: 30px; cursor:pointer;">              
-              <i class="fa fa-edit" style="color: #11A34F; font-size: 20px;"></i>
+              <i class="fa fa-search" style="color: #11A34F; font-size: 20px;"></i>
             </a>
             <!-- <a  class="text-center tooltips c-pointer" (click)="deleteCard(data)"
               style="position: absolute; right: 8px; cursor:pointer;">              
@@ -98,7 +98,7 @@
                 <td class="card-name-cs"> Tên Luống: {{data.ten_luong}}</td>
               </tr>
               <tr>
-                <td> Tên đường: {{data.ten_duong}}</td>
+                <td> Tên đường:<span class="text-tt">{{data.ten_duong}}</span></td>
               </tr>
               <tr>
                 <!-- <div class="c-assignee">
@@ -113,12 +113,20 @@
                 </div> -->
               </tr>
               <tr>
-                <div class="c-assignee">
                   <td>                    
-                    <p>Mô tả: {{data.mota}}</p>
+                    Mô tả: {{data.mota}}
                   </td>
-                </div>
               </tr>
+              <tr>
+                <td>                    
+                  Nguyên liệu trong luống: {{data.soluong_nguyenlieu}}
+                </td>
+            </tr>
+            <tr>
+              <td>                    
+                Tổng khối lượng: {{data.trongluong}}
+              </td>
+          </tr>
               <!-- <tr>
                 <td>
                   <img class="icon-time" src="../../../../assets/images/time.png" alt="Thời gian thực hiện" />

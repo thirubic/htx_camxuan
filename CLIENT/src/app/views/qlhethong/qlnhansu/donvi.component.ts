@@ -87,6 +87,7 @@ export class QldonviComponent implements OnInit {
       }, {
         class: 'modal-lg xlg', initialState
       }));
+      
     this.modalRef.content.event
       .subscribe(arg => {
         if (arg) {
@@ -113,8 +114,6 @@ export class QldonviComponent implements OnInit {
       }, {
         class: 'modal-lg xlg', initialState
       }));
-      console.log(342334543535436546)
-      console.log(this.modalRef)
     this.modalRef.content.event
       .subscribe(arg => {
         if (arg) {

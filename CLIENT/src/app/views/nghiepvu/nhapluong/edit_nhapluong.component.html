@@ -125,38 +125,42 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-sm-12">
               <div *ngIf="nhaptukho == 2">
                 <div class="col-sm-12">
                   <div class="float-input" title="Chọn luống phân đang xử lí">
                     <label class="disabled">Chọn luống phân</label>
                     <ng-select bindLabel="name" placeholder="Mã luống" appendTo="body" [searchable]="true"
-                      [clearable]="true" formControlName="ma_luong">
-                      <ng-option [value]="item.ten_luong" *ngFor="let item of dataluongs">
+                      [clearable]="true" formControlName="ma_luong_khac" (change)="change_luongkhac()">
+                      <ng-option [value]="item.ma_luong" *ngFor="let item of dataluong_khac">
                         <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
                         {{item.ten_luong}}
                       </ng-option>
                     </ng-select>
                   </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                   <div class="float-input" title="Số lượng">
                     <label class="disabled">Số lượng <span class="required"></span></label>
-                    <input type="text" formControlName="soluong" class="form-control" />
+                    <input type="text" formControlName="soluong_luongkhac" class="form-control" />
                   </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                   <div class="float-input" title=">Đơn vị tính">
                     <label class="disabled">Đơn vị tính</label>
                     <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
                     <ng-select bindLabel="name" placeholder="Đơn vị tính" appendTo="body" [searchable]="true"
-                      [clearable]="true" formControlName="donvi_tinh">
+                      [clearable]="true" formControlName="donvi_tinh_luongkhac">
                       <ng-option [value]="item.ma_dv_tinh" *ngFor="let item of datadonvitinh">
                         <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
                         {{item.ten_dv_tinh}}
                       </ng-option>
                     </ng-select>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="float-input" title="Ghi chú">
+                    <label class="disabled">Ghi chú <span class="required"></span></label>
+                    <input type="text" formControlName="ghichu_luongkhac" class="form-control" />
                   </div>
                 </div>
               </div>

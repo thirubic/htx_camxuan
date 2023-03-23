@@ -41,7 +41,7 @@
                 <div class="float-input">
                   <label class="disabled">Loại vật tư</label>
                   <ng-select bindLabel="name" placeholder="Loại vật tư" appendTo="body"
-                  [searchable]="true" [clearable]="true" formControlName="loai_vattu">
+                  [searchable]="true" [clearable]="true" formControlName="loai_vattu" >
                   <ng-option [value]="item.loaivt_id" [disabled]="item.disabled" *ngFor="let item of dataloaivattu">
                     <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
                     {{item.ten_loai}}

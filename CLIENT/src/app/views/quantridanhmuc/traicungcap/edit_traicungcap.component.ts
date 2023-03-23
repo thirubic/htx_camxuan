@@ -135,6 +135,7 @@ export class Edit_TraiComponent implements OnInit {
     obj['DIACHI'] = this.f.diachi.value;
     obj['TEN_CHUTRAI'] = this.f.ten_chutrai.value;
     obj['MOTA'] = this.f.mota.value;
+    obj['NGUOI_CAPNHAT'] = this.UserName;
     formData['data'] = JSON.stringify(obj);
     if(this.data=='0'){
       try{

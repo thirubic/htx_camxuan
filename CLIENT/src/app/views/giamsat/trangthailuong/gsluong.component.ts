@@ -252,7 +252,9 @@ export class GsluongComponent {
     const obj = {}
     var model = {
       "ma_luong": ma_luong,
-      "trangthai": trangthai}
+      "trangthai": trangthai,
+      "nguoi_capnhat": this.UserName,
+    }
       ;    
 
     this.giamsatluongService.capnhatrangthai(model)
