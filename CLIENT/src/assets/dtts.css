@@ -95,8 +95,11 @@ td input[type=text] {
 }
 
 body {
-    font-family: "OpenSans" !important;
+    font-family: "arial" !important;
     font-size: 13px !important;
+}
+.e-card{
+    font-family: "arial" !important;
 }
 
 html, body {
@@ -2698,15 +2701,15 @@ p.BgInputTextStyle.Sprite1 {
 }
 .text-footer-camxuan-add{
     padding-top: 12px;
-    font-size: 21px;
+    font-size: 15px;
     margin-bottom: 0px !important;
 }
 .text-footer-name{
     color: #00703C;
-    font: 800 32px/31px Roboto, "Helvetica Neue", sans-serif;
+    font: 800 22px/22px Roboto, "Helvetica Neue", sans-serif;
     border-bottom: 2px solid #00703C;
     padding-bottom: 11px;
-    width: 737px;
+    width: 510px;
     text-align: center;
     margin: auto !important;
 }
