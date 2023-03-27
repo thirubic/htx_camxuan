@@ -134,20 +134,24 @@ export class TuyenduongComponent implements OnInit {
 
     this.confirmService.confirm(options).then((res: boolean) => {
       if (res) {
-        this.tuyenduongService.Del(datanguonp.ma_duong).subscribe({
-          next: (_data) => {
-            this.toastr.success("Xóa thành công", 'Thông báo', {
-              timeOut: 3000,
-              closeButton: true,
-              positionClass: 'toast-bottom-right',
-            });
-            this.get_all();
-          },
-          error: (error) => {
-            this.toastr.error(error);
-          },
-        });
-        console.log('XÓA');
+        try {
+          this.tuyenduongService.Del(datanguonp.ma_duong).subscribe({
+            next: (_data) => {       
+              this.toastr.success("Xóa thành công", 'Thông báo', {
+                timeOut: 3000,
+                closeButton: true,
+                positionClass: 'toast-bottom-right',
+              });
+              this.get_all();
+            },
+            error: (error) => {
+              this.toastr.error(error);
+            },
+          });
+          
+        } catch (error) {
+          console.log(error.exceptionmessage);
+        }
       }
     });
   }
