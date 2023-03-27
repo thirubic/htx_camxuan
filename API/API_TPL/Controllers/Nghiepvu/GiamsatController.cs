@@ -13,8 +13,11 @@ using System.Net.Http;
 using System.Text;
 using System.Web;
 using System.Web.Http;
-
-
+using Telegram.Bot;
+using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.ReplyMarkups;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace API_TPL.Controllers.Danhmuc
 {
@@ -24,7 +27,7 @@ namespace API_TPL.Controllers.Danhmuc
     {
         static String connString = ConfigurationManager.ConnectionStrings["PHANBONConnection"].ToString();
         SQL_DBHELPERs helper = new SQL_DBHELPERs(connString);
-
+        TelegramBotClient botClient;
         [Route("capnhattrangthai"), HttpPost]
         public IHttpActionResult CAPNHAT_TRANGTHAI_LUONG([FromBody] dynamic obj)
         {
@@ -38,14 +41,20 @@ namespace API_TPL.Controllers.Danhmuc
                 aParams[2] = helper.BuildParameter("nguoi_capnhat", obj.nguoi_capnhat, System.Data.SqlDbType.NVarChar);
 
                 DataTable kq = helper.ExecuteQueryStoreProcedure(query_str, aParams);
+                for (var i = 0; i < kq.Rows.Count; i++)
+                {
 
+                    var noidung = "<b>*=============TÌNH HÌNH SẢN XUẤT ===============*" + "</b>";
+                    noidung = noidung + "\n<b>Luống " + kq.Rows[i]["ma_luong"] + " đã chuyển sang trạng thái "+ kq.Rows[i]["ten_trangthai"] + "</b>";
+                    noidung = noidung + "\n<b>Vào ngày: " + kq.Rows[i]["ngay_capnhat"] + "</b>";
+                    noidung = noidung + "\n<b>Ghi chú: " + kq.Rows[i]["mota"] + "</b>";
+                    sendTeleMessage(noidung, "-967453591", "6127285473:AAGiPtBGszROgZYEYCHP9AdljyNmNFSRs-o");
+                }
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, kq));
             }
             catch (Exception ex)
             {
-                //return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
-                string err = ex.Message.Substring(0, ex.Message.IndexOf("\n", 0)).Substring(ex.Message.IndexOf(":") + 2).Trim();
-                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, err));
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
             }
         }
         [Route("getbytrangthai"), HttpPost]
@@ -65,10 +74,31 @@ namespace API_TPL.Controllers.Danhmuc
             }
             catch (Exception ex)
             {
-                //return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
-                string err = ex.Message.Substring(0, ex.Message.IndexOf("\n", 0)).Substring(ex.Message.IndexOf(":") + 2).Trim();
-                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, err));
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
             }
+        }
+        private void sendTeleMessage(string noidung, string chatid, string token)
+        {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            string _key_tele = token.ToString();
+            string chat_id = chatid;
+            botClient = new TelegramBotClient(_key_tele);
+            try
+            {
+                var task = Task.Run(async () => await botClient.SendTextMessageAsync(
+                  chatId: chat_id,
+                  text: noidung,
+                  parseMode: ParseMode.Html,
+                  disableNotification: true
+                ));
+                var result = task.Result;
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+
         }
     }
 }

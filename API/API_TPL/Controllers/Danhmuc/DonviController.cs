@@ -40,8 +40,7 @@ namespace API_TPL.Controllers.Danhmuc
             }
             catch (Exception ex)
             {
-                string err = ex.Message.Substring(0, ex.Message.IndexOf("\n", 0)).Substring(ex.Message.IndexOf(":") + 2).Trim();
-                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, err));
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
             }
         }
         /// <summary>
@@ -66,8 +65,7 @@ namespace API_TPL.Controllers.Danhmuc
             }
             catch (Exception ex)
             {
-                string err = ex.Message.Substring(0, ex.Message.IndexOf("\n", 0)).Substring(ex.Message.IndexOf(":") + 2).Trim();
-                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, err));
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
             }
         }
         /// <summary>
@@ -94,8 +92,7 @@ namespace API_TPL.Controllers.Danhmuc
             }
             catch (Exception ex)
             {
-                string err = ex.Message.Substring(0, ex.Message.IndexOf("\n", 0)).Substring(ex.Message.IndexOf(":") + 2).Trim();
-                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, err));
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
             }
         }
         /// <summary>
@@ -122,8 +119,7 @@ namespace API_TPL.Controllers.Danhmuc
             }
             catch (Exception ex)
             {
-                string err = ex.Message.Substring(0, ex.Message.IndexOf("\n", 0)).Substring(ex.Message.IndexOf(":") + 2).Trim();
-                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, err));
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
             }
         }
         /// <summary>
@@ -150,8 +146,7 @@ namespace API_TPL.Controllers.Danhmuc
             }
             catch (Exception ex)
             {
-                string err = ex.Message.Substring(0, ex.Message.IndexOf("\n", 0)).Substring(ex.Message.IndexOf(":") + 2).Trim();
-                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, err));
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
             }
         }
         /// <summary>
@@ -178,8 +173,7 @@ namespace API_TPL.Controllers.Danhmuc
             }
             catch (Exception ex)
             {
-                string err = ex.Message.Substring(0, ex.Message.IndexOf("\n", 0)).Substring(ex.Message.IndexOf(":") + 2).Trim();
-                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, err));
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
             }
         }
         /// <summary>
@@ -215,8 +209,7 @@ namespace API_TPL.Controllers.Danhmuc
             }
             catch (Exception ex)
             {
-                string err = ex.Message.Substring(0, ex.Message.IndexOf("\n", 0)).Substring(ex.Message.IndexOf(":") + 2).Trim();
-                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, err));
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
             }
         }
         ///<summary>

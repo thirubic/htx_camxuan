@@ -45,7 +45,7 @@ namespace API_TPL.Controllers.Danhmuc
             }
             catch (Exception ex)
             {
-                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex));
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
             }
         }
     }
