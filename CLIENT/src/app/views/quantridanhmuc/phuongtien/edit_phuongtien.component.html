@@ -1,0 +1,80 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="modal-header" style="display: flow-root;">
+    <button type="button" class="close" (click)="closed()">
+      <span aria-hidden="true">×</span>
+    </button>
+    <h4 class="modal-title">
+      <i style="margin-right: 10px; color: #17b799; font-size: 20px;" class="fa fa-plus-square"></i> {{title}}
+    </h4>
+  </div>
+  <div class="modal-body">
+    <div class="clearfix">
+      <div class="row">      
+        <div class="col-sm-12">
+          <div class="row row-frm">
+            <div class="col-sm-6">
+              <div class="float-input" title="Mã phương tiện">
+                <label  class="disabled">Mã phương tiện <span class="required"></span></label>
+                <input type="text" formControlName="ma_phuongtien" class="form-control" />
+              </div>
+            </div> 
+            <div class="col-sm-6">
+              <div class="float-input" title="Tên phương tiện">
+                <label  class="disabled">Tên phương tiện <span class="required"></span></label>
+                <input type="text" formControlName="ten_phuongtien" class="form-control" />
+              </div>
+            </div> 
+            <div class="col-sm-6">
+              <div class="float-input" title="Trại cung cấp">
+                <label  class="disabled">Trại cung cấp</label>
+                <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
+                <ng-select bindLabel="name" placeholder="Mã trại" appendTo="body"
+                  [searchable]="true" [clearable]="true" formControlName="ma_trai">
+                  <ng-option [value]="item.ma_trai" [disabled]="item.disabled" *ngFor="let item of datatrai">
+                    <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
+                    {{item.ten_trai}}
+                  </ng-option>
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="float-input" title="Trọng tải">
+                <label  class="disabled">Trọng tải (Tấn)<span class="required"></span></label>
+                <input type="number" formControlName="trongtai" class="form-control" />
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="float-input" title="Giá vận chuyển">
+                <label  class="disabled">Giá vận chuyển <span class="required"></span></label>
+                <input type="number" formControlName="giavanchuyen" class="form-control" />
+              </div>
+            </div>
+              <!-- <div class="col-sm-6">
+                <div class="float-input">
+                  <label class="disabled">Loại vật tư</label>
+                  <ng-select bindLabel="name" placeholder="Loại vật tư" appendTo="body"
+                  [searchable]="true" [clearable]="true" formControlName="loai_vattu" >
+                  <ng-option [value]="item.loaivt_id" [disabled]="item.disabled" *ngFor="let item of dataloaivattu">
+                    <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
+                    {{item.ten_loai}}
+                  </ng-option>
+                  </ng-select>
+
+                </div>
+              </div> -->
+            <div class="col-sm-12">
+              <div class="float-input" title="Ghi chú">
+                <label  class="disabled">Ghi chú</label>
+                <input type="text" formControlName="ghichu" class="form-control" />
+              </div>
+            </div> 
+          </div>
+        </div>
+      </div>    
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-check"></i> Lưu</button>
+    <button type="button" class="btn btn-sm btn-default" (click)="closed()">Đóng</button>
+  </div>
+</form>

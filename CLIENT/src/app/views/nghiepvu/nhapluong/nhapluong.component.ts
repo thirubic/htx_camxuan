@@ -5,6 +5,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ConfirmService } from '@app/_modules/confirm/confirm.service';
 import { GlobalConstants } from '@app/_models/config';
 import {Edit_NhapluongComponent  } from './edit_nhapluong.component';
+import {Edit_Phuongtien_luongComponent  } from './edit_phuongtien_luong.component';
 import { environment } from '@environments/environment';
 import { PhanxuongService } from "@app/_services/danhmuc/phanxuong.service";
 import { NhapluongService } from '@app/_services/danhmuc/nhapluong.service';
@@ -91,11 +92,14 @@ export class NhapluongComponent implements OnInit {
       this.duongService.get_byphanxuong({"ma_xuong":this.ma_xuong_select})
         .subscribe(
           _data => {
+            console.log(_data);
             this.dataduong = _data;     
             this.totalItems = _data.length;
             this.p = 1;
-            this.ma_duong_select = _data[0].ma_duong;
-            this.getluong_trongduong()
+            if (_data.length > 0) {
+              this.ma_duong_select = _data[0].ma_duong;
+              this.getluong_trongduong()
+            }
           }
         );
     })
@@ -108,11 +112,31 @@ export class NhapluongComponent implements OnInit {
   }
 
   edit(dataluong) {    
-    console.log(1111111111)
     console.log(dataluong)
       const initialState = { title: GlobalConstants.DIEUCHINH + " nguyên liệu cho luống phân", data:dataluong, phanxuong: this.ma_xuong_select,ma_duong: this.ma_duong_select  };
       this.modalRef = this.modalService.show(
         Edit_NhapluongComponent,
+        Object.assign({}, {
+          animated: true, keyboard: false, backdrop: false, ignoreBackdropClick: true
+        }, {
+          class: 'modal-lg xlg', initialState
+        }));
+
+      this.modalRef.content.event
+        .subscribe(arg => {
+          if (arg) {
+            this.getValueWithAsync().then(() =>            
+                this.isDataAvailable = true
+            );
+          }
+        });
+    
+  }
+  edit_phuongtien(dataluong) {   
+    console.log(dataluong)
+      const initialState = { title: GlobalConstants.DIEUCHINH + " phương tiện vận chuyển cho luống phân", data:dataluong, phanxuong: this.ma_xuong_select,ma_duong: this.ma_duong_select  };
+      this.modalRef = this.modalService.show(
+        Edit_Phuongtien_luongComponent,
         Object.assign({}, {
           animated: true, keyboard: false, backdrop: false, ignoreBackdropClick: true
         }, {
@@ -143,6 +167,11 @@ export class NhapluongComponent implements OnInit {
         .subscribe(
             _data => {
                 this.dataxuong = _data;
+                  const isLargeNumber = (element) => element.ma_xuong == this.ma_xuong_select;
+                  if(_data.findIndex(isLargeNumber) < 0)
+                  {
+                    this.ma_xuong_select = _data[0].ma_xuong;
+                  }
                 this.getduong_byphanxuong()
             }
         );

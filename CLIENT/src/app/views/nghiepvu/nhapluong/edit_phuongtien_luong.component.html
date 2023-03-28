@@ -1,0 +1,136 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="modal-header" style="display: flow-root;">
+    <button type="button" class="close" (click)="closed()">
+      <span aria-hidden="true">×</span>
+    </button>
+    <h4 class="modal-title">
+      <i style="margin-right: 10px; color: #17b799; font-size: 20px;" class="fa fa-plus-square"></i> {{title}}
+    </h4>
+  </div>
+  <div class="modal-body">
+    <div class="clearfix">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="row row-frm">
+            <div class="col-sm-12">
+              <div class="col-sm-4">
+                <div class="float-input" title="Phân xưởng">
+                  <label class="disabled">Phân xưởng 1</label>
+                  <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
+                  <ng-select [disabled]="true" bindLabel="name" placeholder="Mã xưởng" appendTo="body"
+                    [searchable]="true" formControlName="ma_xuong">
+                    <ng-option [value]="item.ma_xuong" [disabled]="true" *ngFor="let item of dataxuong">
+                      <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
+                      {{item.ten_xuong}}
+                    </ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="float-input" title="Đường">
+                  <label class="disabled">Đường</label>
+                  <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
+                  <ng-select bindLabel="name" placeholder="Mã đường" appendTo="body" [searchable]="true"
+                    formControlName="ma_duong">
+                    <ng-option [value]="item.ma_duong" [disabled]="true" *ngFor="let item of dataduong">
+                      <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
+                      {{item.ten_duong}}
+                    </ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="float-input" title="Luống">
+                  <label class="disabled">Luống</label>
+                  <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
+                  <ng-select bindLabel="name" placeholder="Mã luống" appendTo="body" [searchable]="true"
+                    [clearable]="true" formControlName="ma_luong">
+                    <ng-option [value]="item.ma_luong" [disabled]="true" *ngFor="let item of dataluongs">
+                      <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
+                      {{item.ten_luong}}
+                    </ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-sm-8">
+                <div class="float-input" title="Phương tiện vận chuyển">
+                  <label class="disabled">Phương tiện vẫn chuyển</label>
+                  <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
+                  <ng-select bindLabel="name" placeholder="Phương tiện vận chuyển" appendTo="body" [searchable]="true"
+                    [clearable]="true" formControlName="ma_pt">
+                    <ng-option [value]="item.ma_pt" *ngFor="let item of dataphuongtiens">
+                      <img src="../../../../assets/images/slider/delivery-truck.png" width="20px" height="20px" />
+                      {{item.ten_pt}} -  {{item.trai_cungcap}}- {{item.taitrong}}(Tấn) - {{item.gia_vanchuyen | number}}(VNĐ)
+                    </ng-option>
+                  </ng-select>
+                </div>
+              </div> 
+              <div class="col-sm-4">
+                <div class="float-input" title="Ghi chú">
+                  <label class="disabled">Ghi chú</label>
+                  <input type="text" formControlName="ghichu" class="form-control" />                
+                </div>
+              </div> 
+            </div>            
+            <div class="col-sm-12" style="text-align: center;">
+              <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-check"></i> Thêm phương tiện vận chuyển</button>
+            </div>
+            <div class="col-sm-12">
+              <div class="col-sm-12">
+                <label>
+                  DANH SÁCH PHƯƠNG TIỆN VẬN CHUYỂN
+                </label>
+                <table class="table table-condensed table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th class="col-sm-1 ">STT</th>
+                      <th class="col-sm-2 ">Mã phương tiện</th>
+                      <th class="col-sm-2 ">Tên phương tiện</th>
+                      <th class="col-sm-1 ">Trọng tải</th>
+                      <th class="col-sm-2 ">Giá vận chuyển</th>
+                      <th class="col-sm-2 ">Trại vận chuyển</th>
+                      <th class="col-sm-2 ">Ghi chú</th>
+                      <th class="col-sm-1"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor="let datapt of data_pt_in_luongs | paginate: { itemsPerPage: 15, currentPage: p };let i = index">
+                      <td class="text-center">{{i + 1 }}</td>
+                      <td>
+                        {{datapt.ma_pt}}
+                      </td>
+                      <td>
+                        {{datapt.ten_pt}}
+                      </td>
+                      <td>
+                        {{datapt.taitrong}}
+                      </td>
+                      <td>
+                        {{datapt.gia_vanchuyen |number}} (VNĐ)
+                      </td>
+                      <td>
+                        {{datapt.ten_trai}}
+                      </td>
+                      <td>
+                        {{datapt.ghichu}}
+                      </td>
+                      <td class="text-center chucnang-fa">                        
+                        <a href="javascript:void(0);" (click)="deletephuongtien(datapt)">
+                          <i class="fa fa-times-circle" style="color: red; font-size: 20px;"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-default" (click)="closed()">Đóng</button>
+  </div>
+</form>

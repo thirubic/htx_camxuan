@@ -21,6 +21,7 @@ import { Edit_NhapkhoComponent } from './nhapkho/edit_nhapkho.component';
 import { NhapkhoComponent } from './nhapkho/nhapkho.component';
 import { NhapluongComponent } from './nhapluong/nhapluong.component';
 import { Edit_NhapluongComponent } from './nhapluong/edit_nhapluong.component';
+import { Edit_Phuongtien_luongComponent } from './nhapluong/edit_phuongtien_luong.component';
 
 @NgModule({
     imports: [
@@ -42,7 +43,8 @@ import { Edit_NhapluongComponent } from './nhapluong/edit_nhapluong.component';
         // QuillModule
     ],
     declarations: [
-        Edit_NhapkhoComponent,NhapkhoComponent,NhapluongComponent,Edit_NhapluongComponent
+        Edit_NhapkhoComponent,NhapkhoComponent,
+        NhapluongComponent,Edit_NhapluongComponent, Edit_Phuongtien_luongComponent
 
     ]
 })

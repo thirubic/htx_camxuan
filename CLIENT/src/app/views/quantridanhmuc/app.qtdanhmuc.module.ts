@@ -32,6 +32,9 @@ import { Edit_LuongphanComponent } from './luongphan/edit_luongphan.component';
 import { Edit_tuyenduongComponent } from './tuyenduong/edit_tuyenduong.component';
 import { TuyenduongComponent } from './tuyenduong/tuyenduong.component';
 
+import { PhuongtienComponent } from './phuongtien/phuongtien.component';
+import { Edit_PhuongtienComponent } from './phuongtien/edit_phuongtien.component';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -55,7 +58,8 @@ import { TuyenduongComponent } from './tuyenduong/tuyenduong.component';
         // nguon phat sinh
         Edit_phanxuongComponent, PhanxuongComponent, GiavattuComponent,Edit_GiavattuComponent,VattuComponent,
         Edit_VattuComponent,TraicungcapComponent,Edit_TraiComponent,KhoComponent,Edit_KhoComponent,LuongphanComponent,Edit_LuongphanComponent,
-        TuyenduongComponent, Edit_tuyenduongComponent
+        TuyenduongComponent, Edit_tuyenduongComponent,
+        PhuongtienComponent, Edit_PhuongtienComponent
     ]
 })
 export class AppqtdanhmucModulue { }
