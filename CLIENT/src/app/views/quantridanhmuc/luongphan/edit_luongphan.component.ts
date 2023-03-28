@@ -76,7 +76,7 @@ export class Edit_LuongphanComponent implements OnInit {
         ma_luong: [this.data.ma_luong, Validators.required],
         ten_luong: [this.data.ten_luong],
         ma_duong: [this.data.ma_duong],
-        mota: [this.data.ghichu]
+        mota: [this.data.mota]
       });
     }
     this.f.ma_duong.setValue(this.ma_duong)
