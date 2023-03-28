@@ -8,6 +8,7 @@ import {Edit_LuongphanComponent  } from './edit_luongphan.component';
 import { environment } from '@environments/environment';
 import { PhanxuongService } from "@app/_services/danhmuc/phanxuong.service";
 import { DuongService } from '@app/_services/danhmuc/a_duong.service';
+import { DMChungService } from "@app/_services/danhmuc/dmchung.service";
 @Component({
   selector: 'app-luongphan',
   templateUrl: './luongphan.component.html',
@@ -26,6 +27,7 @@ export class LuongphanComponent implements OnInit {
   items: any;
   options = {
   };
+  ma_luong_key:'';
   ma_xuong_select = '';
   ma_duong_select= '';
   ma_xuong_user = localStorage.getItem('Ma_donvi') ? localStorage.getItem('Ma_donvi') : sessionStorage.getItem('Ma_donvi') || '';
@@ -45,6 +47,7 @@ export class LuongphanComponent implements OnInit {
     private confirmService: ConfirmService,
     private xuongService: PhanxuongService,
     private duongService: DuongService,
+    private dmchungService: DMChungService,
     
   ) { }
 
@@ -99,8 +102,8 @@ export class LuongphanComponent implements OnInit {
   }
 
 
-  add() {
-      const initialState = { title: GlobalConstants.THEMMOI + " luống phân", data: '0',ma_duong: this.ma_duong_select };
+  async add() {
+      const initialState = { title: GlobalConstants.THEMMOI + " luống phân", data: '0',ma_duong: this.ma_duong_select};
       this.modalRef = this.modalService.show(
         Edit_LuongphanComponent,
         Object.assign({}, {
@@ -120,7 +123,7 @@ export class LuongphanComponent implements OnInit {
   }
 
   edit(luongphan) {    
-      const initialState = { title: GlobalConstants.DIEUCHINH + " luống phân", data:luongphan, ma_duong: this.ma_duong_select };
+      const initialState = { title: GlobalConstants.DIEUCHINH + " luống phân", data:luongphan, ma_duong: this.ma_duong_select};
       this.modalRef = this.modalService.show(
         Edit_LuongphanComponent,
         Object.assign({}, {

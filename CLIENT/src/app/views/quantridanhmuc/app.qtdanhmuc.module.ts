@@ -30,7 +30,7 @@ import { Edit_KhoComponent } from './kho/edit_kho.component';
 import { LuongphanComponent } from './luongphan/luongphan.component';
 import { Edit_LuongphanComponent } from './luongphan/edit_luongphan.component';
 import { Edit_tuyenduongComponent } from './tuyenduong/edit_tuyenduong.component';
-import { TuyenduongComponent } from './tuyenduong/tuyenduoing.component';
+import { TuyenduongComponent } from './tuyenduong/tuyenduong.component';
 
 @NgModule({
     imports: [

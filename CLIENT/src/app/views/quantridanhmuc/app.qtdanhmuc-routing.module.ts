@@ -4,7 +4,7 @@ import { GiavattuComponent } from "./giavattu/giavattu.component";
 import { KhoComponent } from "./kho/kho.component";
 import { LuongphanComponent } from "./luongphan/luongphan.component";
 import { PhanxuongComponent } from "./phanxuong/phanxuong.component";
-import { TuyenduongComponent } from "./tuyenduong/tuyenduoing.component";
+import { TuyenduongComponent } from "./tuyenduong/tuyenduong.component";
 import { TraicungcapComponent } from "./traicungcap/traicungcap.component";
 import { VattuComponent } from "./vattu/vattu.component";
 

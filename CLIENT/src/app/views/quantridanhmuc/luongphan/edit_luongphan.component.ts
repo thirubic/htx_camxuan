@@ -14,7 +14,7 @@ import * as moment from "moment";
 import { TraicungcapService } from "@app/_services/danhmuc/a_traicungcap.service";
 import { PhanxuongService } from "@app/_services/danhmuc/phanxuong.service";
 import { DuongService } from "@app/_services/danhmuc/a_duong.service";
-
+import { DMChungService } from "@app/_services/danhmuc/dmchung.service";
 @Component({
   selector: 'app-qlluongphan-Edit',
   templateUrl: './edit_luongphan.component.html'
@@ -49,7 +49,8 @@ export class Edit_LuongphanComponent implements OnInit {
     private formBuilder: FormBuilder,
     private xuongService: PhanxuongService,
     private luongphanService: LuongphanService,
-    private duongService: DuongService
+    private duongService: DuongService,
+    private dmchungService: DMChungService,
     
   ) { }
 
@@ -68,6 +69,7 @@ export class Edit_LuongphanComponent implements OnInit {
         ma_duong: [''],
         mota: ['']
       });
+      this.get_key();
     }else{
       this.disabled = true;
       this.form = this.formBuilder.group({        
@@ -86,7 +88,14 @@ export class Edit_LuongphanComponent implements OnInit {
     this.html = element.innerHTML;
   }
 
-
+  async  get_key() {
+    this.dmchungService.get_key({"key":"HOSO_LUONGPHAN"})
+        .subscribe(
+            _data => {
+              this.f.ma_luong.setValue(_data[0].ma_luong)
+            }
+        );
+  }
   checknull(text): boolean {
     if (text == null || text == '' || text == undefined) {
       return true;

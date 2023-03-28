@@ -7,7 +7,7 @@ import { GlobalConstants } from '@app/_models/config';
 import {Edit_tuyenduongComponent  } from './edit_tuyenduong.component';
 import { environment } from '@environments/environment';
 import { NgModule } from '@angular/core';
-
+import { DMChungService } from "@app/_services/danhmuc/dmchung.service";
 @Component({
   selector: 'app-tuyenduong',
   templateUrl: './tuyenduong.component.html',
@@ -21,6 +21,7 @@ export class TuyenduongComponent implements OnInit {
   totalItems = 0;
   term : string = '';
   p: number = 1;
+  ma_duong_key = '';
   TreeNode: [];
   node: [];
   items: any;
@@ -39,6 +40,7 @@ export class TuyenduongComponent implements OnInit {
     private toastr: ToastrService,
     private modalService: BsModalService,
     private confirmService: ConfirmService,
+    private dmchungService: DMChungService,
 
   ) { }
 
@@ -60,10 +62,18 @@ export class TuyenduongComponent implements OnInit {
             this.tuyenduongs = _data;     
                 this.totalItems = _data.length;
             this.p = 1;
-            console.log(this.tuyenduongs)
+            
           }
         );
     })
+  }
+  get_key(): void {
+      this.dmchungService.get_key({"key":"DM_DUONG"})
+        .subscribe(
+            _data => {
+              this.ma_duong_key = _data[0].ma_duong
+            }
+        );
   }
 
   onInitialized(tree) {
@@ -73,9 +83,8 @@ export class TuyenduongComponent implements OnInit {
   }
 
 
-  add() {
-    console.log("add");
-      const initialState = { title: GlobalConstants.THEMMOI + " nguồn phát sinh", data:'0' };
+  async add() {
+      const initialState = { title: GlobalConstants.THEMMOI + " tuyến đường", data:'0'};
       this.modalRef = this.modalService.show(
         Edit_tuyenduongComponent,
         Object.assign({}, {
@@ -87,6 +96,7 @@ export class TuyenduongComponent implements OnInit {
       this.modalRef.content.event
         .subscribe(arg => {
           if (arg) {
+            this.ma_duong_key = '';
             this.getValueWithAsync().then(() =>            
                 this.isDataAvailable = true
             );
@@ -94,9 +104,9 @@ export class TuyenduongComponent implements OnInit {
         });
   }
 
-  edit(nhansu) {    
+  edit(duong) {    
     console.log("Edit");
-      const initialState = { title: GlobalConstants.DIEUCHINH + " nhân sự", data:nhansu };
+      const initialState = { title: GlobalConstants.DIEUCHINH + " truyến đường", data:duong};
       this.modalRef = this.modalService.show(
         Edit_tuyenduongComponent,
         Object.assign({}, {

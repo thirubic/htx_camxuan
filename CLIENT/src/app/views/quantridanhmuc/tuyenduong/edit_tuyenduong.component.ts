@@ -11,7 +11,7 @@ import { DonviService } from "@app/_services/danhmuc/donvi.service";
 import { TuyenduongService } from "@app/_services/danhmuc/tuyenduong.service";
 import { PhanxuongService } from "@app/_services/danhmuc/phanxuong.service";
 import { CongviecphatsinhService } from '@app/_services/congviec/congviecphatsinh.service';
-
+import { DMChungService } from "@app/_services/danhmuc/dmchung.service";
 @Component({
   selector: 'app-qltuyenduong-Edit',
   templateUrl: './edit_tuyenduong.component.html'
@@ -19,6 +19,7 @@ import { CongviecphatsinhService } from '@app/_services/congviec/congviecphatsin
 export class Edit_tuyenduongComponent implements OnInit {
   @Input() title: string;
   @Input() data: any;
+  @Input() ma_duong: string;
 
 
   @Output() event = new EventEmitter<boolean>();
@@ -45,7 +46,7 @@ export class Edit_tuyenduongComponent implements OnInit {
     private donviService: DonviService,
     private phanxuongService: PhanxuongService,
     private tuyenduongService: TuyenduongService,
-    private congviecPSService: CongviecphatsinhService,
+    private dmchungService: DMChungService,
   ) { }
 
   html: string;
@@ -53,18 +54,19 @@ export class Edit_tuyenduongComponent implements OnInit {
 
   get f() { return this.form.controls; }
 
-  ngOnInit() {    
-    console.log(this.data);
+  ngOnInit() {  
     this.get_danhsachdonvi();
+    this.get_key();
     if(this.data =='0'){
       this.form = this.formBuilder.group({
         ten_duong: ['', Validators.required],
-        ma_duong: ['', Validators.required],
+        ma_duong: [''],
         noidung: [''],
         phanxuong: [''],
         mota: [''],
         trangthai: [''],
       });
+      this.f.ma_duong.setValue(this.ma_duong);
     }else{
       this.viewtrangthai = true;
       this.form = this.formBuilder.group({
@@ -76,7 +78,6 @@ export class Edit_tuyenduongComponent implements OnInit {
         trangthai: [''],
       });
       this.phanxuong_select = this.data.ma_xuong;
-      //this.get_congviec_file();
       this.viewtrangthai = true;
     }
   }
@@ -87,7 +88,14 @@ export class Edit_tuyenduongComponent implements OnInit {
     this.html = element.innerHTML;
   }
 
-
+  get_key(): void {
+    this.dmchungService.get_key({"key":"DM_DUONG"})
+      .subscribe(
+          _data => {
+            this.f.ma_duong.setValue(_data[0].ma_duong);
+          }
+      );
+  }
   checknull(text): boolean {
     if (text == null || text == '' || text == undefined) {
       return true;
