@@ -94,9 +94,9 @@ export class Edit_LuongphanComponent implements OnInit {
         .subscribe(
             _data => {
               if(_data.length > 0){
-                this.f.ma_luong.setValue(this.ma_xuong_user+'/'+this.ma_duong+'/'+_data[0].ma_luong)
+                this.f.ma_luong.setValue(this.ma_duong+'/'+_data[0].ma_luong)
               }else{
-                this.f.ma_luong.setValue(this.ma_xuong_user+'/'+this.ma_duong+'/L01')
+                this.f.ma_luong.setValue(this.ma_duong+'/L01')
               }
               
             }
