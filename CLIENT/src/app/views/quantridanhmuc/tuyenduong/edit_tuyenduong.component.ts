@@ -19,7 +19,6 @@ import { DMChungService } from "@app/_services/danhmuc/dmchung.service";
 export class Edit_tuyenduongComponent implements OnInit {
   @Input() title: string;
   @Input() data: any;
-  @Input() ma_duong: string;
 
 
   @Output() event = new EventEmitter<boolean>();
@@ -33,6 +32,7 @@ export class Edit_tuyenduongComponent implements OnInit {
   danhsachfile: any = [];
   dataphanxuong = [];
   phanxuong_select = [];
+  ma_xuong_user = localStorage.getItem('Ma_donvi') ? localStorage.getItem('Ma_donvi') : sessionStorage.getItem('Ma_donvi') || '';
   serviceBase = `${environment.apiURL}`;
   viewtrangthai = false;
   Ma_nhanvien = localStorage.getItem('Ma_nhanvien') ? localStorage.getItem('Ma_nhanvien') : sessionStorage.getItem('Ma_nhanvien') || '';
@@ -56,7 +56,6 @@ export class Edit_tuyenduongComponent implements OnInit {
 
   ngOnInit() {  
     this.get_danhsachdonvi();
-    this.get_key();
     if(this.data =='0'){
       this.form = this.formBuilder.group({
         ten_duong: ['', Validators.required],
@@ -66,7 +65,7 @@ export class Edit_tuyenduongComponent implements OnInit {
         mota: [''],
         trangthai: [''],
       });
-      this.f.ma_duong.setValue(this.ma_duong);
+      this.get_key();
     }else{
       this.viewtrangthai = true;
       this.form = this.formBuilder.group({
@@ -92,7 +91,12 @@ export class Edit_tuyenduongComponent implements OnInit {
     this.dmchungService.get_key({"key":"DM_DUONG"})
       .subscribe(
           _data => {
-            this.f.ma_duong.setValue(_data[0].ma_duong);
+            if(_data.length > 0){
+              this.f.ma_duong.setValue(this.ma_xuong_user+'/'+_data[0].ma_duong);
+            }else{
+              this.f.ma_duong.setValue(this.ma_xuong_user+'/D01');
+            }
+            
           }
       );
   }

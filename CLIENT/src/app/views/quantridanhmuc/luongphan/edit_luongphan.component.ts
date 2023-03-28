@@ -34,6 +34,7 @@ export class Edit_LuongphanComponent implements OnInit {
   fileinput = '';
   fileattachs: any = [];
   danhsachfile: any = [];
+  ma_xuong_user = localStorage.getItem('Ma_donvi') ? localStorage.getItem('Ma_donvi') : sessionStorage.getItem('Ma_donvi') || '';
   dataduong: any = [];
   dataloailuongphan = [{"loailuongphan_id": 1,"ten_loailuongphan":"luongphan vật tư"},{"loailuongphan_id": 2,"ten_loailuongphan":"luongphan thành phẩm"},{"loailuongphan_id": 3,"ten_loailuongphan":"luongphan nguyên liệu"}]
   maxuong_select = '';
@@ -92,7 +93,12 @@ export class Edit_LuongphanComponent implements OnInit {
     this.dmchungService.get_key({"key":"HOSO_LUONGPHAN"})
         .subscribe(
             _data => {
-              this.f.ma_luong.setValue(_data[0].ma_luong)
+              if(_data.length > 0){
+                this.f.ma_luong.setValue(this.ma_xuong_user+'/'+this.ma_duong+'/'+_data[0].ma_luong)
+              }else{
+                this.f.ma_luong.setValue(this.ma_xuong_user+'/'+this.ma_duong+'/L01')
+              }
+              
             }
         );
   }

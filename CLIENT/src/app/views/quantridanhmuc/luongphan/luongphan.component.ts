@@ -154,7 +154,7 @@ export class LuongphanComponent implements OnInit {
   deleteluongphan(datadel){
     console.log(datadel)
     let options = {
-      prompt: 'Bạn có muốn xóa luống phân [' + datadel['ma_luongphan'] + '] này không?',
+      prompt: 'Bạn có muốn xóa luống phân [' + datadel['ma_luong'] + '] này không?',
       title: "Thông báo",
       okText: `Đồng ý`,
       cancelText: `Hủy`,
@@ -163,7 +163,7 @@ export class LuongphanComponent implements OnInit {
     this.confirmService.confirm(options).then((res: boolean) => {
       if (res) {
         let input = {
-          "ma_luongphan": datadel.ma_luongphan
+          "ma_luong": datadel.ma_luong
         };
         this.luongphanService.Del(input).subscribe({
           next: (_data) => {
