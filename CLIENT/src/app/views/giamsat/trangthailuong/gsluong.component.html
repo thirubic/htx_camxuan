@@ -74,7 +74,7 @@
     <ejs-kanban keyField='keyfield' [dataSource]='data' [cardSettings]='cardSettings'
       [swimlaneSettings]='swimlaneSettings' (dragStop)='onKanbanBDragStop($event)' (dialogOpen)="dialogOpen($event)">
       <e-columns>
-        <e-column headerText='Mới' keyField= '1'></e-column>
+        <e-column style="font-weight: bold;" headerText='Mới' keyField= '1'></e-column>
         <e-column headerText='Đang xử lý' keyField='2'></e-column>
         <!-- <e-column headerText='Chờ đánh giá' keyField='Testing'></e-column> -->
         <e-column headerText='Hoàn thành' keyField='3'></e-column>
@@ -95,10 +95,7 @@
           <table class="card-template-wrap">
             <tbody>
               <tr>
-                <td class="card-name-cs"> Tên Luống: {{data.ten_luong}}</td>
-              </tr>
-              <tr>
-                <td> Tên đường: <span class="text-tt">{{data.ten_duong}}</span></td>
+                <td class="card-name-cs">{{data.ma_luong}} <span style="color:black;font-weight: normal;">({{data.ten_luong}})</span></td>
               </tr>
               <tr>
                 <!-- <div class="c-assignee">
@@ -113,11 +110,6 @@
                 </div> -->
               </tr>
               <tr>
-                  <td>                    
-                    Mô tả: {{data.mota}}
-                  </td>
-              </tr>
-              <tr>
                 <td>                    
                   Nguyên liệu trong luống: {{data.soluong_nguyenlieu}}
                 </td>
@@ -127,6 +119,11 @@
                 Tổng khối lượng: {{data.trongluong}}
               </td>
           </tr>
+          <tr>
+            <td>                    
+              Mô tả: {{data.mota}}
+            </td>
+        </tr>
               <!-- <tr>
                 <td>
                   <img class="icon-time" src="../../../../assets/images/time.png" alt="Thời gian thực hiện" />

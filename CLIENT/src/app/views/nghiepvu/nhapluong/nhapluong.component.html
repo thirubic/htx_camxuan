@@ -57,9 +57,11 @@
                   <thead>
                     <tr>
                       <th class="col-sm-1">STT</th>
-                      <th class="col-sm-2">Mã luống</th>
-                      <th class="col-sm-3">Tên luống</th>
-                      <th class="col-sm-3">Mô tả</th>
+                      <th class="col-sm-1">Mã luống</th>
+                      <th class="col-sm-1">Tên luống</th>
+                      <th class="col-sm-3">Nguyên liệu trong luống</th>
+                      <th class="col-sm-1">khối lượng</th>
+                      <th class="col-sm-1">Mô tả</th>
                       <th class="col-sm-1">Trạng thái</th>
                       <th class="col-sm-1"></th>
                     </tr>
@@ -73,6 +75,12 @@
                       </td>
                       <td>
                         {{dataluong.ten_luong}}
+                      </td>
+                      <td>
+                        Số lượng: {{dataluong.soluong_nguyenlieu}}
+                      </td>
+                      <td>
+                        {{dataluong.trongluong}}
                       </td>
                       <td>
                         {{dataluong.mota}}

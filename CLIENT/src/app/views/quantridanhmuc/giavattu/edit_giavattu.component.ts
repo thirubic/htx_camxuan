@@ -59,7 +59,6 @@ export class Edit_GiavattuComponent implements OnInit {
     if(this.data=='0'){
       this.form = this.formBuilder.group({
         ma_vattu: [''],
-        ten_vattu: [''],
         gia: [''],
         donvi_tinh: [''],
         ghichu: [''],
@@ -69,7 +68,6 @@ export class Edit_GiavattuComponent implements OnInit {
     }else{
       this.form = this.formBuilder.group({        
         ma_vattu: [this.data.ma_vattu, Validators.required],
-        ten_vattu: [this.data.ten_vattu],
         gia: [this.data.gia],
         donvi_tinh: [this.data.donvi_tinh],
         ghichu: [this.data.ghichu],
@@ -114,15 +112,6 @@ export class Edit_GiavattuComponent implements OnInit {
   onSubmit(): void {
 
     this.submitted = true;
-    if (this.f.ten_vattu.value == "" || this.f.ten_vattu.value == null) {
-      this.toastr.warning("Chưa nhập tên vật tư", "Cảnh báo",
-        {
-          timeOut: 3000,
-          closeButton: true,
-          positionClass: 'toast-bottom-right'
-        });
-      return;
-    }
     this.loading = true;
     const obj = {}
     const formData = {}
@@ -136,7 +125,7 @@ export class Edit_GiavattuComponent implements OnInit {
     formData['data'] = JSON.stringify(obj);
     if(this.data=='0'){
       try{
-        this.giavattuService.giavattu_ins({formData})
+        this.giavattuService.giavattu_ins(formData)
         .subscribe({
           next: (_data) => {
             this.event.emit(true);

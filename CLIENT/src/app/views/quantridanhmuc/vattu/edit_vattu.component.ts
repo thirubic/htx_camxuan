@@ -29,6 +29,7 @@ export class Edit_VattuComponent implements OnInit {
   filepreview = '';
   file: any = null;
   fileinput = '';
+  code = '';
   fileattachs: any = [];
   danhsachfile: any = [];
   datatrai: any = [];
@@ -51,11 +52,12 @@ export class Edit_VattuComponent implements OnInit {
 
   get f() { return this.form.controls; }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {  
+    this.generateCode()  
     this.get_danhsachtrai();
     if(this.data=='0'){
       this.form = this.formBuilder.group({
-        ma_vattu: [''],
+        ma_vattu: [this.code],
         ten_vattu: [''],
         ma_trai: [''],
         mota: [''],
@@ -74,7 +76,11 @@ export class Edit_VattuComponent implements OnInit {
     }
   }
   
-
+  generateCode() {
+    let codeNumber = Math.floor(Math.random() * 10000) + 1;
+    let codeString = codeNumber.toString().padStart(5, "0");
+    this.code = "VT" + codeString;
+  }
   public logValue(): void {
     const element = document.querySelector('.ql-editor');
     this.html = element.innerHTML;
@@ -129,6 +135,7 @@ export class Edit_VattuComponent implements OnInit {
     formData['data'] = JSON.stringify(obj);
     if(this.data=='0'){
       try{
+        console.log(formData)
         this.vattuService.vattu_ins(formData)
         .subscribe({
           next: (_data) => {
@@ -147,6 +154,7 @@ export class Edit_VattuComponent implements OnInit {
       }
     
     }else{
+      console.log(formData)
       this.vattuService.vattu_up(formData)
       .subscribe({
         next: (_data) => {
