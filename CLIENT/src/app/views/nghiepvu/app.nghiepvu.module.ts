@@ -22,6 +22,9 @@ import { NhapkhoComponent } from './nhapkho/nhapkho.component';
 import { NhapluongComponent } from './nhapluong/nhapluong.component';
 import { Edit_NhapluongComponent } from './nhapluong/edit_nhapluong.component';
 import { Edit_Phuongtien_luongComponent } from './nhapluong/edit_phuongtien_luong.component';
+// xuất thành phẩm
+import { Edit_Xuat_thanhphamComponent } from './xuat_thanhpham/edit_xuat_thanhpham.component';
+import { Xuat_thanhphamComponent } from './xuat_thanhpham/xuat_thanhpham.component';
 
 @NgModule({
     imports: [
@@ -44,7 +47,8 @@ import { Edit_Phuongtien_luongComponent } from './nhapluong/edit_phuongtien_luon
     ],
     declarations: [
         Edit_NhapkhoComponent,NhapkhoComponent,
-        NhapluongComponent,Edit_NhapluongComponent, Edit_Phuongtien_luongComponent
+        NhapluongComponent,Edit_NhapluongComponent, Edit_Phuongtien_luongComponent,
+        Xuat_thanhphamComponent, Edit_Xuat_thanhphamComponent
 
     ]
 })
