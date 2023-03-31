@@ -106,6 +106,7 @@ namespace API_TPL.Controllers.Danhmuc
                 return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
             }
         }
+
         [Route("getbyduong"), HttpPost]
         public IHttpActionResult HOSO_LUONGPHAN_BYMADUONG([FromBody] dynamic obj)
         {
