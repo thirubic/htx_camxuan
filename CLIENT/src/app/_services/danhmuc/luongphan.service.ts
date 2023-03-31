@@ -21,6 +21,12 @@ export class LuongphanService {
       formData
     );
   }
+  get_bytrangthai(formData: any): Observable<any> {
+    return this.http.post(
+      `${baseUrl}/getbytrangthai`,
+      formData
+    );
+  }
   get_byduong(formData: any): Observable<any> {
     return this.http.post(
       `${baseUrl}/getbyduong`,

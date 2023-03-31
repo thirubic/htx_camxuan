@@ -61,7 +61,8 @@ export class Edit_VattuComponent implements OnInit {
         ten_vattu: [''],
         ma_trai: [''],
         mota: [''],
-        loai_vattu: ['']
+        loai_vattu: [''],
+        taitrong: [''],
       });
       this.f.loai_vattu.setValue(this.dataloaivattu[0].loaivt_id)
     }else{
@@ -70,7 +71,8 @@ export class Edit_VattuComponent implements OnInit {
         ten_vattu: [this.data.ten_vattu],
         ma_trai: [this.data.ma_trai],
         mota: [this.data.mota],
-        loai_vattu: [this.data.loai_vattu]
+        loai_vattu: [this.data.loai_vattu],
+        taitrong: [this.data.taitrong]
       });
       this.matrai_select = this.data.ma_trai;
     }
@@ -131,6 +133,7 @@ export class Edit_VattuComponent implements OnInit {
     obj['LOAI_VATTU'] = this.f.loai_vattu.value;
     obj['MA_TRAI'] = this.f.ma_trai.value;
     obj['MOTA'] = this.f.mota.value;
+    obj['TAITRONG'] = this.f.taitrong.value;
     obj['NGUOI_CAPNHAT'] = this.UserName;
     formData['data'] = JSON.stringify(obj);
     if(this.data=='0'){

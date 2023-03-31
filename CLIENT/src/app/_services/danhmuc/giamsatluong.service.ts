@@ -39,6 +39,13 @@ export class GiamsatluongService {
       formData
     );
   }
+  getluong_bytrangthai(formData: any): Observable<any> {
+    return this.http.post(
+      `${baseUrl}/getbytrangthai`,
+      formData
+    );
+  }
+
 
   nhapkho_up(formData: any): Observable<any> {
     return this.http.post(

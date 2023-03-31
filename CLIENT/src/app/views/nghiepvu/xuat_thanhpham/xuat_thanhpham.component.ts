@@ -90,7 +90,7 @@ export class Xuat_thanhphamComponent implements OnInit {
             this.datakho = _data;     
             this.totalItems = _data.length;
             this.p = 1;
-            this.ma_kho_select = _data[0].ma_kho;
+            this.ma_kho_select = _data[1].ma_kho;
             this.getvattu_trongkho()
             console.log(this.ma_kho_select)
           }
@@ -106,7 +106,7 @@ export class Xuat_thanhphamComponent implements OnInit {
 
 
   add() {
-      const initialState = { title: GlobalConstants.THEMMOI + " vật tư vào kho", data: '0',phanxuong: this.ma_xuong_select,ma_kho: this.ma_kho_select };
+      const initialState = { title:"Nhập thành phẩm vào kho", data: '0',phanxuong: this.ma_xuong_select,ma_kho: this.ma_kho_select };
       this.modalRef = this.modalService.show(
         Edit_Xuat_thanhphamComponent,
         Object.assign({}, {

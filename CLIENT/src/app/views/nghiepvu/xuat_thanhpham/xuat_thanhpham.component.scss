@@ -216,3 +216,17 @@
     background-color: #0fa1d3 ;
     padding: 5px;
   }
+
+  .box {
+    box-sizing: border-box;
+    width: "45%";
+  }
+  .box-title {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    font-weight: bold;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 0 10px;
+  }

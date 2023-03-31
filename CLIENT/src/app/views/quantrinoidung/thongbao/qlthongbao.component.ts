@@ -35,7 +35,7 @@ export class QlthongbaoComponent {
   Ma_nhanvien = localStorage.getItem('Ma_nhanvien') ? localStorage.getItem('Ma_nhanvien') : sessionStorage.getItem('Ma_nhanvien') || '';
   UserName = localStorage.getItem('UserName') ? localStorage.getItem('UserName') : sessionStorage.getItem('UserName') || '';
   serviceBase = `${environment.apiURL}`;
-  serviceurl_realtime = `${environment.apiURL_Realtime}`;
+  //serviceurl_realtime = `${environment.apiURL_Realtime}`;
   private _hubConnection: HubConnection;
   public connectionId: string;
 

@@ -44,7 +44,7 @@
                     <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
                     <ng-select bindLabel="name" placeholder="Mã kho" appendTo="body" [searchable]="true"
                       [clearable]="true" [(ngModel)]="ma_kho_select" (change)="change_kho()">
-                      <ng-option [value]="item.ma_kho" [disabled]="item.disabled" *ngFor="let item of datakho">
+                      <ng-option  [value]="item.ma_kho" [disabled]="true" *ngFor="let item of datakho">
                         <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
                         {{item.ten_kho}}
                       </ng-option>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="col-sm-2" style="text-align: right;">
                   <button type="button" class="btn btn-primary" style="margin-bottom: 10px;border-radius:3px;"
-                    (click)="add()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nhập kho</button>
+                    (click)="add()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nhập kho thành phẩm</button>
                 </div>
               </div>
               <div *ngIf="type_view == false">
@@ -62,11 +62,13 @@
                     <tr>
                       <th class="col-sm-1">STT</th>
                       <th class="col-sm-1">Mã vật tư</th>
-                      <th class="col-sm-3">Tên vật tư</th>
+                      <th class="col-sm-2">Tên vật tư</th>
                       <th class="col-sm-1">Số lượng</th>
                       <th class="col-sm-1">Đơn vị tính</th>
-                      <th class="col-sm-2">Tình trạng</th>
-                      <th class="col-sm-2">Ghi chú</th>
+                      <th class="col-sm-1">Tình trạng</th>
+                      <th class="col-sm-2">Ngày nhập kho</th>
+                      <th class="col-sm-2">Từ luống phân</th>
+                      <th class="col-sm-1">Ghi chú</th>
                       <th class="col-sm-2"></th>
                     </tr>
                   </thead>
@@ -90,15 +92,13 @@
                         {{vattu.ten_tinhtrang}}
                       </td>
                       <td>
-                        {{vattu.ghichu}}
+                        {{vattu.ngay_nhapkho}}
                       </td>
-                      <td class="text-center chucnang-fa">
-                        <a href="javascript:void(0);" (click)="edit(vattu)">
-                          <i class="fa fa-edit" ></i>
-                        </a>
-                        <a href="javascript:void(0);" (click)="deletevattu(vattu)">
-                          <i class="fa fa-times-circle" style="color: red; font-size: 20px;"></i>
-                        </a>
+                      <td>
+                        {{vattu.ten_luong}}
+                      </td>
+                      <td>
+                        {{vattu.ghichu}}
                       </td>
                     </tr>
                   </tbody>

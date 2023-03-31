@@ -21,7 +21,12 @@ export class VattuService {
       formData
     );
   }
-
+  get_bykho(formData: any): Observable<any> {
+    return this.http.post(
+      `${baseUrl}/getbykho`,
+      formData
+    );
+  }
   Del(formData: any): Observable<any> {
     return this.http.post(
       `${baseUrl}/xoa`,

@@ -21,6 +21,12 @@ export class XuatthanhphamService {
       formData
     );
   }
+  themmoi_thanhpham_kho(formData: any): Observable<any> {
+    return this.http.post(
+      `${baseUrl}/themmoi_thanhpham_kho`,
+      formData
+    );
+  }
   get_bymakho(formData: any): Observable<any> {
     return this.http.post(
       `${baseUrl}/getbymakho`,

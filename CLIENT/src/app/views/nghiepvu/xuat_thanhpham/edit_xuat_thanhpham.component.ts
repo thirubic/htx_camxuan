@@ -11,14 +11,21 @@ import { DonviService } from "@app/_services/danhmuc/donvi.service";
 import { KhoService } from "@app/_services/danhmuc/kho.service";
 import { CongviecphatsinhService } from '@app/_services/congviec/congviecphatsinh.service';
 import * as moment from "moment";
+
 import { TraicungcapService } from "@app/_services/danhmuc/a_traicungcap.service";
 import { PhanxuongService } from "@app/_services/danhmuc/phanxuong.service";
 import { DonvitinhService } from "@app/_services/danhmuc/donvitinh.service";
 import { NhapkhoService } from "@app/_services/danhmuc/nhapkho.service";
+import { LuongphanService } from "@app/_services/danhmuc/luongphan.service";
+import { GiamsatluongService } from "@app/_services/danhmuc/giamsatluong.service";
+import { NhapluongService } from "@app/_services/danhmuc/nhapluong.service";
+import { VattuService } from "@app/_services/danhmuc/vattu.service";
+import { XuatthanhphamService } from "@app/_services/danhmuc/Tr_xuatthanhpham";
 
 @Component({
   selector: 'app-qlxuat_thanhpham-Edit',
-  templateUrl: './edit_xuat_thanhpham.component.html'
+  templateUrl: './edit_xuat_thanhpham.component.html',
+  styleUrls: ['./xuat_thanhpham.component.scss'],
 })
 export class Edit_Xuat_thanhphamComponent implements OnInit {
   @Input() title: string;
@@ -40,6 +47,9 @@ export class Edit_Xuat_thanhphamComponent implements OnInit {
   datakho: any = [];
   datadonvitinh: any = [];
   dataxuong: any = [];
+  khoiluong_max: 0;
+  datakho_vattu: any = [];
+  dataluong: any = [];
   loai_vattu = 1;
   dataloaivattu = [{"loaivt_id": 1,"ten_loaivt":"Vật tư phục vụ sản xuất"},{"loaivt_id": 2,"ten_loaivt":"Nguyên liệu"}];
   datatinhtrang = [{"ttcl_id": 1,"ten_ttcl":"Tốt"},{"ttcl_id": 2,"ten_ttcl":"Hỏng"},{"ttcl_id": 3,"ten_ttcl":"Sắp hết hạn sử dụng"}]
@@ -57,8 +67,13 @@ export class Edit_Xuat_thanhphamComponent implements OnInit {
     private xuongService: PhanxuongService,
     private donvitinhService: DonvitinhService,
     private khoService: KhoService,
-    private nhapkhoService: NhapkhoService
-
+    private nhapkhoService: NhapkhoService,
+    private luongphanService: LuongphanService,
+    private confirmService: ConfirmService,
+    private nhapluongService: NhapluongService,
+    private vatutuService: VattuService,
+    private xuatthanhphamService: XuatthanhphamService,
+    
   ) { }
 
   html: string;
@@ -75,6 +90,9 @@ export class Edit_Xuat_thanhphamComponent implements OnInit {
       this.form = this.formBuilder.group({
         ma_xuong: [''],
         ma_kho: [''],
+        ma_kho_vt: [''],
+        ma_luong: [''],
+        khoiluong: [''],
         ma_vattu: [''],
         loai_vattu: [this.dataloaivattu[0].loaivt_id ],
         soluong: [''],
@@ -82,13 +100,16 @@ export class Edit_Xuat_thanhphamComponent implements OnInit {
         tinhtrang_chatluong: [this.datatinhtrang[0].ttcl_id],
         ghichu: ['']
       });
-      this.getvattu();
+      this.getluong_bytrangthai()
     }else{
       this.disabled = true;
      
       this.form = this.formBuilder.group({ 
         ma_xuong: [this.phanxuong],    
         ma_kho: [this.data.ma_kho, Validators.required],
+        ma_luong: [this.data.ma_luong],
+        khoiluong: [''],
+        ma_kho_vt: [''],
         ma_vattu: [this.data.ma_vattu],
         loai_vattu: [this.data.loai_vattu],  
         soluong: [this.data.soluong],
@@ -96,11 +117,10 @@ export class Edit_Xuat_thanhphamComponent implements OnInit {
         tinhtrang_chatluong: [this.data.tinhtrang_chatluong],
         ghichu: [this.data.ghichu]
       });
-      
+      this.getluong_bytrangthai()
     }
     this.f.ma_xuong.setValue(this.phanxuong)
     this.f.ma_kho.setValue(this.ma_kho);
-    this.getvattu();
   }
   
   getkho_byphanxuong() { 
@@ -108,21 +128,41 @@ export class Edit_Xuat_thanhphamComponent implements OnInit {
       this.khoService.get_byphanxuong({"ma_xuong":this.phanxuong})
         .subscribe(
           _data => {
-            this.datakho = _data;   
+            this.datakho = _data;
+            this.datakho_vattu = _data.filter(x=> parseInt(x.loai_kho) == 1);
+            this.f.ma_kho_vt.setValue(this.datakho_vattu[0].ma_kho)
+            this.getvattu_bykho()
           }
         );
     })
   }
-  change_loaivt(){
-    this.getvattu()
-  }
-  getvattu() { 
-    return new Promise<any>((resolve) => {
-      this.nhapkhoService.get_byloaivattu({"loai_vattu":this.f.loai_vattu.value})
+
+  getluong_bytrangthai() { 
+      this.luongphanService.get_all()
         .subscribe(
           _data => {
-            this.datavattu = _data;  
-            this.f.ma_vattu.setValue(_data[0].ma_vattu) 
+            this.dataluong = _data.filter(x => x.trangthai == 3);  
+            this.f.ma_luong.setValue(this.dataluong[0].ma_luong);
+            this.getkhoiluong_luong()
+          }
+        );
+  }
+  getvattu_bykho() { 
+    this.vatutuService.get_bykho({"ma_kho":this.f.ma_kho_vt.value})
+      .subscribe(
+        _data => {
+          this.datavattu = _data;
+          this.f.ma_vattu.setValue(this.datavattu[0].ma_vattu);
+        }
+      );
+}
+  getkhoiluong_luong() { 
+    return new Promise<any>((resolve) => {
+      this.nhapluongService.get_khoiluong_byluong({"ma_luong":this.f.ma_luong.value})
+        .subscribe(
+          _data => { 
+            this.f.khoiluong.setValue(_data[0].soluong);
+            this.khoiluong_max = _data[0].soluong
           }
         );
     })
@@ -156,7 +196,6 @@ export class Edit_Xuat_thanhphamComponent implements OnInit {
     }
     return true;
   }
-
   onSubmit(): void {
 
     this.submitted = true;
@@ -176,27 +215,42 @@ export class Edit_Xuat_thanhphamComponent implements OnInit {
     obj['MA_VATTU'] = this.f.ma_vattu.value;
     obj['SOLUONG'] = this.f.soluong.value;
     obj['DONVI_TINH'] = this.f.donvi_tinh.value;
-    obj['TINHTRANG_CHATLUONG'] = this.f.tinhtrang_chatluong.value;
+    obj['MA_LUONG'] = this.f.ma_luong.value;
+    obj['KHOILUONG'] = this.f.khoiluong.value;
     obj['GHICHU'] = this.f.ghichu.value;
     obj['NGUOI_CAPNHAT'] = this.UserName;
     formData['data'] = JSON.stringify(obj);
     if(this.data=='0'){
       try{
-        this.nhapkhoService.nhapkho(formData)
-        .subscribe({
-          next: (_data) => {
-            this.event.emit(true);
-            this.modalRef.hide();
-            this.toastr.success("Nhập vật tư vào kho thành công", "",
-              {
-                timeOut: 3000,
-                closeButton: true,
-                positionClass: 'toast-bottom-right'
+        let options = {
+          prompt: 'Bạn có muốn thêm thành phẩm vào kho không?',
+          title: "Thông báo",
+          okText: `Đồng ý`,
+          cancelText: `Hủy`,
+        };
+        this.confirmService.confirm(options).then((res: boolean) => {
+          if (res) {
+              this.xuatthanhphamService.themmoi_thanhpham_kho(formData)
+              .subscribe({
+                next: (_data) => {
+                  this.event.emit(true);
+                  this.modalRef.hide();
+                  this.toastr.success("Nhập vật tư vào kho thành công", "",
+                    {
+                      timeOut: 3000,
+                      closeButton: true,
+                      positionClass: 'toast-bottom-right'
+                    });
+                },
+                error: (error) => {
+                  this.toastr.error(error);
+                },
+                
               });
-          }
-        });
+            }
+          });
       }catch(err){
-        this.toastr.error(err)
+        this.toastr.error(err.message)
       }
     
     }else{
