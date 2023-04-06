@@ -31,7 +31,7 @@
                 <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
                 <ng-select bindLabel="name" placeholder="Mã kho" appendTo="body" [searchable]="true" [clearable]="true"
                   formControlName="ma_kho">
-                  <ng-option [value]="item.ma_kho" [disabled]="true" *ngFor="let item of datakho">
+                  <ng-option aria-readonly="true" [value]="item.ma_kho" [disabled]="true" *ngFor="let item of datakho">
                     <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
                     {{item.ten_kho}}
                   </ng-option>
@@ -44,8 +44,7 @@
                 <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
                 <ng-select bindLabel="name" placeholder="Loại vật tư" appendTo="body" [searchable]="true"
                   [clearable]="true" formControlName="loai_vattu" (change)="change_loaivt()">
-                  <ng-option [value]="item.loaivt_id" *ngFor="let item of dataloaivattu">
-                    <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
+                  <ng-option aria-readonly="true" [value]="item.loaivt_id" *ngFor="let item of dataloaivattu">
                     {{item.ten_loaivt}}
                   </ng-option>
                 </ng-select>
@@ -53,26 +52,17 @@
             </div>
             <div class="col-sm-6">
               <div class="row">
-                <div class="col-sm-8">
+                <div class="col-sm-12">
                   <div class="float-input" title="Vật tư/Nguyên liệu">
                     <label class="disabled">Vật tư/Nguyên liệu</label>
                     <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
                     <ng-select bindLabel="name" placeholder="Mã vật tư" appendTo="body" [searchable]="true"
                       [clearable]="true" formControlName="ma_vattu">
                       <ng-option [value]="item.ma_vattu" *ngFor="let item of datavattu">
-                        <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
                         {{item.ten_vattu}}
                       </ng-option>
                     </ng-select>
                   </div>
-                </div>
-                <div class="col-sm-4">
-                    <div title="Quy đổi">
-                      <label>
-                        <input type="checkbox" name="quydoi" value="1" formControlName="quydoi">
-                        Quy đổi
-                      </label>
-                    </div>
                 </div>
               </div>
             </div>
@@ -89,7 +79,6 @@
                 <ng-select bindLabel="name" placeholder="Đơn vị tính" appendTo="body" [searchable]="true"
                   [clearable]="true" formControlName="donvi_tinh">
                   <ng-option [value]="item.ma_dv_tinh" *ngFor="let item of datadonvitinh">
-                    <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
                     {{item.ten_dv_tinh}}
                   </ng-option>
                 </ng-select>
@@ -101,7 +90,6 @@
                 <ng-select bindLabel="name" placeholder="Tình trang" appendTo="body" [searchable]="true"
                   [clearable]="true" formControlName="tinhtrang_chatluong">
                   <ng-option [value]="item.ttcl_id" *ngFor="let item of datatinhtrang">
-                    <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
                     {{item.ten_ttcl}}
                   </ng-option>
                 </ng-select>

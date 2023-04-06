@@ -60,7 +60,7 @@
                 <table class="table table-condensed table-striped table-bordered">
                   <thead>
                     <tr>
-                      <th class="col-sm-1">STT</th>
+                      <th class="col-sm-1 text-center">STT</th>
                       <th class="col-sm-1">Mã vật tư</th>
                       <th class="col-sm-2">Tên vật tư</th>
                       <th class="col-sm-1">Số lượng</th>
@@ -77,7 +77,7 @@
                       *ngFor="let vattu of vattukhos | filter:term | paginate: { itemsPerPage: 15, currentPage: p };let i = index">
                       <td class="text-center">{{i + 1 }}</td>
                       <td>
-                        {{vattu.ma_vattu}}
+                        <strong>{{vattu.ma_vattu}}</strong>
                       </td>
                       <td>
                         {{vattu.ten_vattu}}

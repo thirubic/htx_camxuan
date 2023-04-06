@@ -43,7 +43,6 @@
                   <ng-select bindLabel="name" placeholder="Loại kho" appendTo="body"
                   [searchable]="true" [clearable]="true" formControlName="loai_kho">
                   <ng-option [value]="item.loaikho_id" [disabled]="item.disabled" *ngFor="let item of dataloaikho">
-                    <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
                     {{item.ten_loaikho}}
                   </ng-option>
                   </ng-select>

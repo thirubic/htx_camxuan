@@ -134,7 +134,7 @@ export class NhapluongComponent implements OnInit {
   }
   edit_phuongtien(dataluong) {   
     console.log(dataluong)
-      const initialState = { title: GlobalConstants.DIEUCHINH + " phương tiện vận chuyển cho luống phân", data:dataluong, phanxuong: this.ma_xuong_select,ma_duong: this.ma_duong_select  };
+      const initialState = { title: "Số chuyến phương tiện vận chuyển nguyên liệu cho luống phân", data:dataluong, phanxuong: this.ma_xuong_select,ma_duong: this.ma_duong_select  };
       this.modalRef = this.modalService.show(
         Edit_Phuongtien_luongComponent,
         Object.assign({}, {

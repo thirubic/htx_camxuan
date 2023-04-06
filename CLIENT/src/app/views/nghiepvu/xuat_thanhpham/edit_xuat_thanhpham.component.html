@@ -11,105 +11,113 @@
     <div  style="padding:20px">
       <div class="row" style="justify-content: space-between;">
           <div class="box col-sm-6" >
-            <a class="box-title">Chọn nguyên liệu từ luống</a>
-              <div class="row row-frm" style="margin-top:20px">
-                <div class="col-sm-12">
-                  <div class="float-input" title="Phân xưởng">
-                    <label class="disabled">Phân xưởng</label>
-                    <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
-                    <ng-select bindLabel="name" placeholder="Mã xưởng" appendTo="body" [searchable]="true"
-                      [clearable]="true" formControlName="ma_xuong">
-                      <ng-option [value]="item.ma_xuong" [disabled]="true" *ngFor="let item of dataxuong">
-                        <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
-                        {{item.ten_xuong}}
-                      </ng-option>
-                    </ng-select>
+            <div class="card">
+              <div class="card-header">Chọn nguyên liệu từ luống</div>
+              <div class="card-body">
+                <div class="row row-frm" style="margin-top:20px">
+                  <div class="col-sm-12">
+                    <div class="float-input" title="Phân xưởng">
+                      <label class="disabled">Phân xưởng</label>
+                      <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
+                      <ng-select bindLabel="name" placeholder="Mã xưởng" appendTo="body" [searchable]="true"
+                        [clearable]="true" formControlName="ma_xuong">
+                        <ng-option [value]="item.ma_xuong" [disabled]="true" *ngFor="let item of dataxuong">
+                          <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
+                          {{item.ten_xuong}}
+                        </ng-option>
+                      </ng-select>
+                    </div>
                   </div>
-                </div>
-                <div class="col-sm-12">
-                  <div class="float-input" title="Kho">
-                    <label class="disabled">Chọn kho nhập thành phẩm</label>
-                    <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
-                    <ng-select bindLabel="name" placeholder="Mã kho" appendTo="body" [searchable]="true"
-                      [clearable]="true" formControlName="ma_kho">
-                      <ng-option [value]="item.ma_kho" [disabled]="true" *ngFor="let item of datakho">
-                        <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
-                        {{item.ten_kho}}
-                      </ng-option>
-                    </ng-select>
+                  <div class="col-sm-12">
+                    <div class="float-input" title="Kho">
+                      <label class="disabled">Chọn kho nhập thành phẩm</label>
+                      <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
+                      <ng-select bindLabel="name" placeholder="Mã kho" appendTo="body" [searchable]="true"
+                        [clearable]="true" formControlName="ma_kho">
+                        <ng-option [value]="item.ma_kho" [disabled]="true" *ngFor="let item of datakho">
+                          <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
+                          {{item.ten_kho}}
+                        </ng-option>
+                      </ng-select>
+                    </div>
                   </div>
-                </div>
-                <div class="col-sm-12">
-                  <div class="float-input" title="Tên luống">
-                    <label class="disabled">Chọn luống đã hoàn thành</label>
-                    <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
-                    <ng-select bindLabel="name" placeholder="Tên luống" appendTo="body" [searchable]="true"
-                      [clearable]="true" formControlName="ma_luong">
-                      <ng-option [value]="item.ma_luong" *ngFor="let item of dataluong">
-                        {{item.ten_luong}}
-                      </ng-option>
-                    </ng-select>
+                  <div class="col-sm-12">
+                    <div class="float-input" title="Tên luống">
+                      <label class="disabled">Chọn luống đã hoàn thành</label>
+                      <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
+                      <ng-select bindLabel="name" placeholder="Tên luống" appendTo="body" [searchable]="true"
+                        [clearable]="true" formControlName="ma_luong">
+                        <ng-option [value]="item.ma_luong" *ngFor="let item of dataluong">
+                          {{item.ten_luong}}
+                        </ng-option>
+                      </ng-select>
+                    </div>
                   </div>
-                </div>
-                <div class="col-sm-12">
-                  <div class="float-input" title="Số lượng">
-                    <label class="disabled">Khối lượng cần lấy để đóng thành phẩm  <span class="required"></span></label>
-                    <input type="text" type="number" min="0" [max]="khoiluong_max" step="1" formControlName="khoiluong" class="form-control" />
+                  <div class="col-sm-12">
+                    <div class="float-input" title="Số lượng">
+                      <label class="disabled">Khối lượng cần lấy để đóng thành phẩm  <span class="required"></span></label>
+                      <input type="text" type="number" min="0" [max]="khoiluong_max" step="1" formControlName="khoiluong" class="form-control" />
+                    </div>
                   </div>
-                </div>
-                <div class="col-sm-12">
-                  <div class="float-input" title="Ghi chú">
-                    <label class="disabled">Ghi chú <span class="required"></span></label>
-                    <input type="text" formControlName="ghichu" class="form-control" />
+                  <div class="col-sm-12">
+                    <div class="float-input" title="Ghi chú">
+                      <label class="disabled">Ghi chú <span class="required"></span></label>
+                      <input type="text" formControlName="ghichu" class="form-control" />
+                    </div>
                   </div>
                 </div>
               </div>
+            </div>
           </div>
-          <div class="box col-sm-6">
-            <a class="box-title">Chọn vật tư nhập thành phẩm</a>
-            <div class="col-sm-12">
-              <div class="row row-frm" style="margin-top:20px">
+          <div class="box-form col-sm-6">
+            <div class="card">
+              <div class="card-header">Chọn vật tư nhập thành phẩm</div>
+              <div class="card-body">
                 <div class="col-sm-12">
-                  <div class="float-input" title="Kho">
-                    <label class="disabled">Kho lấy vật tư</label>
-                    <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
-                    <ng-select bindLabel="name" placeholder="Mã kho" appendTo="body" [searchable]="true"
-                      [clearable]="true" formControlName="ma_kho_vt">
-                      <ng-option [value]="item.ma_kho" [disabled]="true" *ngFor="let item of datakho_vattu">
-                        <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
-                        {{item.ten_kho}}
-                      </ng-option>
-                    </ng-select>
-                  </div>
-                </div>
-                <div class="col-sm-12">
-                  <div class="float-input" title="Vật tư/Nguyên liệu">
-                    <label class="disabled">Vật tư đóng thành phẩm</label>
-                    <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
-                    <ng-select bindLabel="name" placeholder="Mã vật tư" appendTo="body" [searchable]="true"
-                      [clearable]="true" formControlName="ma_vattu">
-                      <ng-option [value]="item.ma_vattu" *ngFor="let item of datavattu">
-                        {{item.ten_vattu}}
-                      </ng-option>
-                    </ng-select>
-                  </div>
-                </div>
-                <div class="col-sm-12">
-                  <div class="float-input" title="Số lượng">
-                    <label class="disabled">Số lượng<span class="required"></span></label>
-                    <input type="text" formControlName="soluong" class="form-control" />
-                  </div>
-                </div>
-                <div class="col-sm-12">
-                  <div class="float-input" title=">Đơn vị tính">
-                    <label class="disabled">Đơn vị tính</label>
-                    <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
-                    <ng-select bindLabel="name" placeholder="Đơn vị tính" appendTo="body" [searchable]="true"
-                      [clearable]="true" formControlName="donvi_tinh">
-                      <ng-option [value]="item.ma_dv_tinh" *ngFor="let item of datadonvitinh">
-                        {{item.ten_dv_tinh}}
-                      </ng-option>
-                    </ng-select>
+                  <div class="row row-frm" style="margin-top:20px">
+                    <div class="col-sm-12">
+                      <div class="float-input" title="Kho">
+                        <label class="disabled">Kho lấy vật tư</label>
+                        <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
+                        <ng-select bindLabel="name" placeholder="Mã kho" appendTo="body" [searchable]="true"
+                          [clearable]="true" formControlName="ma_kho_vt">
+                          <ng-option [value]="item.ma_kho" [disabled]="true" *ngFor="let item of datakho_vattu">
+                            <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
+                            {{item.ten_kho}}
+                          </ng-option>
+                        </ng-select>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="float-input" title="Vật tư/Nguyên liệu">
+                        <label class="disabled">Vật tư đóng thành phẩm</label>
+                        <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
+                        <ng-select bindLabel="name" placeholder="Mã vật tư" appendTo="body" [searchable]="true"
+                          [clearable]="true" formControlName="ma_vattu">
+                          <ng-option [value]="item.ma_vattu" *ngFor="let item of datavattu">
+                            {{item.ten_vattu}}
+                          </ng-option>
+                        </ng-select>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="float-input" title="Số lượng">
+                        <label class="disabled">Số lượng<span class="required"></span></label>
+                        <input type="text" formControlName="soluong" class="form-control" />
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="float-input" title=">Đơn vị tính">
+                        <label class="disabled">Đơn vị tính</label>
+                        <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
+                        <ng-select bindLabel="name" placeholder="Đơn vị tính" appendTo="body" [searchable]="true"
+                          [clearable]="true" formControlName="donvi_tinh">
+                          <ng-option [value]="item.ma_dv_tinh" *ngFor="let item of datadonvitinh">
+                            {{item.ten_dv_tinh}}
+                          </ng-option>
+                        </ng-select>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

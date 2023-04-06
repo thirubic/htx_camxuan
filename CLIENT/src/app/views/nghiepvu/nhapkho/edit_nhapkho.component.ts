@@ -41,7 +41,7 @@ export class Edit_NhapkhoComponent implements OnInit {
   datadonvitinh: any = [];
   dataxuong: any = [];
   loai_vattu = 1;
-  dataloaivattu = [{"loaivt_id": 1,"ten_loaivt":"Vật tư phục vụ sản xuất"},{"loaivt_id": 2,"ten_loaivt":"Nguyên liệu"}];
+  dataloaivattu = [{"loaivt_id": 1,"ten_loaivt":"Vật tư phục vụ sản xuất"}];
   datatinhtrang = [{"ttcl_id": 1,"ten_ttcl":"Tốt"},{"ttcl_id": 2,"ten_ttcl":"Hỏng"},{"ttcl_id": 3,"ten_ttcl":"Sắp hết hạn sử dụng"}]
   maxuong_select = '';
   disabled = false;
@@ -101,7 +101,6 @@ export class Edit_NhapkhoComponent implements OnInit {
       
     }
     this.f.ma_xuong.setValue(this.phanxuong)
-    this.f.ma_kho.setValue(this.ma_kho);
     this.getvattu();
   }
   
@@ -110,7 +109,8 @@ export class Edit_NhapkhoComponent implements OnInit {
       this.khoService.get_byphanxuong({"ma_xuong":this.phanxuong})
         .subscribe(
           _data => {
-            this.datakho = _data.filter(x => x.loai_kho !=2);   
+            this.datakho = _data.filter(x => x.loai_kho ==1);   
+            this.f.ma_kho.setValue(this.datakho[0].ma_kho);
           }
         );
     })
@@ -123,7 +123,8 @@ export class Edit_NhapkhoComponent implements OnInit {
       this.nhapkhoService.get_byloaivattu({"loai_vattu":this.f.loai_vattu.value})
         .subscribe(
           _data => {
-            this.datavattu = _data;  
+            this.datavattu = _data; 
+            this.f.ma_vattu.setValue(_data[0].ma_vattu)
           }
         );
     })

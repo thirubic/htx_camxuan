@@ -19,7 +19,6 @@
                 <ng-select bindLabel="name" placeholder="Mã vật tư" appendTo="body"
                   [searchable]="true" [clearable]="true" formControlName="ma_vattu">
                   <ng-option [value]="item.ma_vattu" [disabled]="item.disabled" *ngFor="let item of datagiavattu">
-                    <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
                     {{item.ten_vattu}}
                   </ng-option>
                 </ng-select>

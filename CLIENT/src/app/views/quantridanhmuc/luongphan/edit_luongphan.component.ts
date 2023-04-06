@@ -15,6 +15,7 @@ import { TraicungcapService } from "@app/_services/danhmuc/a_traicungcap.service
 import { PhanxuongService } from "@app/_services/danhmuc/phanxuong.service";
 import { DuongService } from "@app/_services/danhmuc/a_duong.service";
 import { DMChungService } from "@app/_services/danhmuc/dmchung.service";
+import { VattuService } from "@app/_services/danhmuc/vattu.service";
 @Component({
   selector: 'app-qlluongphan-Edit',
   templateUrl: './edit_luongphan.component.html'
@@ -52,6 +53,8 @@ export class Edit_LuongphanComponent implements OnInit {
     private luongphanService: LuongphanService,
     private duongService: DuongService,
     private dmchungService: DMChungService,
+    private vattuService: VattuService,
+    
     
   ) { }
 
@@ -88,7 +91,6 @@ export class Edit_LuongphanComponent implements OnInit {
     const element = document.querySelector('.ql-editor');
     this.html = element.innerHTML;
   }
-
   async  get_key() {
     this.dmchungService.get_key({"key":"HOSO_LUONGPHAN"})
         .subscribe(

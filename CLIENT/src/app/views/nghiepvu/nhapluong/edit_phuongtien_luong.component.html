@@ -52,29 +52,7 @@
                   </ng-select>
                 </div>
               </div>
-              <div class="col-sm-8">
-                <div class="float-input" title="Phương tiện vận chuyển">
-                  <label class="disabled">Phương tiện vẫn chuyển</label>
-                  <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
-                  <ng-select bindLabel="name" placeholder="Phương tiện vận chuyển" appendTo="body" [searchable]="true"
-                    [clearable]="true" formControlName="ma_pt">
-                    <ng-option [value]="item.ma_pt" *ngFor="let item of dataphuongtiens">
-                      <img src="../../../../assets/images/slider/delivery-truck.png" width="20px" height="20px" />
-                      {{item.ten_pt}} -  {{item.trai_cungcap}}- {{item.taitrong}}(Tấn) - {{item.gia_vanchuyen | number}}(VNĐ)
-                    </ng-option>
-                  </ng-select>
-                </div>
-              </div> 
-              <div class="col-sm-4">
-                <div class="float-input" title="Ghi chú">
-                  <label class="disabled">Ghi chú</label>
-                  <input type="text" formControlName="ghichu" class="form-control" />                
-                </div>
-              </div> 
-            </div>            
-            <div class="col-sm-12" style="text-align: center;">
-              <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-check"></i> Thêm phương tiện vận chuyển</button>
-            </div>
+            </div>   
             <div class="col-sm-12">
               <div class="col-sm-12">
                 <label>
@@ -83,13 +61,15 @@
                 <table class="table table-condensed table-striped table-bordered">
                   <thead>
                     <tr>
-                      <th class="col-sm-1 ">STT</th>
-                      <th class="col-sm-2 ">Mã phương tiện</th>
-                      <th class="col-sm-2 ">Tên phương tiện</th>
+                      <th class="col-sm-1 text-center">STT</th>
+                      <th class="col-sm-2 ">Mã PT</th>
+                      <th class="col-sm-2 ">Tên PT</th>
                       <th class="col-sm-1 ">Trọng tải</th>
-                      <th class="col-sm-2 ">Giá vận chuyển</th>
+                      <th class="col-sm-1 ">Giá vận chuyển</th>
                       <th class="col-sm-2 ">Trại vận chuyển</th>
-                      <th class="col-sm-2 ">Ghi chú</th>
+                      <th class="col-sm-1 ">KL đổ</th>
+                      <th class="col-sm-2 ">Ngày đổ</th>
+                      <th class="col-sm-1 ">Ghi chú</th>
                       <th class="col-sm-1"></th>
                     </tr>
                   </thead>
@@ -111,6 +91,12 @@
                       </td>
                       <td>
                         {{datapt.ten_trai}}
+                      </td>
+                      <td>
+                        {{datapt.soluong}}
+                      </td>
+                      <td>
+                        {{datapt.ngay_do}}
                       </td>
                       <td>
                         {{datapt.ghichu}}

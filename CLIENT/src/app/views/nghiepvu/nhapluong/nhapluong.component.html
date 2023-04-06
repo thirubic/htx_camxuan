@@ -56,7 +56,7 @@
                 <table class="table table-condensed table-striped table-bordered">
                   <thead>
                     <tr>
-                      <th class="col-sm-1">STT</th>
+                      <th class="col-sm-1 text-center">STT</th>
                       <th class="col-sm-1">Mã luống</th>
                       <th class="col-sm-1">Tên luống</th>
                       <th class="col-sm-3">Nguyên liệu trong luống</th>
@@ -77,7 +77,7 @@
                         {{dataluong.ten_luong}}
                       </td>
                       <td>
-                        Số lượng: {{dataluong.soluong_nguyenlieu}}
+                        {{dataluong.soluong_nguyenlieu}}
                       </td>
                       <td>
                         {{dataluong.trongluong}}
@@ -86,13 +86,14 @@
                         {{dataluong.mota}}
                       </td>
                       <td>
-                        <p> <i *ngIf="dataluong.trangthai == 1" style="margin-right: 5px; color: chartreuse;"
+                        <p> <i *ngIf="dataluong.trangthai == 3" style="margin-right: 5px; color: chartreuse;"
                             class="fa fa-circle"></i>
-                          <i *ngIf="dataluong.trangthai != 1" style="margin-right: 5px; color: red;" class="fa fa-circle"></i>
+                          <i *ngIf="dataluong.trangthai == 1" style="margin-right: 5px; color: red;" class="fa fa-circle"></i>
+                          <i *ngIf="dataluong.trangthai == 2" style="margin-right: 5px; color: rgb(255, 115, 0);" class="fa fa-circle"></i>
                           {{dataluong.ten_trangthai}}
                         </p>
                       </td>
-                      <td class="text-center chucnang-fa">
+                      <td *ngIf="dataluong.trangthai == 1||dataluong.trangthai == 2" class="text-center chucnang-fa">
                         <a href="javascript:void(0);" (click)="edit(dataluong)">
                           <span class="glyphicon glyphicon-plus" style="color: #11A34F;" aria-hidden="true"></span>
                         </a>

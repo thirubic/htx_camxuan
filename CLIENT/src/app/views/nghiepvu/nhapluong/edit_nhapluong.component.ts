@@ -21,8 +21,8 @@ import { DuongService } from "@app/_services/danhmuc/a_duong.service";
 import { LuongphanService } from "@app/_services/danhmuc/luongphan.service";
 import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 import { NhapluongService } from "@app/_services/danhmuc/nhapluong.service";
-
-
+import { Tr_phuongtienService } from "@app/_services/danhmuc/Tr_phuongtien.service";
+import { VattuService } from "@app/_services/danhmuc/vattu.service";
 @Component({
   selector: 'app-qlnhapluong-Edit',
   styleUrls: ['./nhapluong.component.scss'],
@@ -47,6 +47,7 @@ export class Edit_NhapluongComponent implements OnInit {
   danhsachfile: any = [];
   datavattu: any = [];
   dataduong: any = [];
+  phuongtiendata: any = [];
   quydoi = 0;
   soluong_max = 0;
   datadonvitinh: any = [];
@@ -67,7 +68,7 @@ export class Edit_NhapluongComponent implements OnInit {
   soluong_luongkhac = '';
   donvi_tinh_luongkhac = '';
   ghichu_luongkhac= '';
-  ma_kho_select = '';
+  ma_kho = '';
   disabled = false;
   serviceBase = `${environment.apiURL}`;
   viewtrangthai = false;
@@ -84,7 +85,10 @@ export class Edit_NhapluongComponent implements OnInit {
     private duongService: DuongService,
     private nhapkhoService: NhapkhoService,
     private nhapluongService: NhapluongService,
-    private donvitinhService: DonvitinhService
+    private donvitinhService: DonvitinhService,
+    private phuongtienService:     Tr_phuongtienService,
+    private vattuService:     VattuService,
+    
     
   ) { }
 
@@ -95,16 +99,18 @@ export class Edit_NhapluongComponent implements OnInit {
 
   ngOnInit(): void {
     this.get_danhsachxuong();
-    this.getkho_byphanxuong();
+    this.get_phuongtien();
     this.get_danhsachduong();
     this.getluong_trongduong();
     this.get_donvitinh();
+    this.getvattu();
+    this.getkho_byphanxuong()
     this.form = this.formBuilder.group({
         ma_xuong: [this.phanxuong],
         ma_duong: [this.ma_duong],
         ma_luong: [this.data.ma_luong],
         ghichu: [this.data.ghichu],
-        ma_kho: [this.data.ghichu],
+        ma_pt: [this.data.ma_pt],
         ma_vattu: [this.data.ma_vattu],
         ma_vattu_quidoi: [''],
         nhaptukho:[1],
@@ -117,8 +123,6 @@ export class Edit_NhapluongComponent implements OnInit {
     });
     this.f.ma_xuong.setValue(this.phanxuong)
     this.f.ma_duong.setValue(this.ma_duong)
-    this.f.ma_kho.setValue(this.datakho[0].ma_kho);
-    this.getvattu_bykho();
     
   }
 
@@ -127,7 +131,17 @@ export class Edit_NhapluongComponent implements OnInit {
     this.html = element.innerHTML;
   }
 
-
+  get_phuongtien() { 
+    return new Promise<any>((resolve) => {
+      this.phuongtienService.get_all()
+        .subscribe(
+          _data => {
+            this.phuongtiendata = _data;  
+            this.f.ma_pt.setValue(this.phuongtiendata[0].ma_pt);
+          }
+        );
+    })
+  }
   checknull(text): boolean {
     if (text == null || text == '' || text == undefined) {
       return true;
@@ -158,7 +172,9 @@ export class Edit_NhapluongComponent implements OnInit {
     }
     return true;
   }
-
+  onTabChange(event) {
+    this.f.nhaptukho.setValue(event)
+  }
   onSubmit(): void {
 
     this.submitted = true;
@@ -176,7 +192,8 @@ export class Edit_NhapluongComponent implements OnInit {
       const obj = {}
       const formData = {}
       obj['MA_LUONG'] = this.f.ma_luong.value;
-      obj['MA_KHO'] = this.f.ma_kho.value;
+      obj['MA_KHO'] = this.ma_kho;
+      obj['MA_PT'] = this.f.ma_pt.value;
       obj['MA_VT'] = this.f.ma_vattu.value;
       obj['SOLUONG'] = this.f.soluong.value;
       obj['DONVI_TINH'] = this.f.donvi_tinh.value;
@@ -248,6 +265,17 @@ export class Edit_NhapluongComponent implements OnInit {
     this.event.emit(true);
     this.modalRef.hide();
   }
+  getkho_byphanxuong() { 
+    return new Promise<any>((resolve) => {
+      this.khoService.get_byphanxuong({"ma_xuong":this.phanxuong})
+        .subscribe(
+          _data => {
+            this.datakho = _data;
+            this.ma_kho = _data.find(x=> parseInt(x.loai_kho) == 3).ma_kho;
+          }
+        );
+    })
+  }
   get_danhsachxuong(): void {
     this.xuongService.get_all()
       .subscribe(
@@ -256,13 +284,11 @@ export class Edit_NhapluongComponent implements OnInit {
         }
       );
   }
-  change_kho(){
-    this.getvattu_bykho()
+  change_pt(){
   }
   change_vattu(){
     this.quydoi = this.datavattu.filter(x => x.ma_vattu == this.f.ma_vattu.value)[0].quydoi;
     this.getvattu_quydoi()
-    this.getsoluong_vattu();
   }
   change_vattuquydoi(){
     this.getsoluong_quydoi();
@@ -278,33 +304,21 @@ export class Edit_NhapluongComponent implements OnInit {
         );
     })
   }
-  getkho_byphanxuong() { 
-    return new Promise<any>((resolve) => {
-      this.khoService.get_byphanxuong({"ma_xuong":this.phanxuong})
-        .subscribe(
-          _data => {
-            this.datakho = _data.filter(x => x.loai_kho == 3);
-            this.f.ma_kho.setValue(this.datakho[0].ma_kho)  ;
-            this.getvattu_bykho()
-          }
-        );
-    })
-  }
   get_donvitinh(): void {
     this.donvitinhService.get_all()
         .subscribe(
             _data => {
                 this.datadonvitinh = _data;
-                this.f.donvi_tinh.setValue(_data[0].ma_dv_tinh)
+                this.f.donvi_tinh.setValue(_data.find(x => x.ma_dv_tinh =='TAN').ma_dv_tinh)
             }
         );
   }
-  getvattu_bykho() { 
+  getvattu() { 
     return new Promise<any>((resolve) => {
-      this.nhapkhoService.get_bymakho({"ma_kho":this.f.ma_kho.value})
+      this.vattuService.get_all()
         .subscribe(
           _data => {
-            this.datavattu = _data;  
+            this.datavattu = _data.filter(x => x.loai_vattu == 2);  
             this.f.ma_vattu.setValue(_data[0].ma_vattu) 
           }
         );
