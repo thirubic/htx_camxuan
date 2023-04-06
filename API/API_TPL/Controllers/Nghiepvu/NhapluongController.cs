@@ -103,6 +103,25 @@ namespace API_TPL.Controllers.Danhmuc
                 return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
             }
         }
+        [Route("getsoluong_quydoi"), HttpPost]
+        public IHttpActionResult GET_SOLUONG_QUYDOI([FromBody] dynamic obj)
+        {
+            string query_str = "get_soluong_vatttu_quydoi";
+
+            object[] aParams = new object[1];
+            try
+            {
+                aParams[0] = helper.BuildParameter("id", obj.id, System.Data.SqlDbType.Int);
+
+                DataTable kq = helper.ExecuteQueryStoreProcedure(query_str, aParams);
+
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, kq));
+            }
+            catch (Exception ex)
+            {
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
+            }
+        }
         [Route("get_nguyenlieu_byluong"), HttpPost]
         public IHttpActionResult get_nguyenlieu_byluong([FromBody] dynamic obj)
         {
@@ -131,6 +150,25 @@ namespace API_TPL.Controllers.Danhmuc
             try
             {
                 aParams[0] = helper.BuildParameter("ma_luong", obj.ma_luong, System.Data.SqlDbType.NVarChar);
+
+                DataTable kq = helper.ExecuteQueryStoreProcedure(query_str, aParams);
+
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, kq));
+            }
+            catch (Exception ex)
+            {
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
+            }
+        }
+        [Route("get_vattu_quydoi"), HttpPost]
+        public IHttpActionResult get_vattu_quydoi([FromBody] dynamic obj)
+        {
+            string query_str = "vattuquydoi_bymavattu";
+
+            object[] aParams = new object[1];
+            try
+            {
+                aParams[0] = helper.BuildParameter("ma_vattu", obj.ma_vattu, System.Data.SqlDbType.NVarChar);
 
                 DataTable kq = helper.ExecuteQueryStoreProcedure(query_str, aParams);
 
