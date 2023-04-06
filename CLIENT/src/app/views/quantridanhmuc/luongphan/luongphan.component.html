@@ -60,11 +60,11 @@
                     <tr>
                       <th class="col-sm-1">STT</th>
                       <th class="col-sm-1">Mã luống</th>
-                      <th class="col-sm-2">Tên luống</th>
-                      <th class="col-sm-2">Mô tả</th>
-                      <th class="col-sm-1">Số lượng NL</th>
+                      <th class="col-sm-1">Tên luống</th>
+                      <th class="col-sm-1">Mô tả</th>
+                      <th class="col-sm-2">Số lượng NL</th>
                       <th class="col-sm-1">Trọng lượng</th>
-                      <th class="col-sm-2">Tên đường</th>
+                      <th class="col-sm-1">Tên đường</th>
                       <th class="col-sm-1">Trạng thái</th>
                       <th class="col-sm-2"></th>
                     </tr>
@@ -74,7 +74,7 @@
                       *ngFor="let luongphan of luongphans | filter:term | paginate: { itemsPerPage: 15, currentPage: p };let i = index">
                       <td class="text-center">{{i + 1 }}</td>
                       <td>
-                        {{luongphan.ma_luong}}
+                        <strong>{{luongphan.ma_luong}}</strong>
                       </td>
                       <td>
                         {{luongphan.ten_luong}}
@@ -92,7 +92,12 @@
                         {{luongphan.ten_duong}}
                       </td>
                       <td>
-                        {{luongphan.ten_trangthai}}
+                        <p> <i *ngIf="luongphan.trangthai == 3" style="margin-right: 5px; color: chartreuse;"
+                            class="fa fa-circle"></i>
+                          <i *ngIf="luongphan.trangthai == 1" style="margin-right: 5px; color: red;" class="fa fa-circle"></i>
+                          <i *ngIf="luongphan.trangthai == 2" style="margin-right: 5px; color: rgb(255, 115, 0);" class="fa fa-circle"></i>
+                          {{luongphan.ten_trangthai}}
+                        </p>
                       </td>
                       <td class="text-center chucnang-fa">
                         <a href="javascript:void(0);" (click)="edit(luongphan)">

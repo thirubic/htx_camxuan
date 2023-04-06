@@ -21,6 +21,12 @@ export class NhapluongService {
       formData
     );
   }
+  get_vattu_quydoi(formData: any): Observable<any> {
+    return this.http.post(
+      `${baseUrl}/get_vattu_quydoi`,
+      formData
+    );
+  }
   get_nguyenlieu_byluong(formData: any): Observable<any> {
     return this.http.post(
       `${baseUrl}/get_nguyenlieu_byluong`,
@@ -42,6 +48,12 @@ export class NhapluongService {
   getsoluong(formData: any): Observable<any> {
     return this.http.post(
       `${baseUrl}/getsoluong`,
+      formData
+    );
+  }
+  getsoluong_quydoi(formData: any): Observable<any> {
+    return this.http.post(
+      `${baseUrl}/getsoluong_quydoi`,
       formData
     );
   }

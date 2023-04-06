@@ -71,7 +71,7 @@
                       *ngFor="let dataluong of dataluongs | filter:term | paginate: { itemsPerPage: 15, currentPage: p };let i = index">
                       <td class="text-center">{{i + 1 }}</td>
                       <td>
-                        {{dataluong.ma_luong}}
+                        <strong>{{dataluong.ma_luong}}</strong>
                       </td>
                       <td>
                         {{dataluong.ten_luong}}

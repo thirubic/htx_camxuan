@@ -37,13 +37,13 @@
                   <thead>
                     <tr>
                       <th class="col-sm-1">STT</th>
-                      <th class="col-sm-2">Mã vật tư</th>
+                      <th class="col-sm-1">Mã vật tư</th>
                       <th class="col-sm-2">Tên vật tư</th>
                       <th class="col-sm-1">Giá</th>
                       <th class="col-sm-1">Đơn vị tính</th>
-                      <th class="col-sm-2">Ghi chú</th>
-                      <th class="col-sm-2">Từ ngày</th>
-                      <th class="col-sm-2">Đến ngày</th>
+                      <th class="col-sm-1">Ghi chú</th>
+                      <th class="col-sm-1">Từ ngày</th>
+                      <th class="col-sm-1">Đến ngày</th>
                       <th class="col-sm-2"></th>
                     </tr>
                   </thead>
@@ -52,7 +52,7 @@
                       *ngFor="let giavattu of giavattus | filter:term | paginate: { itemsPerPage: 15, currentPage: p };let i = index">
                       <td class="text-center">{{i + 1 }}</td>
                       <td>
-                        {{giavattu.ma_vattu}}
+                        <strong>{{giavattu.ma_vattu}}</strong>
                       </td>
                       <td>
                         {{giavattu.ten_vattu}}

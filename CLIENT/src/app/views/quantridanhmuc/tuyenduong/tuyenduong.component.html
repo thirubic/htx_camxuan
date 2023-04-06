@@ -50,7 +50,7 @@
                       *ngFor="let tuyenduong of tuyenduongs | filter:term | paginate: { itemsPerPage: 15, currentPage: p };let i = index">
                       <td class="text-center">{{i + 1 }}</td>
                       <td>
-                        {{tuyenduong.ma_duong}}
+                        <strong>{{tuyenduong.ma_duong}}</strong>
                       </td>
                       <td>
                         {{tuyenduong.ten_duong}}

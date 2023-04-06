@@ -1,0 +1,86 @@
+<section id="main" class="extend clearfix">  
+  <div class="col-sm-12">
+    <div class="header-text">
+      <h3 class="header-baocao">
+        <span class="header-img">
+         Báo cáo thống kê thành phẩm đã đóng gói
+        </span>
+      </h3>
+    </div>
+    <div title="Tìm kiếm" class="div-input-baocao">
+      <div class="col-sm-4" title="Đơn vị chủ trì">
+        <label>Phân xưởng</label>
+        <ng-select bindLabel="name" placeholder="Phân xưởng" appendTo="body"
+          [searchable]="true" [clearable]="true" [(ngModel)]="ma_xuong_select">
+          <ng-option [value]="item.ma_xuong" [disabled]="item.disabled" *ngFor="let item of dataxuong">
+            <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
+            {{item.ten_xuong}}
+          </ng-option>
+        </ng-select>
+      </div>
+      <label class="save-task buttonbc">
+        <a (click)="xembaocao()">
+          <i class="fa fa-search"> Xem báo cáo</i>
+        </a>
+      </label>
+      <label class="save-task buttonbc">
+        <a (click)="taifile()">
+          <i class="fa fa-cloud-download"> Tải xuống</i>
+        </a>
+      </label>
+    </div>
+  </div>
+  <div  class="col-sm-12" >
+    <div class="modal-body body-baocao">
+      <div class="clearfix">
+        <div id="grid-result" class="body">
+          <div>
+            <table  id="baocao-result" class="table table-condensed table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th class="text-center w20">STT</th>                  
+                  <th class="text-center">Phân xưởng</th>
+                  <th class="text-center">Tên kho</th>
+                  <th class="text-center">Tên vật tư</th>
+                  <th class="text-center">Số lượng</th>
+                  <th class="text-center">Tổng khối lượng</th>
+                  <th class="text-center">Đơn vị tính</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let item of data_baocao;let i = index">
+                  <td class="text-center">{{i + 1}}</td>
+                  <td class="text-center">
+                    {{item.ten_xuong}}
+                  </td>
+                  <td>
+                    {{item.ten_kho}}
+                  </td>
+                  <td>
+                    {{item.ten_vattu}}
+                  </td>
+                  <td>
+                    {{item.soluong}}
+                  </td> 
+                  <td>
+                    {{item.tong_khoiluong}}
+                  </td> 
+                  <td>
+                    {{item.donvi_tinh}}
+                  </td> 
+                </tr>
+                <tr *ngIf="data_baocao.length == null  || data_baocao.length == 0">
+                  <td colspan="13" class="text-center empty gray-color fs13"
+                      style="min-height:18px; line-height:18px;">
+                      Chưa có dòng dữ liệu nào
+                  </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+</section>

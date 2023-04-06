@@ -62,7 +62,8 @@
                       *ngFor="let kho of khos | filter:term | paginate: { itemsPerPage: 15, currentPage: p };let i = index">
                       <td class="text-center">{{i + 1 }}</td>
                       <td>
-                        {{kho.ma_kho}}
+                        <strong>{{kho.ma_kho}}</strong>
+                        
                       </td>
                       <td>
                         {{kho.ten_kho}}

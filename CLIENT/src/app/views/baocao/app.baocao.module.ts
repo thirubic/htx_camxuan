@@ -13,10 +13,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NumbersDirectivesModule } from '@app/_services/Directive/number.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-import { Bc_congviecphatsinhComponent } from './congviecphatsinh/bc_congviecphatsinh.component';
-import { Bc_donviComponent } from './congviecphatsinh/bc_donvicomponent';
-import { Bc_nhanvienComponent } from './congviecphatsinh/bc_nhanvien.component';
-import { Bc_nguonphatsinhComponent } from './congviecphatsinh/bc_nguonphatsinh.component';
+import { Bc_thanhphamComponent } from './thongkethanhpham/bc_thanhphamcomponent';
 // import { QuillModule } from 'ngx-quill';
 import { HttpClientModule} from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
@@ -40,7 +37,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     // QuillModule.forRoot(),
     // QuillModule
     ], 
-    declarations: [ Bc_congviecphatsinhComponent, Bc_donviComponent, Bc_nhanvienComponent, Bc_nguonphatsinhComponent
+    declarations: [ Bc_thanhphamComponent
        
         ]
 })

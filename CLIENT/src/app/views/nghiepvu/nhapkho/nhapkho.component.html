@@ -75,7 +75,7 @@
                       *ngFor="let vattu of vattukhos | filter:term | paginate: { itemsPerPage: 15, currentPage: p };let i = index">
                       <td class="text-center">{{i + 1 }}</td>
                       <td>
-                        {{vattu.ma_vattu}}
+                        <strong>{{vattu.ma_vattu}}</strong>
                       </td>
                       <td>
                         {{vattu.ten_vattu}}

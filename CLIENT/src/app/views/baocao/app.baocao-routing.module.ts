@@ -4,12 +4,12 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 import { TreeModule } from '@circlon/angular-tree-component';
-import { Bc_congviecphatsinhComponent } from "./congviecphatsinh/bc_congviecphatsinh.component";
+import { Bc_thanhphamComponent } from "./thongkethanhpham/bc_thanhphamcomponent";
 
 
 
 const routes: Routes = [        
-    { path: 'CVphatsinh',              component: Bc_congviecphatsinhComponent },    
+    { path: 'CVphatsinh',              component: Bc_thanhphamComponent },    
 ];
 
 @NgModule({

@@ -54,7 +54,14 @@
               "src/styles.scss",
               "./node_modules/@circlon/angular-tree-component/css/angular-tree-component.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js", 
+              
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              
+              
+              
+            ]
           },
           "configurations": {
             "production": {
@@ -123,7 +130,14 @@
               "./node_modules/@ng-select/ng-select/themes/default.theme.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js", 
+              
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              
+              
+              
+            ]
           }
         },
         "lint": {

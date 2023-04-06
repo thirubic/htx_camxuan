@@ -52,7 +52,7 @@ export class GsluongComponent {
   xuli_trehan: number = 0;
   modalRef: BsModalRef;
   hide_title = true;
-
+  content = false;
   ma_xuong_select = '';
   ma_duong_select: '';
   dataluongs = []; 
@@ -91,7 +91,8 @@ export class GsluongComponent {
   public cardSettings: CardSettingsModel = {
     contentField: 'mota',
     headerField: 'ma_luong',
-    showHeader: false
+    showHeader: false,
+    noCardsMessage: "Không có thẻ để hiển thị"
   };
   public swimlaneSettings: SwimlaneSettingsModel = {
     keyField: '',
@@ -156,7 +157,9 @@ export class GsluongComponent {
 
 
   }
-
+  EnableDropdown(){
+    this.content = !this.content
+  }
   editcard(data) {
     const initialState = { title: "Chi tiết: " + data.ten_luong, data: data };
     this.hide_title = false;
@@ -167,7 +170,7 @@ export class GsluongComponent {
       }, {
         class: 'modal-lg xlg', initialState
       }));
-
+      
     this.modalRef.content.event
       .subscribe(arg => {
         if (arg) {

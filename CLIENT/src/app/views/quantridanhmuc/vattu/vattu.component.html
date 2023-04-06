@@ -37,11 +37,11 @@
                   <thead>
                     <tr>
                       <th class="col-sm-1">STT</th>
-                      <th class="col-sm-2">Mã vật tư</th>
+                      <th class="col-sm-1">Mã vật tư</th>
                       <th class="col-sm-2">Tên vật tư</th>
-                      <th class="col-sm-2">Loại vật tư</th>
+                      <th class="col-sm-1">Loại vật tư</th>
                       <th class="col-sm-2">Mô tả</th>
-                      <th class="col-sm-2">Nơi cung cấp</th>
+                      <th class="col-sm-1">Nơi cung cấp</th>
                       <th class="col-sm-2"></th>
                     </tr>
                   </thead>
@@ -50,7 +50,7 @@
                       *ngFor="let vattu of vattus | filter:term | paginate: { itemsPerPage: 15, currentPage: p };let i = index">
                       <td class="text-center">{{i + 1 }}</td>
                       <td>
-                        {{vattu.ma_vattu}}
+                        <strong>{{vattu.ma_vattu}}</strong>
                       </td>
                       <td>
                         {{vattu.ten_vattu}}

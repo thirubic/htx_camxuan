@@ -9,7 +9,7 @@
   </div>
   <div class="modal-body">
     <div class="clearfix">
-      <div class="row">      
+      <div class="row">
         <div class="col-sm-12">
           <div class="row row-frm">
             <div class="col-sm-6">
@@ -42,8 +42,8 @@
               <div class="float-input" title="Loại vật tư">
                 <label class="disabled">Loại vật tư</label>
                 <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
-                <ng-select bindLabel="name" placeholder="Loại vật tư" appendTo="body" [searchable]="true" [clearable]="true"
-                formControlName="loai_vattu" (change)="change_loaivt()">
+                <ng-select bindLabel="name" placeholder="Loại vật tư" appendTo="body" [searchable]="true"
+                  [clearable]="true" formControlName="loai_vattu" (change)="change_loaivt()">
                   <ng-option [value]="item.loaivt_id" *ngFor="let item of dataloaivattu">
                     <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
                     {{item.ten_loaivt}}
@@ -52,16 +52,28 @@
               </div>
             </div>
             <div class="col-sm-6">
-              <div class="float-input" title="Vật tư/Nguyên liệu">
-                <label class="disabled">Vật tư/Nguyên liệu</label>
-                <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
-                <ng-select bindLabel="name" placeholder="Mã vật tư" appendTo="body" [searchable]="true"
-                  [clearable]="true" formControlName="ma_vattu">
-                  <ng-option [value]="item.ma_vattu" *ngFor="let item of datavattu">
-                    <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
-                    {{item.ten_vattu}}
-                  </ng-option>
-                </ng-select>
+              <div class="row">
+                <div class="col-sm-8">
+                  <div class="float-input" title="Vật tư/Nguyên liệu">
+                    <label class="disabled">Vật tư/Nguyên liệu</label>
+                    <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
+                    <ng-select bindLabel="name" placeholder="Mã vật tư" appendTo="body" [searchable]="true"
+                      [clearable]="true" formControlName="ma_vattu">
+                      <ng-option [value]="item.ma_vattu" *ngFor="let item of datavattu">
+                        <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
+                        {{item.ten_vattu}}
+                      </ng-option>
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                    <div title="Quy đổi">
+                      <label>
+                        <input type="checkbox" name="quydoi" value="1" formControlName="quydoi">
+                        Quy đổi
+                      </label>
+                    </div>
+                </div>
               </div>
             </div>
             <div class="col-sm-6">
@@ -95,15 +107,15 @@
                 </ng-select>
               </div>
             </div>
-            <div class="col-sm-12">
+            <div class="col-sm-6">
               <div class="float-input" title="Ghi chú">
-                <label  class="disabled">Ghi chú <span class="required"></span></label>
+                <label class="disabled">Ghi chú <span class="required"></span></label>
                 <input type="text" formControlName="ghichu" class="form-control" />
               </div>
-            </div> 
+            </div>
           </div>
         </div>
-      </div>    
+      </div>
     </div>
   </div>
   <div class="modal-footer">

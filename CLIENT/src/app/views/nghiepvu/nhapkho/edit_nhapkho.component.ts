@@ -78,6 +78,7 @@ export class Edit_NhapkhoComponent implements OnInit {
         ma_vattu: [''],
         loai_vattu: [this.dataloaivattu[0].loaivt_id ],
         soluong: [''],
+        quydoi: [0],
         donvi_tinh: [''],
         tinhtrang_chatluong: [this.datatinhtrang[0].ttcl_id],
         ghichu: ['']
@@ -93,6 +94,7 @@ export class Edit_NhapkhoComponent implements OnInit {
         loai_vattu: [this.data.loai_vattu],  
         soluong: [this.data.soluong],
         donvi_tinh: [this.data.donvi_tinh],
+        quydoi: [this.data.quydoi],
         tinhtrang_chatluong: [this.data.tinhtrang_chatluong],
         ghichu: [this.data.ghichu]
       });
@@ -108,7 +110,7 @@ export class Edit_NhapkhoComponent implements OnInit {
       this.khoService.get_byphanxuong({"ma_xuong":this.phanxuong})
         .subscribe(
           _data => {
-            this.datakho = _data;   
+            this.datakho = _data.filter(x => x.loai_kho !=2);   
           }
         );
     })
@@ -122,7 +124,6 @@ export class Edit_NhapkhoComponent implements OnInit {
         .subscribe(
           _data => {
             this.datavattu = _data;  
-            this.f.ma_vattu.setValue(_data[0].ma_vattu) 
           }
         );
     })
@@ -173,6 +174,7 @@ export class Edit_NhapkhoComponent implements OnInit {
     const obj = {}
     const formData = {}
     obj['MA_KHO'] = this.f.ma_kho.value;
+    obj['QUYDOI'] = this.f.quydoi.value?1:0;
     obj['MA_VATTU'] = this.f.ma_vattu.value;
     obj['SOLUONG'] = this.f.soluong.value;
     obj['DONVI_TINH'] = this.f.donvi_tinh.value;
@@ -203,7 +205,6 @@ export class Edit_NhapkhoComponent implements OnInit {
       this.nhapkhoService.nhapkho(formData)
       .subscribe({
         next: (_data) => {
-          console.log(_data)
           this.event.emit(true);
           this.modalRef.hide();
           this.toastr.success("Cập nhật vật tư kho thành công", "",

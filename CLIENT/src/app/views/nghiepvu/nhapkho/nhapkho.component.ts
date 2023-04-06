@@ -87,10 +87,10 @@ export class NhapkhoComponent implements OnInit {
       this.khoService.get_byphanxuong({"ma_xuong":this.ma_xuong_select})
         .subscribe(
           _data => {
-            this.datakho = _data;     
+            this.datakho = _data.filter(x => x.loai_kho != 2);     
             this.totalItems = _data.length;
             this.p = 1;
-            this.ma_kho_select = _data[0].ma_kho;
+            this.ma_kho_select = this.datakho[0].ma_kho;
             this.getvattu_trongkho()
             console.log(this.ma_kho_select)
           }

@@ -51,7 +51,7 @@
                       *ngFor="let trai of trais | filter:term | paginate: { itemsPerPage: 15, currentPage: p };let i = index">
                       <td class="text-center">{{i + 1 }}</td>
                       <td>
-                        {{trai.ma_trai}}
+                        <strong>{{trai.ma_trai}}</strong>
                       </td>
                       <td>
                         {{trai.ten_trai}}

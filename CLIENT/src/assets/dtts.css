@@ -2170,16 +2170,16 @@ p.BgInputTextStyle.Sprite1 {
     cursor: pointer;
   }
   .e-header-row  th:nth-child(1){
-    background-color: #4291E5  !important;   
+    background-color: #dc3545  !important;   
   }
   .e-header-row  th:nth-child(2){
-    background-color: #F29C5C  !important;   
+    background-color: #ffc107  !important;   
   }
   /* .e-header-row  th:nth-child(3){
     background-color: #FF9700 !important;   
   } */
   .e-header-row  th:nth-child(3){
-    background-color: #43F753  !important;   
+    background-color: #28a745  !important;   
   }
   .edit-card-custom {
       display: none;

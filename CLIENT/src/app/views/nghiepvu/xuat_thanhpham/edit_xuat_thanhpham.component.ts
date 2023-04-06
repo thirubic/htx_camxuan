@@ -213,6 +213,7 @@ export class Edit_Xuat_thanhphamComponent implements OnInit {
     const formData = {}
     obj['MA_KHO'] = this.f.ma_kho.value;
     obj['MA_VATTU'] = this.f.ma_vattu.value;
+    obj['MA_KHO_VT'] = this.f.ma_kho_vt.value;
     obj['SOLUONG'] = this.f.soluong.value;
     obj['DONVI_TINH'] = this.f.donvi_tinh.value;
     obj['MA_LUONG'] = this.f.ma_luong.value;
