@@ -33,6 +33,12 @@ export class NhapluongService {
       formData
     );
   }
+  quydoi_vattu(formData: any): Observable<any> {
+    return this.http.post(
+      `${baseUrl}/quydoi_vattu`,
+      formData
+    );
+  }
   get_khoiluong_byluong(formData: any): Observable<any> {
     return this.http.post(
       `${baseUrl}/get_khoiluong_byluong`,

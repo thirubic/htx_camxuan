@@ -62,10 +62,11 @@
                     <tr>
                       <th class="col-sm-1 text-center">STT</th>
                       <th class="col-sm-1">Mã vật tư</th>
-                      <th class="col-sm-3">Tên vật tư</th>
+                      <th class="col-sm-2">Tên vật tư</th>
                       <th class="col-sm-1">Số lượng</th>
                       <th class="col-sm-1">Đơn vị tính</th>
-                      <th class="col-sm-2">Tình trạng</th>
+                      <th class="col-sm-2">Ngày nhập kho</th>
+                      <th class="col-sm-1">Tình trạng</th>
                       <th class="col-sm-2">Ghi chú</th>
                       <th class="col-sm-2"></th>
                     </tr>
@@ -85,6 +86,9 @@
                       </td>
                       <td>
                         {{vattu.ten_dv_tinh}}
+                      </td>
+                      <td>
+                        {{vattu.ngay_nhapkho}}
                       </td>
                       <td>
                         {{vattu.ten_tinhtrang}}

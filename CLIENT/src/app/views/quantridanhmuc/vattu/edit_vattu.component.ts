@@ -61,6 +61,7 @@ export class Edit_VattuComponent implements OnInit {
         ten_vattu: [''],
         ma_trai: [''],
         mota: [''],
+        quydoi: [0],
         loai_vattu: [''],
         taitrong: [''],
       });
@@ -71,6 +72,7 @@ export class Edit_VattuComponent implements OnInit {
         ten_vattu: [this.data.ten_vattu],
         ma_trai: [this.data.ma_trai],
         mota: [this.data.mota],
+        quydoi: [0],
         loai_vattu: [this.data.loai_vattu],
         taitrong: [this.data.taitrong]
       });
@@ -133,6 +135,7 @@ export class Edit_VattuComponent implements OnInit {
     obj['LOAI_VATTU'] = this.f.loai_vattu.value;
     obj['MA_TRAI'] = this.f.ma_trai.value;
     obj['MOTA'] = this.f.mota.value;
+    obj['QUYDOI'] = this.f.quydoi.value?1:0;
     obj['TAITRONG'] = this.f.taitrong.value;
     obj['NGUOI_CAPNHAT'] = this.UserName;
     formData['data'] = JSON.stringify(obj);

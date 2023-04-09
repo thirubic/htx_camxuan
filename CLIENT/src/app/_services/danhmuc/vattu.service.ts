@@ -27,6 +27,12 @@ export class VattuService {
       formData
     );
   }
+  dm_vattu_getbyloai(formData: any): Observable<any> {
+    return this.http.post(
+      `${baseUrl}/dm_vattu_getbyloai`,
+      formData
+    );
+  }
   Del(formData: any): Observable<any> {
     return this.http.post(
       `${baseUrl}/xoa`,

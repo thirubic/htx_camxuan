@@ -6,6 +6,7 @@ import { ConfirmService } from '@app/_modules/confirm/confirm.service';
 import { GlobalConstants } from '@app/_models/config';
 import {Edit_VattuComponent  } from './edit_vattu.component';
 import { environment } from '@environments/environment';
+import { NhapkhoService } from '@app/_services/danhmuc/nhapkho.service';
 
 @Component({
   selector: 'app-vattu',
@@ -23,9 +24,11 @@ export class VattuComponent implements OnInit {
   TreeNode: [];
   node: [];
   items: any;
+  loaivt_id = 0;
   options = {
   };
   donvi = [];
+  dataloaivattu = [{ "loaivt_id": 0, "ten_loaivt": "Tất cả" },{ "loaivt_id": 1, "ten_loaivt": "Vật tư phục vụ sản xuất" }, { "loaivt_id": 2, "ten_loaivt": "Nguyên liệu" }];
   modalRef: BsModalRef;
   id_donvi: any;
   isDataAvailable: boolean = false;
@@ -38,6 +41,7 @@ export class VattuComponent implements OnInit {
     private toastr: ToastrService,
     private modalService: BsModalService,
     private confirmService: ConfirmService,
+    private nhapkhoService: NhapkhoService,
 
   ) { }
 
@@ -47,7 +51,7 @@ export class VattuComponent implements OnInit {
   }
 
   async getValueWithAsync() {
-    this.items = await this.get_all();    
+    this.items = await this.get_byloaivattu();    
     this.node = this.items;
     console.log(123);
   }
@@ -72,9 +76,10 @@ export class VattuComponent implements OnInit {
     });
   }
 
-
+  change_loaivt(){
+      this.get_byloaivattu()
+  }
   add() {
-    console.log("add");
       const initialState = { title: GlobalConstants.THEMMOI + " vật tư", data: '0' };
       this.modalRef = this.modalService.show(
         Edit_VattuComponent,
@@ -112,9 +117,16 @@ export class VattuComponent implements OnInit {
             );
           }
         });
-    
   }
-
+  get_byloaivattu(): void {
+      this.vattuService.dm_vattu_getbyloai({"loai_vt":this.loaivt_id})
+        .subscribe(
+            _data => {
+                this.vattus = _data;
+            }
+        );
+  }
+  
   viewboard(){
     this.type_view = true;
     this.p = 0;

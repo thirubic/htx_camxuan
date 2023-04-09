@@ -10,6 +10,7 @@ import { environment } from '@environments/environment';
 import { ConfirmService } from '@app/_modules/confirm/confirm.service';
 import { DonviService } from "@app/_services/danhmuc/donvi.service";
 import { KhoService } from "@app/_services/danhmuc/kho.service";
+
 import { CongviecphatsinhService } from '@app/_services/congviec/congviecphatsinh.service';
 import * as moment from "moment";
 import { TabsModule } from 'ngx-bootstrap/tabs';
@@ -60,6 +61,7 @@ export class Edit_NhapluongComponent implements OnInit {
   dataluong_khac: any = [];
   datasoluong: any = [];
   loai_vattu = 1;
+  soluong_quidoi_max = 0;
   dataloaivattu = [{ "loaivt_id": 1, "ten_loaivt": "Vật tư phục vụ sản xuất" }, { "loaivt_id": 2, "ten_loaivt": "Nguyên liệu" }];
   datatinhtrang = [{ "ttcl_id": 1, "ten_ttcl": "Tốt" }, { "ttcl_id": 2, "ten_ttcl": "Hỏng" }, { "ttcl_id": 3, "ten_ttcl": "Sắp hết hạn sử dụng" }]
   maxuong_select = '';
@@ -80,6 +82,7 @@ export class Edit_NhapluongComponent implements OnInit {
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
     private khoService:KhoService,
+    private confirmService: ConfirmService,
     private xuongService: PhanxuongService,
     private luongphanService: LuongphanService,
     private duongService: DuongService,
@@ -88,6 +91,7 @@ export class Edit_NhapluongComponent implements OnInit {
     private donvitinhService: DonvitinhService,
     private phuongtienService:     Tr_phuongtienService,
     private vattuService:     VattuService,
+
     
     
   ) { }
@@ -115,6 +119,8 @@ export class Edit_NhapluongComponent implements OnInit {
         ma_vattu_quidoi: [''],
         nhaptukho:[1],
         soluong:[0],
+        soluong_quidoi:[0],
+        quydoi:[0],
         donvi_tinh:[3],
         ma_luong_khac: [''],
         soluong_luongkhac:[0],
@@ -180,85 +186,105 @@ export class Edit_NhapluongComponent implements OnInit {
     this.submitted = true;
     this.loading = true;
     if (this.f.nhaptukho.value == '1') {
-      if (this.f.soluong.value == "" || this.f.soluong.value == null) {
-        this.toastr.warning("Chưa nhập số lượng nguyên liệu cần nhập luống", "Cảnh báo",
-          {
-            timeOut: 3000,
-            closeButton: true,
-            positionClass: 'toast-bottom-right'
-          });
-        return;
-      }
-      const obj = {}
-      const formData = {}
-      obj['MA_LUONG'] = this.f.ma_luong.value;
-      obj['MA_KHO'] = this.ma_kho;
-      obj['MA_PT'] = this.f.ma_pt.value;
-      obj['MA_VT'] = this.f.ma_vattu.value;
-      obj['SOLUONG'] = this.f.soluong.value;
-      obj['DONVI_TINH'] = this.f.donvi_tinh.value;
-      obj['GHICHU'] = this.f.ghichu.value;
-      obj['NGUOI_CAP'] = this.UserName;
-      formData['data'] = JSON.stringify(obj);
-      try {
-        this.nhapluongService.nhapnguyenlieu_tukho(formData)
-          .subscribe({
-            next: (_data) => {
-              this.event.emit(true);
-              this.toastr.success("Nhập nguyên liệu vào luống thành công", "",
+      let options = {
+        prompt: 'Bạn có muốn thêm nguyên liệu [' + this.f.ma_vattu.value + '] vào luống không?',
+        title: "Thông báo",
+        okText: `Đồng ý`,
+        cancelText: `Hủy`,
+      };
+      this.confirmService.confirm(options).then((res: boolean) => {
+        if (res) {
+            if (this.f.soluong.value == "" || this.f.soluong.value == null) {
+              this.toastr.warning("Chưa nhập số lượng nguyên liệu cần nhập luống", "Cảnh báo",
                 {
                   timeOut: 3000,
                   closeButton: true,
                   positionClass: 'toast-bottom-right'
                 });
-                this.getnguyenlieu_byluong(); 
-            },
-            error: (error) => {
-              this.toastr.error(error);
-            },
-          });
-      } catch (err) {
-        this.toastr.error(err)
-      }
-
+              return;
+            }
+            const obj = {}
+            const formData = {}
+            obj['MA_LUONG'] = this.f.ma_luong.value;
+            obj['MA_KHO'] = this.ma_kho;
+            obj['MA_PT'] = this.f.ma_pt.value;
+            obj['QUYDOI'] = this.f.quydoi.value?1:0;
+            obj['MA_VT'] = this.f.ma_vattu.value;
+            obj['SOLUONG'] = this.f.soluong.value;
+            obj['DONVI_TINH'] = this.f.donvi_tinh.value;
+            obj['GHICHU'] = this.f.ghichu.value;
+            obj['NGUOI_CAP'] = this.UserName;
+            formData['data'] = JSON.stringify(obj);
+            try {
+              this.nhapluongService.nhapnguyenlieu_tukho(formData)
+                .subscribe({
+                  next: (_data) => {
+                    this.event.emit(true);
+                    this.toastr.success("Nhập nguyên liệu vào luống thành công", "",
+                      {
+                        timeOut: 3000,
+                        closeButton: true,
+                        positionClass: 'toast-bottom-right'
+                      });
+                      this.getnguyenlieu_byluong(); 
+                  },
+                  error: (error) => {
+                    this.toastr.error(error);
+                  },
+                });
+            } catch (err) {
+              this.toastr.error(err)
+            }
+        }
+      })
     } else {
-      if (this.f.soluong_luongkhac.value == "" || this.f.soluong_luongkhac.value == null) {
-        this.toastr.warning("Chưa nhập số lượng nguyên liệu cần nhập luống", "Cảnh báo",
-          {
-            timeOut: 3000,
-            closeButton: true,
-            positionClass: 'toast-bottom-right'
-          });
-        return;
-      }
-      const obj = {}
-      const formData = {}
-      obj['MA_LUONG'] = this.f.ma_luong.value;
-      obj['MA_LUONGKHAC'] = this.f.ma_luong_khac.value;
-      obj['SOLUONG'] = this.f.soluong_luongkhac.value;
-      obj['DONVI_TINH'] = this.f.donvi_tinh_luongkhac.value;
-      obj['GHICHU'] = this.f.ghichu_luongkhac.value;
-      obj['NGUOI_CAP'] = this.UserName;
-      formData['data'] = JSON.stringify(obj);
-      console.log(formData)
-      this.nhapluongService.nhapnguyenlieu_tuluongkhac(formData)
-        .subscribe({
-          next: (_data) => {
-            console.log(_data)
-            this.event.emit(true);
-            this.modalRef.hide();
-            this.toastr.success("Cập nhật nguyên liệu từ luống khác thành công", "",
-              {
-                timeOut: 3000,
-                closeButton: true,
-                positionClass: 'toast-bottom-right'
+      let options = {
+        prompt: 'Bạn có muốn thêm nguyên liệu vào luống không?',
+        title: "Thông báo",
+        okText: `Đồng ý`,
+        cancelText: `Hủy`,
+      };
+      this.confirmService.confirm(options).then((res: boolean) => {
+        if (res) {
+            if (this.f.soluong_luongkhac.value == "" || this.f.soluong_luongkhac.value == null) {
+              this.toastr.warning("Chưa nhập số lượng nguyên liệu cần nhập luống", "Cảnh báo",
+                {
+                  timeOut: 3000,
+                  closeButton: true,
+                  positionClass: 'toast-bottom-right'
+                });
+              return;
+            }
+            const obj = {}
+            const formData = {}
+            obj['MA_LUONG'] = this.f.ma_luong.value;
+            obj['MA_LUONGKHAC'] = this.f.ma_luong_khac.value;
+            obj['SOLUONG'] = this.f.soluong_luongkhac.value;
+            obj['DONVI_TINH'] = this.f.donvi_tinh_luongkhac.value;
+            obj['GHICHU'] = this.f.ghichu_luongkhac.value;
+            obj['NGUOI_CAP'] = this.UserName;
+            formData['data'] = JSON.stringify(obj);
+            console.log(formData)
+            this.nhapluongService.nhapnguyenlieu_tuluongkhac(formData)
+              .subscribe({
+                next: (_data) => {
+                  console.log(_data)
+                  this.event.emit(true);
+                  this.modalRef.hide();
+                  this.toastr.success("Cập nhật nguyên liệu từ luống khác thành công", "",
+                    {
+                      timeOut: 3000,
+                      closeButton: true,
+                      positionClass: 'toast-bottom-right'
+                    });
+                },
+                error: error => {
+                  this.toastr.error(error)
+                }
               });
-          },
-          error: error => {
-            this.toastr.error(error)
           }
-        });
-    }
+        })
+      }
   }
 
   closed() {
@@ -287,8 +313,7 @@ export class Edit_NhapluongComponent implements OnInit {
   change_pt(){
   }
   change_vattu(){
-    this.quydoi = this.datavattu.filter(x => x.ma_vattu == this.f.ma_vattu.value)[0].quydoi;
-    this.getvattu_quydoi()
+    this.getsoluong_quydoi()
   }
   change_vattuquydoi(){
     this.getsoluong_quydoi();
@@ -318,11 +343,51 @@ export class Edit_NhapluongComponent implements OnInit {
       this.vattuService.get_all()
         .subscribe(
           _data => {
-            this.datavattu = _data.filter(x => x.loai_vattu == 2);  
+            this.datavattu = _data.filter(x => x.loai_vattu == 2 && x.tinhchat != 2);  
             this.f.ma_vattu.setValue(_data[0].ma_vattu) 
           }
         );
     })
+  }
+  fn_quydoi(){
+    if(this.f.quydoi.value == 1){
+      let options = {
+        prompt: 'Bạn có muốn quy đổi nguyên liệu [' + this.f.ma_vattu.value + '] không?',
+        title: "Thông báo",
+        okText: `Đồng ý`,
+        cancelText: `Hủy`,
+      };
+      this.confirmService.confirm(options).then((res: boolean) => {
+        if (res) {
+          const obj = {}
+          const formData = {}
+          obj['MA_LUONG'] = this.f.ma_luong.value;
+          obj['MA_KHO'] = this.ma_kho;
+          obj['MA_PT'] = this.f.ma_pt.value;
+          obj['QUYDOI'] = this.f.quydoi.value?1:0;
+          obj['MA_VT'] = this.f.ma_vattu.value;
+          obj['SOLUONG'] = this.f.soluong.value;
+          obj['DONVI_TINH'] = this.f.donvi_tinh.value;
+          obj['GHICHU'] = this.f.ghichu.value;
+          obj['NGUOI_CAP'] = this.UserName;
+          formData['data'] = JSON.stringify(obj);
+          this.nhapluongService.quydoi_vattu(formData).subscribe({
+            next: (_data) => {
+              this.toastr.success("Quy đổi nguyên liệu thành công", 'Thông báo', {
+                timeOut: 3000,
+                closeButton: true,
+                positionClass: 'toast-bottom-right',
+              });
+              this.getvattu_quydoi();
+            },
+            error: (error) => {
+              this.toastr.error(error);
+            },
+          });
+          console.log('XÓA');
+        }
+      });
+    }
   }
   getvattu_quydoi() { 
     return new Promise<any>((resolve) => {
@@ -387,8 +452,8 @@ export class Edit_NhapluongComponent implements OnInit {
         .subscribe(
           _data => {
             this.datasoluong = _data; 
-            this.f.soluong.setValue(_data[0].soluong);
-            this.soluong_max = _data[0].soluong;
+            this.f.soluong_quidoi.setValue(_data[0].soluong);
+            this.soluong_quidoi_max = _data[0].soluong;
             this.f.donvi_tinh.setValue(_data[0].donvi_tinh);
           }
         );

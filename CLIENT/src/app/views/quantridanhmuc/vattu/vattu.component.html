@@ -26,7 +26,17 @@
                   </div>
                 </div>
               </div>
-              <div class="col-sm-6" style="text-align: right;">
+              <div class="col-sm-3">
+                <div class="float-input" title="Loại vật tư">
+                  <ng-select bindLabel="name" placeholder="Loại vật tư" appendTo="body" [searchable]="true"
+                    [clearable]="true" [(ngModel)]="loaivt_id" (change)="change_loaivt()">
+                    <ng-option [value]="item.loaivt_id" [disabled]="item.disabled" *ngFor="let item of dataloaivattu">
+                      {{item.ten_loaivt}}
+                    </ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-sm-3" style="text-align: right;">
                 <button type="button" class="btn btn-primary" style="margin-bottom: 10px;border-radius:3px;"
                   (click)="add()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Thêm mới</button>
               </div>
@@ -42,6 +52,7 @@
                       <th class="col-sm-1">Loại vật tư</th>
                       <th class="col-sm-2">Mô tả</th>
                       <th class="col-sm-1">Nơi cung cấp</th>
+                      <th *ngIf="loaivt_id==2" class="col-sm-1">Tính chất</th>
                       <th class="col-sm-2"></th>
                     </tr>
                   </thead>
@@ -63,6 +74,9 @@
                       </td>
                       <td>
                         {{vattu.ten_trai}}
+                      </td>
+                      <td *ngIf="loaivt_id==2">
+                        {{vattu.ten_tinhchat}}
                       </td>
                       <td class="text-center chucnang-fa">
                         <a href="javascript:void(0);" (click)="edit(vattu)">
