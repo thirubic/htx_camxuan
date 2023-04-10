@@ -9,7 +9,6 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Newtonsoft.Json.Linq;
-using OfficeOpenXml;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using System.IO;
@@ -17,6 +16,9 @@ using System.Net.Http.Headers;
 using System.Web;
 using System.Text;
 using System.Configuration;
+using Microsoft.Office.Interop.Excel;
+using OfficeOpenXml;
+using Aspose.Cells;
 
 namespace API_TPL.Controllers.Congviec
 {
@@ -37,7 +39,7 @@ namespace API_TPL.Controllers.Congviec
             {
                 aParams[0] = helper.BuildParameter("ma_xuong", obj.ma_xuong, System.Data.SqlDbType.NVarChar);
 
-                DataTable kq = helper.ExecuteQueryStoreProcedure(query_str, aParams);
+                System.Data.DataTable kq = helper.ExecuteQueryStoreProcedure(query_str, aParams);
 
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, kq));
             }
@@ -48,23 +50,22 @@ namespace API_TPL.Controllers.Congviec
         }
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [Route("baocao_thanhpham_exp"), HttpPost]
-        public IHttpActionResult baocao_thanhpham_exp([FromBody] dynamic obj)
+        [Route("baocao_thanhpham_exp"), HttpGet]
+        public IHttpActionResult baocao_thanhpham_exp(string ma_xuong)
         {
-           
+
             string query_str = "baocao_thanhpham";
-           
+
             object[] aParams = new object[1];
             try
             {
-                aParams[0] = helper.BuildParameter("ma_xuong", obj.ma_xuong, System.Data.SqlDbType.NVarChar);
+                aParams[0] = helper.BuildParameter("ma_xuong", ma_xuong, System.Data.SqlDbType.NVarChar);
 
-                DataTable kq = helper.ExecuteQueryStoreProcedure(query_str, aParams);
+                System.Data.DataTable kq = helper.ExecuteQueryStoreProcedure(query_str, aParams);
 
                 string templateDocument = HttpContext.Current.Server.MapPath("~/Templates/Baocaothanhpham.xlsx");
-
                 MemoryStream output = new MemoryStream();
-
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
                 using (FileStream templateDocumentStream = File.OpenRead(templateDocument))
                 {
                     using (ExcelPackage package = new ExcelPackage(templateDocumentStream))
@@ -76,17 +77,17 @@ namespace API_TPL.Controllers.Congviec
                         int SL = startRow + kq.Rows.Count + 1;
                         for (int i = 0; i < kq.Rows.Count; i++)
                         {
-                            sheet.Cells[rowIndex, 2].Value = (i+1).ToString();
+                            sheet.Cells[rowIndex, 2].Value = (i + 1).ToString();
                             sheet.Cells[rowIndex, 3].Value = kq.Rows[i]["ten_xuong"].ToString();
                             sheet.Cells[rowIndex, 4].Value = kq.Rows[i]["ten_kho"].ToString();
                             sheet.Cells[rowIndex, 5].Value = kq.Rows[i]["ten_vattu"].ToString();
                             sheet.Cells[rowIndex, 6].Value = kq.Rows[i]["soluong"].ToString();
-                            sheet.Cells[rowIndex, 7].Value = kq.Rows[i]["tong_khoiluong"].ToString();
-                            sheet.Cells[rowIndex, 8].Value = kq.Rows[i]["donvi_tinh"].ToString();
+                            sheet.Cells[rowIndex, 7].Value = kq.Rows[i]["donvi_tinh"].ToString();
+                            sheet.Cells[rowIndex, 8].Value = kq.Rows[i]["tong_khoiluong"].ToString();
                             rowIndex++;
                         }
-                        
-                        using (ExcelRange range = sheet.Cells[startRow, 2, rowIndex - 1, 14])
+
+                        using (ExcelRange range = sheet.Cells[startRow, 2, rowIndex - 1, 8])
                         {
                             range.Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
                             range.Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
@@ -112,7 +113,6 @@ namespace API_TPL.Controllers.Congviec
 
                 //Set Filename sent to client
                 result.Content.Headers.ContentDisposition.FileName = documentName;
-
                 return ResponseMessage(result);
             }
             catch (Exception ex)
