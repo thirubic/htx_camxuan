@@ -8,8 +8,8 @@
       </h3>
     </div>
     <div title="Tìm kiếm" class="div-input-baocao">
-      <div class="col-sm-4" title="Đơn vị chủ trì">
-        <label>Phân xưởng</label>
+      <div class="col-sm-6" title="Đơn vị chủ trì">
+        <!-- <label class="col-sm-4" style="padding: 7px;">Phân xưởng</label> -->
         <ng-select bindLabel="name" placeholder="Phân xưởng" appendTo="body"
           [searchable]="true" [clearable]="true" [(ngModel)]="ma_xuong_select">
           <ng-option [value]="item.ma_xuong" [disabled]="item.disabled" *ngFor="let item of dataxuong">
@@ -18,7 +18,8 @@
           </ng-option>
         </ng-select>
       </div>
-      <label class="save-task buttonbc">
+      <div class="col-sm-6">
+      <label class=" save-task buttonbc">
         <a (click)="xembaocao()">
           <i class="fa fa-search"> Xem báo cáo</i>
         </a>
@@ -28,12 +29,13 @@
           <i class="fa fa-cloud-download"> Tải xuống</i>
         </a>
       </label>
+      </div>  
     </div>
   </div>
   <div  class="col-sm-12" >
     <div class="modal-body body-baocao">
       <div class="clearfix">
-        <div id="grid-result" class="body">
+        <div id="grid-result" class="body" style="min-height: 400px;">
           <div>
             <table  id="baocao-result" class="table table-condensed table-striped table-bordered">
               <thead>

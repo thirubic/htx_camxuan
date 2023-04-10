@@ -2017,7 +2017,7 @@ a:hover {
     color: #fff;
     border: 0;
     border-bottom: 1px solid #e5e5e5;
-    background: #0fa1d3;
+    background: #12A551;
     text-transform: uppercase;
     font-weight: bold;
     margin-top: -5px;
@@ -2050,7 +2050,7 @@ p.BgInputTextStyle.Sprite1 {
     color: #fff;
     border: 0;
     border-bottom: 1px solid #e5e5e5;
-    background: #278ae6;
+    background: #12A551;
     text-transform: uppercase;
     font-weight: bold;
     margin-top: -5px;
@@ -2846,7 +2846,7 @@ input.question:valid ~ input[type="submit"], textarea.question:valid ~ input[typ
     color: #0067B1 !important; font-size: 16px; padding-left: 10px; 
 }
 .buttonbc{
-    margin-top: 25px;
+    /* margin-top: 25px; */
     height: 36px;
 }
 .input-baocao{
@@ -2866,7 +2866,7 @@ input.question:valid ~ input[type="submit"], textarea.question:valid ~ input[typ
     overflow-x: scroll;
 }
 .body-baocao #grid-result{
-   min-width: 2000px;
+   /* min-width: 2000px; */
 }
 .btn-add-nv{
     position: absolute;
