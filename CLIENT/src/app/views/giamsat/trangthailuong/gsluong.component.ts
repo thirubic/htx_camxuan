@@ -92,7 +92,7 @@ export class GsluongComponent {
     contentField: 'mota',
     headerField: 'ma_luong',
     showHeader: false,
-    noCardsMessage: "Không có thẻ để hiển thị"
+    //noCardsMessage: "Không có thẻ để hiển thị"
   };
   public swimlaneSettings: SwimlaneSettingsModel = {
     keyField: '',

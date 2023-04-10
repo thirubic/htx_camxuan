@@ -82,6 +82,7 @@ export class Bc_thanhphamComponent {
     };
     this.baocaothanhphamService.baocao_thanhpham(model).subscribe({
       next: (_data) => {
+        console.log(_data);
         this.data_baocao = _data;
       },
       error: (error) => {
@@ -110,12 +111,13 @@ export class Bc_thanhphamComponent {
     //  /* save to file */  
     //  XLSX.writeFile(wb, "Báo cáo theo đơn vị.xlsx");
 
-    this.baocaothanhphamService.baocao_thanhpham_exp({"ma_xuong":this.ma_xuong_select}).subscribe(
+    this.baocaothanhphamService.baocao_thanhpham_exp(this.ma_xuong_select).subscribe(
       response => {
         var file = new Blob([response], {
           type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64'
         });
         var fileURL = window.URL.createObjectURL(file);
+        console.log(response);
         var seconds = new Date().getTime() / 1000;
         var fileName = "Baocaotheodonvi.xlsx";
         var a = document.createElement("a");
@@ -131,6 +133,7 @@ export class Bc_thanhphamComponent {
     this.phanxuongService.get_all()
         .subscribe(
             _data => {
+              console.log(_data);
                 this.dataxuong = _data;
                   const isLargeNumber = (element) => element.ma_xuong == this.ma_xuong_select;
                   if(_data.findIndex(isLargeNumber) < 0)
