@@ -16,9 +16,9 @@ using System.Net.Http.Headers;
 using System.Web;
 using System.Text;
 using System.Configuration;
-using Microsoft.Office.Interop.Excel;
+//using Microsoft.Office.Interop.Excel;
 using OfficeOpenXml;
-using Aspose.Cells;
+//using Aspose.Cells;
 
 namespace API_TPL.Controllers.Congviec
 {
