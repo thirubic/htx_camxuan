@@ -5,6 +5,7 @@ import { AuthorisedRoutingModule } from './authorised-routing.module';
 import { KanbanModule } from '@syncfusion/ej2-angular-kanban';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { DashboardComponent } from '@app/views/dashboard/dashboard.component';
+import { TreeModule } from '@circlon/angular-tree-component';
 
 @NgModule({
     imports: [
@@ -12,7 +13,8 @@ import { DashboardComponent } from '@app/views/dashboard/dashboard.component';
         ReactiveFormsModule,
         AuthorisedRoutingModule,
         KanbanModule,
-        TabsModule
+        TabsModule,
+        TreeModule
     ],
     declarations: [
         DashboardComponent,        

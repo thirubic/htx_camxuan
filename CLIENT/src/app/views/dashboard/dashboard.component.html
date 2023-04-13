@@ -1,101 +1,130 @@
 <style>
-  * {box-sizing:border-box}
-/* thiết lập style cho slideshow container */
- .slideshow-container {
-   max-width: 1000px;
-   position: relative;
-   margin: auto;
- }
-/* ẩn hình ảnh cho phần tử slideshow */
- .mySlides {
-   display: none;
- }
- .fade:not(.show) {
+  * {
+    box-sizing: border-box
+  }
+
+  /* thiết lập style cho slideshow container */
+  .slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+  }
+
+  /* ẩn hình ảnh cho phần tử slideshow */
+  .mySlides {
+    display: none;
+  }
+
+  .fade:not(.show) {
     opacity: 1;
-}
-/* thiết kế nút mũi tên*/
- .prev, .next {
-   cursor: pointer;
-   position: absolute;
-   top: 50%;
-   width: auto;
-   margin-top: -22px;
-   padding: 16px;
-   color: white;
-   font-weight: bold;
-   font-size: 18px;
-   transition: 0.6s ease;
-   border-radius: 0 3px 3px 0;
-   user-select: none;
- }
-/* thiết kế nút mũi tên next nằm phía bên phải */
- .next {
-   right: 0;
-   border-radius: 3px 0 0 3px;
- }
-/* hiệu ứng thay đổi background khi hover vào nút mũi tên*/
- .prev:hover, .next:hover {
-   background-color: rgba(0,0,0,0.8);
- }
-/* Thiết lập style cho nội dung của mỗi phần tử slideshow */
- .text {
-   color: #f2f2f2;
-   font-size: 15px;
-   padding: 8px 12px;
-   position: absolute;
-   bottom: 8px;
-   width: 100%;
-   text-align: center;
- }
-/* Thiết lập style cho số hiển thị của phần tử */
- .numbertext {
-   color: #f2f2f2;
-   font-size: 12px;
-   padding: 8px 12px;
-   position: absolute;
-   top: 0;
- }
-/* thiết lập style  nút tròn điều khiển*/
- .dot {
-   cursor: pointer;
-   height: 15px;
-   width: 15px;
-   margin: 0 2px;
-   background-color: #bbb;
-   border-radius: 50%;
-   display: inline-block;
-   transition: background-color 0.6s ease;
- }
-.active, .dot:hover {
-   background-color: #717171;
- }
-/* tạo hiệu ứng chuyển động fade */
- .fade {
-   -webkit-animation-name: fade;
-   -webkit-animation-duration: 1.5s;
-   animation-name: fade;
-   animation-duration: 1.5s;
- }
- .main-content{
-  background-color: #fff;
- }
- .header-div {
+  }
+
+  /* thiết kế nút mũi tên*/
+  .prev,
+  .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+  }
+
+  /* thiết kế nút mũi tên next nằm phía bên phải */
+  .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+
+  /* hiệu ứng thay đổi background khi hover vào nút mũi tên*/
+  .prev:hover,
+  .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  /* Thiết lập style cho nội dung của mỗi phần tử slideshow */
+  .text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Thiết lập style cho số hiển thị của phần tử */
+  .numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+  }
+
+  /* thiết lập style  nút tròn điều khiển*/
+  .dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+
+  .active,
+  .dot:hover {
+    background-color: #717171;
+  }
+
+  /* tạo hiệu ứng chuyển động fade */
+  .fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+  }
+
+  .main-content {
+    background-color: #fff;
+  }
+
+  .header-div {
     width: 70%;
     z-index: 1030;
     position: fixed;
-}
-@-webkit-keyframes fade {
-   from {opacity: .4}
-   to {opacity: 1}
- }
-@keyframes fade {
-   from {opacity: .4}
-   to {opacity: 1}
- }
+  }
 
+  @-webkit-keyframes fade {
+    from {
+      opacity: .4
+    }
+
+    to {
+      opacity: 1
+    }
+  }
+
+  @keyframes fade {
+    from {
+      opacity: .4
+    }
+
+    to {
+      opacity: 1
+    }
+  }
 </style>
 <script>
-  
+
 
 </script>
 
@@ -105,7 +134,7 @@
       <h3 style="float: left">
         <a href="/">
           <span class="header-img">
-            <img src="../../../assets/images/slider/camxuan.JPG" style="width: 150px;">           
+            <img src="../../../assets/images/slider/camxuan.JPG" style="width: 150px;">
 
           </span>
         </a>
@@ -117,105 +146,106 @@
         width: 125%;
         font-size: 30px;
     ">
-          <p>HỢP TÁC XÃ NÔNG NGHIỆP SINH THÁI CẨM XUÂN</p>         
+          <p>HỢP TÁC XÃ NÔNG NGHIỆP SINH THÁI CẨM XUÂN</p>
         </div>
       </h3>
     </div>
   </div>
- <!--Nguồn W3School -->
-<!-- Thẻ Chứa Slideshow -->
-<div class="slideshow-container">
-  <!-- Kết hợp hình ảnh và nội dung cho mội phần tử trong slideshow-->
-   <div class="mySlides fade" style="display: block;">
-     <div class="numbertext" >1 / 16</div>
-     <img src="../../../assets/images/slider/1.jpg" style="width:100%">
-   </div>
-  <div class="mySlides fade">
-     <div class="numbertext">2 / 16</div>
-     <img src="../../../assets/images/slider/2.jpg" style="width:100%">
-   </div>
-  <div class="mySlides fade">
-     <div class="numbertext">3 / 16</div>
-     <img src="../../../assets/images/slider/3.jpg" style="width:100%">
-   </div>
-   <div class="mySlides fade">
-    <div class="numbertext">4 / 16</div>
-    <img src="../../../assets/images/slider/4.jpg" style="width:100%">
+  <!--Nguồn W3School -->
+  <!-- Thẻ Chứa Slideshow -->
+<!-- 
+  <div class="slideshow-container">
+    
+    <div class="mySlides fade" style="display: block;">
+      <div class="numbertext">1 / 16</div>
+      <img src="../../../assets/images/slider/1.jpg" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+      <div class="numbertext">2 / 16</div>
+      <img src="../../../assets/images/slider/2.jpg" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+      <div class="numbertext">3 / 16</div>
+      <img src="../../../assets/images/slider/3.jpg" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+      <div class="numbertext">4 / 16</div>
+      <img src="../../../assets/images/slider/4.jpg" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+      <div class="numbertext">5 / 16</div>
+      <img src="../../../assets/images/slider/5.jpg" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+      <div class="numbertext">6 / 16</div>
+      <img src="../../../assets/images/slider/6.jpg" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+      <div class="numbertext">7 / 16</div>
+      <img src="../../../assets/images/slider/7.jpg" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+      <div class="numbertext">8 / 16</div>
+      <img src="../../../assets/images/slider/8.jpg" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+      <div class="numbertext">9 / 16</div>
+      <img src="../../../assets/images/slider/9.jpg" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+      <div class="numbertext">10 / 16</div>
+      <img src="../../../assets/images/slider/10.jpg" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+      <div class="numbertext">11 / 16</div>
+      <img src="../../../assets/images/slider/11.jpg" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+      <div class="numbertext">12 / 16</div>
+      <img src="../../../assets/images/slider/12.jpg" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+      <div class="numbertext">13 / 16</div>
+      <img src="../../../assets/images/slider/13.jpg" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+      <div class="numbertext">14 / 16</div>
+      <img src="../../../assets/images/slider/14.jpg" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+      <div class="numbertext">15 / 16</div>
+      <img src="../../../assets/images/slider/15.jpg" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+      <div class="numbertext">16 / 16</div>
+      <img src="../../../assets/images/slider/16.jpg" style="width:100%">
+    </div>
+    
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
   </div>
-  <div class="mySlides fade">
-    <div class="numbertext">5 / 16</div>
-    <img src="../../../assets/images/slider/5.jpg" style="width:100%">
-  </div>
-  <div class="mySlides fade">
-    <div class="numbertext">6 / 16</div>
-    <img src="../../../assets/images/slider/6.jpg" style="width:100%">
-  </div>
-  <div class="mySlides fade">
-    <div class="numbertext">7 / 16</div>
-    <img src="../../../assets/images/slider/7.jpg" style="width:100%">
-  </div>
-  <div class="mySlides fade">
-    <div class="numbertext">8 / 16</div>
-    <img src="../../../assets/images/slider/8.jpg" style="width:100%">
-  </div>
-  <div class="mySlides fade">
-    <div class="numbertext">9 / 16</div>
-    <img src="../../../assets/images/slider/9.jpg" style="width:100%">
-  </div>
-  <div class="mySlides fade">
-    <div class="numbertext">10 / 16</div>
-    <img src="../../../assets/images/slider/10.jpg" style="width:100%">
-  </div>
-  <div class="mySlides fade">
-    <div class="numbertext">11 / 16</div>
-    <img src="../../../assets/images/slider/11.jpg" style="width:100%">
-  </div>
-  <div class="mySlides fade">
-    <div class="numbertext">12 / 16</div>
-    <img src="../../../assets/images/slider/12.jpg" style="width:100%">
-  </div>
-  <div class="mySlides fade">
-    <div class="numbertext">13 / 16</div>
-    <img src="../../../assets/images/slider/13.jpg" style="width:100%">
-  </div>
-  <div class="mySlides fade">
-    <div class="numbertext">14 / 16</div>
-    <img src="../../../assets/images/slider/14.jpg" style="width:100%">
-  </div>
-  <div class="mySlides fade">
-    <div class="numbertext">15 / 16</div>
-    <img src="../../../assets/images/slider/15.jpg" style="width:100%">
-  </div>
-  <div class="mySlides fade">
-    <div class="numbertext">16 / 16</div>
-    <img src="../../../assets/images/slider/16.jpg" style="width:100%">
-  </div>
-  <!-- Nút điều khiển mũi tên-->
-   <a class="prev" onclick="plusSlides(-1)">❮</a>
-   <a class="next" onclick="plusSlides(1)">❯</a>
- </div>
- <br>
-<!-- Nút tròn điều khiển slideshow-->
- <div style="text-align:center">
-   <span class="dot" onclick="currentSlide(1)"></span>
-   <span class="dot" onclick="currentSlide(2)"></span>
-   <span class="dot" onclick="currentSlide(3)"></span>
-   <span class="dot" onclick="currentSlide(4)"></span>
-   <span class="dot" onclick="currentSlide(5)"></span>
-   <span class="dot" onclick="currentSlide(6)"></span>
-   <span class="dot" onclick="currentSlide(7)"></span>
-   <span class="dot" onclick="currentSlide(8)"></span>
-   <span class="dot" onclick="currentSlide(9)"></span>
-   <span class="dot" onclick="currentSlide(10)"></span>
-   <span class="dot" onclick="currentSlide(11)"></span>
-   <span class="dot" onclick="currentSlide(12)"></span>
-   <span class="dot" onclick="currentSlide(13)"></span>
-   <span class="dot" onclick="currentSlide(14)"></span>
-   <span class="dot" onclick="currentSlide(15)"></span>
-   <span class="dot" onclick="currentSlide(16)"></span>
-
- </div>
+  <br>
   
+  <div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+    <span class="dot" onclick="currentSlide(5)"></span>
+    <span class="dot" onclick="currentSlide(6)"></span>
+    <span class="dot" onclick="currentSlide(7)"></span>
+    <span class="dot" onclick="currentSlide(8)"></span>
+    <span class="dot" onclick="currentSlide(9)"></span>
+    <span class="dot" onclick="currentSlide(10)"></span>
+    <span class="dot" onclick="currentSlide(11)"></span>
+    <span class="dot" onclick="currentSlide(12)"></span>
+    <span class="dot" onclick="currentSlide(13)"></span>
+    <span class="dot" onclick="currentSlide(14)"></span>
+    <span class="dot" onclick="currentSlide(15)"></span>
+    <span class="dot" onclick="currentSlide(16)"></span>
+
+  </div> -->
+
   <!-- tabs -->
   <!-- <div class="pcss3t pcss3t-effect-scale pcss3t-theme-1">
     <input type="radio" name="pcss3t" checked id="tab1" class="tab-content-first">
@@ -226,7 +256,7 @@
 
     <input type="radio" name="pcss3t" id="tab3" class="tab-content-3">
     <label for="tab3"><i class="icon-cogs"></i>Công việc mục tiêu</label> -->
-    <!-- <tabset>
+  <!-- <tabset>
       <tab heading="Công việc phát sinh" class="mt-2 tab-dashboard" (selectTab)="onSelect(1)">
 
     <ul>
@@ -511,5 +541,124 @@
     </tabset> -->
   <!-- </div> -->
   <!--/ tabs -->
+
+  <div style="float: left; width: 97%; padding-top: 20px; min-height: 500px;">
+    <div class="row row-frm">
+      <div class="col-sm-5">
+        <div class="panel-body gray-bg" style="min-height: auto !important; padding-top: 0px">
+          <label class="title-form"> <i style="margin-right: 13px;" class="fa fa-home"></i>Cây cấu trúc hợp tác xã</label>
+          <div class="panel-body" style="border:solid 1px #ccc; height: auto; max-height: 1000px; overflow: scroll;"
+            *ngIf="isDataAvailable">
+            <div class="form-group">
+              <div style="position: relative;">
+                <input id="filter" #filter (keyup)="tree.treeModel.filterNodes(filter.value)"
+                  placeholder="Nhập thông tin cần tìm" /> <i class="fa  icon-search"></i>
+              </div>
+              <tree-root #tree [focused]="true" [nodes]="node" [options]="options" (activate)="onEvent($event.node)"
+                (initialized)="onInitialized(tree)">
+              </tree-root>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-7">
+        <div class="modal-body">
+          <div class="clearfix">
+            <tabset>
+              <tab heading="Chi tiết" class="mt-2" (selectTab)="onSelect(1)">
+                <div id="grid-result" class="body">
+                  
+                  <div *ngIf="view_cap== 0" >
+                    <!-- <div class="col-sm-2" style="text-align: center;">
+                      <img class="img-nhansu" src="../../../assets/images/slider/icon_cx_2.png"
+                        onerror="this.src='../../../../assets/images/icon_account.png';" />
+                    </div> -->
+                    <div class="col-sm-12" style="padding-top: 10px;">
+                      <p class="nhansu-name">HỢP TÁC XÃ NÔNG NGHIỆP SINH THÁI CẨM XUÂN</p>
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-map-marker"></i> <strong>Địa chỉ:</strong> Tổ 13 ấp Cọ Dầu 2, xã Xuân Đông, huyện Cẩm Mỹ, tỉnh Đồng Nai</p>
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-newspaper-o"></i> <strong> MST: </strong> 3603869701</p>
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-phone-square"></i> <strong>Điện thoại:</strong> 0904 334 119 / 0913 425 207</p>
+                    </div>
+                    <div>
+                      <!-- <p> <i *ngIf="nhansu.active == 1" style="margin-right: 5px; color: chartreuse;"
+                          class="fa fa-circle"></i>
+                        <i *ngIf="nhansu.active != 1" style="margin-right: 5px; color: red;" class="fa fa-circle"></i>
+                        {{nhansu.ma_nv}}
+                      </p>
+                      <p> <i style="margin-right: 5px; " class="fa fa-university"></i> {{nhansu.ten_dv}}</p>
+                      <p> <i style="margin-right: 5px; color: coral;" class="fa fa-envelope"></i>{{nhansu.email}}</p> -->
+                    </div>
+                  </div>
+
+                  <div *ngIf="view_cap== 1" >
+                    <!-- <div class="col-sm-2" style="text-align: center;">
+                      <img class="img-nhansu" src="../../../assets/images/slider/icon_cx_2.png"
+                        onerror="this.src='../../../../assets/images/icon_account.png';" />
+                    </div> -->
+                    <div class="col-sm-12" style="padding-top: 10px;">
+                      <p class="nhansu-name">{{phanxuongview.ten_xuong}}</p>
+                      </div>
+                    <div class="col-sm-6" style="padding-top: 10px;">
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-hashtag"></i><strong>Mã:</strong>{{phanxuongview.ma_xuong}}</p>
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-user-circle"></i> <strong>Người đại diện:</strong> {{phanxuongview.nguoi_daidien}}</p>
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-phone-square"></i> <strong>Điện thoại: </strong>{{phanxuongview.sdt_lienhe}} </p>
+                    </div>
+                    <div class="col-sm-6" style="padding-top: 10px;">                     
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-map-marker"></i><strong> Địa chỉ:</strong> {{phanxuongview.diachi}}</p>
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-building"></i><strong>Tỉnh thành:</strong> {{phanxuongview.ten_tinh}}</p>
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-bars"></i><strong>Số tuyến đường:</strong> {{phanxuongview.so_luong_tuyen}}</p>
+                    </div>
+                  </div>
+
+                  <div *ngIf="view_cap== 2" >
+                    <div class="col-sm-12" style="padding-top: 10px;">
+                      <p class="nhansu-name">{{tuyenduongview.ten_duong}}</p>
+                      </div>
+                    <div class="col-sm-6" style="padding-top: 10px;">
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-hashtag"></i><strong>Mã: </strong>{{tuyenduongview.ma_duong}}</p>
+                      
+                    </div>
+                    <div class="col-sm-6">
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-bars"></i><strong>Số luống:</strong>{{tuyenduongview.so_luong}}</p>                      
+                    </div>
+                    <div class="col-sm-12">
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-info-circle"></i><strong>Mô tả:</strong> {{tuyenduongview.mota}}</p>                      
+                    </div>
+                  </div>
+
+                  <div *ngIf="view_cap== 3" >
+                    <div class="col-sm-12" style="padding-top: 10px;">
+                      <p class="nhansu-name">{{luongview.ten_luong}}</p>
+                      </div>
+                    <div class="col-sm-6" style="padding-top: 10px;">
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-hashtag"></i><strong>Mã:</strong> {{luongview.ma_luong}}</p>                     
+                    </div>
+                    <div class="col-sm-6" >
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-balance-scale"></i><strong>Trạng thái:</strong> {{luongview.ten_trangthai}} </p>                                           
+                    </div>
+                    <div class="col-sm-12" >
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-cubes"></i> <strong>NGUYÊN LIỆU TRONG LUỐNG</strong></p>                                 
+                    </div>
+                    <div *ngFor="let nguyenlieu of nguyenlieuview ; let i = index" class="col-sm-12" style="padding-top: 10px;">                      
+                      <p  class="col-sm-8"> <i style="margin-right: 5px; color: #12A551;" class="fa fa-dot-circle-o"></i><strong>Tên:</strong> {{nguyenlieu.ten_vattu}}</p>                      
+                      <p  class="col-sm-4"> <i style="margin-right: 5px; color: #12A551;" class="fa fa-balance-scale"></i><strong>Khối lượng:</strong> {{nguyenlieu.soluong}} ({{nguyenlieu.ten_dv_tinh}})</p>                   
+                    </div>
+                    
+                  </div>
+
+                </div>
+              </tab>
+              <!-- <tab heading="Chi tiết 2 " class="mt-2" (selectTab)="onSelect(2)">
+                <div id="grid-result" class="body">                  
+                  
+                  
+                </div>
+              </tab> -->
+            </tabset>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </section>

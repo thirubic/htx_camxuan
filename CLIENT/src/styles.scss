@@ -74,7 +74,7 @@ $Angular11-theme: mat.define-light-theme((
 .be-content { position:relative; left:0; bottom:0;min-height:100%; padding-top: 50px;}
 .be-content footer { margin:50px 20px; margin-top:5px; text-align:center; }
 .be-content footer .gray-color { color:#777; }
-.be-content footer { position:relative; }
+.be-content footer { position:relative; left: 3%; }
 .be-content #vnpt-logo { width:100px; height:24px; background:url('./assets/images/logo_vnpt.png') top left no-repeat; background-size:100px 24px; position:absolute; bottom:20px; right:50px; z-index:999; }
 
 .breadcrumb { margin:0; padding:0; padding-top:5px; margin-bottom:10px; font-weight:700; background-color:transparent; font-size:14px; }

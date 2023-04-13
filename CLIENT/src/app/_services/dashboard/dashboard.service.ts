@@ -5,7 +5,7 @@ import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
 
 const baseUrl = `${environment.apiURL}/api/dashboard`;
-
+const baseUrl_chung = `${environment.apiURL}/api/dmchung`;
 @Injectable({
   providedIn: 'root'
 })
@@ -28,6 +28,17 @@ export class DashboardService {
   }
   get_bieudo(ma: string) {
     return this.http.get<Dashboard_CV_bieudo>(`${baseUrl}/view_bieudo?prmMA_NV=${ma}`);
+  }
+
+
+  // get tree hợp tác xã
+  get_tree() {
+    return this.http.get<any>(`${baseUrl_chung}/getdatatree`);
+  }
+
+  // get data hợp tác xã
+  get_data_htx() {
+    return this.http.get<any>(`${baseUrl_chung}/getdatahtx`);
   }
 
 }

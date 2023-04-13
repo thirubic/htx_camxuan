@@ -29,6 +29,16 @@ export class TuyenduongService {
     );
   }
 
+  getbyma(model: any): Observable<any> {
+    return this.http.post(
+      `${baseUrl}/getbyma`,   
+      {
+        'ma_duong': model
+      },      
+      { withCredentials: true }
+    );
+  }
+
   Del(model: any): Observable<any> {
     return this.http.post(
       `${baseUrl}/xoa`,   

@@ -29,6 +29,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
 import { KanbanModule } from '@syncfusion/ej2-angular-kanban';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { TreeModule } from '@circlon/angular-tree-component';
 // import { QuillModule } from 'ngx-quill';
 import * as moment from 'moment';
 import * as $ from "jquery";
@@ -66,6 +67,7 @@ import * as $ from "jquery";
     BrowserModule,
     KanbanModule,
     AngularEditorModule,
+    TreeModule
     // QuillModule.forRoot(),
     // QuillModule
   ],
