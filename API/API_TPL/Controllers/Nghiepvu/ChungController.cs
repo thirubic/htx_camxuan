@@ -18,6 +18,7 @@ using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 using System.Threading;
 using System.Threading.Tasks;
+using API_TPL.Models;
 
 namespace API_TPL.Controllers.Danhmuc
 {
@@ -48,6 +49,29 @@ namespace API_TPL.Controllers.Danhmuc
                 return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
             }
         }
+        ///<summary>
+        ///<b>Mục đích:</b>Lấy danh sách phân xưởng. <br />
+        ///<b>Tham số URI:</b> Không có. <br />
+        ///<b>Trả về:</b> Datatable <br />
+        ///</summary>
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [Route("getdatahtx"), HttpGet]
+        public IHttpActionResult getdatahtx()
+        {
+            string query_str = "tree_htx_camxuan";
+
+            object[] aParams = new object[0];
+            try
+            {
+                DataTable kq = helper.ExecuteQueryStoreProcedure(query_str, aParams);
+
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, kq));
+            }
+            catch (Exception ex)
+            {
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
+            }
+        }
 
         ///<summary>
         ///<b>Mục đích:</b>Lấy danh sách phân xưởng. <br />
@@ -65,11 +89,60 @@ namespace API_TPL.Controllers.Danhmuc
             {
                 DataTable kq = helper.ExecuteQueryStoreProcedure(query_str, aParams);
 
-                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, kq));
+
+                List<Donvi> listreturndv = new List<Donvi>();
+                if (kq.Rows.Count > 0)
+                {
+                    Donvi dv0 = new Donvi();
+                    dv0.id = kq.Rows[0]["ma_dv"].ToString();
+                    dv0.name = kq.Rows[0]["ten_dv"].ToString() + " - " + kq.Rows[0]["ma_dv"].ToString();
+                    dv0.children = Danh_sach_node(kq, kq.Rows[0]["ma_dv"].ToString()).ToArray();
+                    listreturndv.Add(dv0);
+                }
+
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, listreturndv));
             }
             catch (Exception ex)
             {
                 return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
+            }
+        }
+                
+        public List<Donvi> Danh_sach_node(DataTable kq, string madonvi)
+        {
+            List<Donvi> donvvi_con = new List<Donvi>();
+            List<DataRow> listdtr = new List<DataRow>();
+            for (int i = 0; i < kq.Rows.Count; i++)
+            {
+                if (kq.Rows[i]["parent_id"].ToString() == madonvi)
+                {
+                    listdtr.Add(kq.Rows[i]);
+                }
+            }
+            if (listdtr.Count > 0)
+            {
+                foreach (DataRow dtr in listdtr)
+                {
+                    Donvi cls = new Donvi();
+                    cls.name = dtr["ten_dv"].ToString() + " - " + dtr["ma_dv"].ToString();
+                    cls.id = dtr["ma_dv"].ToString();
+                    List<Donvi> dv_con = new List<Donvi>();
+                    dv_con = Danh_sach_node(kq, dtr["ma_dv"].ToString());
+                    if (dv_con != null)
+                    {
+                        cls.children = dv_con.ToArray();
+                    }
+                    else
+                    {
+                        cls.children = (new List<Donvi>()).ToArray();
+                    }
+                    donvvi_con.Add(cls);
+                }
+                return donvvi_con;
+            }
+            else
+            {
+                return null;
             }
         }
     }
