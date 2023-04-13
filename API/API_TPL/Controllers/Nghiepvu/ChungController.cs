@@ -48,6 +48,29 @@ namespace API_TPL.Controllers.Danhmuc
                 return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
             }
         }
-        
+
+        ///<summary>
+        ///<b>Mục đích:</b>Lấy danh sách phân xưởng. <br />
+        ///<b>Tham số URI:</b> Không có. <br />
+        ///<b>Trả về:</b> Datatable <br />
+        ///</summary>
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [Route("getdatatree"), HttpGet]
+        public IHttpActionResult tree_htx_camxuan()
+        {
+            string query_str = "tree_htx_camxuan";
+
+            object[] aParams = new object[0];
+            try
+            {
+                DataTable kq = helper.ExecuteQueryStoreProcedure(query_str, aParams);
+
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, kq));
+            }
+            catch (Exception ex)
+            {
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
+            }
+        }
     }
 }
