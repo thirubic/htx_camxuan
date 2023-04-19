@@ -218,14 +218,14 @@
                       <p class="nhansu-name">{{phanxuongview.ten_xuong}}</p>
                       </div>
                     <div class="col-sm-6" style="padding-top: 10px;">
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-hashtag"></i><strong>Mã:</strong> <span class="text-detail">{{phanxuongview.ma_xuong}}</span></p>
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-user-circle"></i> <strong>Người đại diện:</strong> <span class="text-detail">{{phanxuongview.nguoi_daidien}}</span></p>
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-hashtag"></i><strong>Mã: </strong> <span class="text-detail">{{phanxuongview.ma_xuong}}</span></p>
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-user-circle"></i> <strong>Người đại diện: </strong> <span class="text-detail">{{phanxuongview.nguoi_daidien}}</span></p>
                       <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-phone-square"></i> <strong>Điện thoại: </strong><span class="text-detail">{{phanxuongview.sdt_lienhe}}</span> </p>
                     </div>
                     <div class="col-sm-6" style="padding-top: 10px;">                     
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-map-marker"></i><strong> Địa chỉ:</strong> <span class="text-detail">{{phanxuongview.diachi}}</span></p>
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-building"></i><strong>Tỉnh thành:</strong> <span class="text-detail">{{phanxuongview.ten_tinh}}</span></p>
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-bars"></i><strong>Số tuyến đường:</strong> <span class="text-detail">{{phanxuongview.so_luong_tuyen}}</span></p>
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-map-marker"></i><strong> Địa chỉ: </strong> <span class="text-detail">{{phanxuongview.diachi}}</span></p>
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-building"></i><strong>Tỉnh thành: </strong> <span class="text-detail">{{phanxuongview.ten_tinh}}</span></p>
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-bars"></i><strong>Số tuyến đường: </strong> <span class="text-detail">{{phanxuongview.so_luong_tuyen}}</span></p>
                     </div>
                   </div>
 
@@ -238,10 +238,10 @@
                       
                     </div>
                     <div class="col-sm-6">
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-bars"></i><strong>Số luống:</strong><span class="text-detail">{{tuyenduongview.so_luong}}</span></p>                      
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-bars"></i><strong>Số luống: </strong><span class="text-detail">{{tuyenduongview.so_luong}}</span></p>                      
                     </div>
                     <div class="col-sm-12">
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-info-circle"></i><strong>Mô tả:</strong> <span class="text-detail">{{tuyenduongview.mota}}</span></p>                      
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-info-circle"></i><strong>Mô tả: </strong> <span class="text-detail">{{tuyenduongview.mota}}</span></p>                      
                     </div>
                   </div>
 
@@ -250,17 +250,17 @@
                       <p class="nhansu-name">{{luongview.ten_luong}}</p>
                       </div>
                     <div class="col-sm-6" style="padding-top: 10px;">
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-hashtag"></i><strong>Mã:</strong> <span class="text-detail">{{luongview.ma_luong}}</span></p>                     
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-hashtag"></i><strong>Mã: </strong> <span class="text-detail">{{luongview.ma_luong}}</span></p>                     
                     </div>
                     <div class="col-sm-6" >
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-balance-scale"></i><strong>Trạng thái:</strong> <span class="text-detail">{{luongview.ten_trangthai}} </span></p>                                           
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-balance-scale"></i><strong>Trạng thái: </strong> <span class="text-detail">{{luongview.ten_trangthai}} </span></p>                                           
                     </div>
                     <div class="col-sm-12" >
                       <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-cubes"></i> <strong>NGUYÊN LIỆU TRONG LUỐNG</strong></p>                                 
                     </div>
                     <div *ngFor="let nguyenlieu of nguyenlieuview ; let i = index" class="col-sm-12" style="padding-top: 10px;">                      
-                      <p  class="col-sm-8"> <i style="margin-right: 5px; color: #12A551;" class="fa fa-dot-circle-o"></i><strong>Tên:</strong> <span class="text-detail">{{nguyenlieu.ten_vattu}}</span></p>                      
-                      <p  class="col-sm-4"> <i style="margin-right: 5px; color: #12A551;" class="fa fa-balance-scale"></i><strong>Khối lượng:</strong> <span class="text-detail">{{nguyenlieu.soluong}} ({{nguyenlieu.ten_dv_tinh}})</span></p>                   
+                      <p  class="col-sm-8"> <i style="margin-right: 5px; color: #12A551;" class="fa fa-dot-circle-o"></i><strong>Tên: </strong> <span class="text-detail">{{nguyenlieu.ten_vattu}}</span></p>                      
+                      <p  class="col-sm-4"> <i style="margin-right: 5px; color: #12A551;" class="fa fa-balance-scale"></i><strong>Khối lượng: </strong> <span class="text-detail">{{nguyenlieu.soluong}} ({{nguyenlieu.ten_dv_tinh}})</span></p>                   
                     </div>
                     
                   </div>
