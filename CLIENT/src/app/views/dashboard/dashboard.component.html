@@ -153,7 +153,7 @@
   </div>
   <div style="float: left; width: 97%; padding-top: 20px; min-height: 500px;">
     <div class="row row-frm">
-      <div class="col-sm-5">
+      <div class="col-sm-6">
         <div class="panel-body gray-bg" style="min-height: auto !important; padding-top: 0px">
           <label class="title-form"> <i style="margin-right: 13px;" class="fa fa-home"></i>Cây cấu trúc hợp tác xã</label>
           <div class="panel-body" style="border:solid 1px #ccc; height: auto; max-height: 1000px; overflow: scroll;"
@@ -165,16 +165,26 @@
               </div>
               <tree-root #tree [focused]="true" [nodes]="node" [options]="options" (activate)="onEvent($event.node)"
                 (initialized)="onInitialized(tree)">
+                <ng-template #treeNodeTemplate let-node let-index="index">
+                  <p [ngClass]="node.data.classes" style="margin-bottom: 2px;">
+                    <img *ngIf="node.data.cap == 0"src="../../../assets/images/slider/icon_cx_2.png" style="width: 18px; margin-top: -2px;">
+                    <img *ngIf="node.data.cap == 1"src="../../../assets/images/slider/warehouse.png" style="width: 18px; margin-top: -2px;">
+                    <img *ngIf="node.data.cap == 2"src="../../../assets/images/slider/two-way-street.png" style="width: 18px; margin-top: -2px;">
+                    <img *ngIf="node.data.cap == 3"src="../../../assets/images/slider/land.png" style="width: 18px; margin-top: -2px;">
+                   <span *ngIf="node.data.cap == 0" style="padding-left: 5px; color: red; font-weight: bold;">{{ node.data.name }}</span>
+                   <span *ngIf="node.data.cap != 0" style="padding-left: 5px;">{{ node.data.name }}</span>
+                  </p>
+                </ng-template>
               </tree-root>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-sm-7">
+      <div class="col-sm-6">
         <div class="modal-body">
           <div class="clearfix">
             <tabset>
-              <tab heading="Chi tiết" class="mt-2" (selectTab)="onSelect(1)">
+              <tab heading="Thông tin cơ bản" class="mt-2" (selectTab)="onSelect(1)">
                 <div id="grid-result" class="body">
                   
                   <div *ngIf="view_cap== 0" >
@@ -184,9 +194,9 @@
                     </div> -->
                     <div class="col-sm-12" style="padding-top: 10px;">
                       <p class="nhansu-name">HỢP TÁC XÃ NÔNG NGHIỆP SINH THÁI CẨM XUÂN</p>
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-map-marker"></i> <strong>Địa chỉ:</strong> Tổ 13 ấp Cọ Dầu 2, xã Xuân Đông, huyện Cẩm Mỹ, tỉnh Đồng Nai</p>
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-newspaper-o"></i> <strong> MST: </strong> 3603869701</p>
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-phone-square"></i> <strong>Điện thoại:</strong> 0904 334 119 / 0913 425 207</p>
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-map-marker"></i> <strong>Địa chỉ:</strong> <span class="text-detail">Tổ 13 ấp Cọ Dầu 2, xã Xuân Đông, huyện Cẩm Mỹ, tỉnh Đồng Nai</span> </p>
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-newspaper-o"></i> <strong> MST: </strong> <span class="text-detail">3603869701</span></p>
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-phone-square"></i> <strong>Điện thoại:</strong> <span class="text-detail">0904 334 119 / 0913 425 207</span></p>
                     </div>
                     <div>
                       <!-- <p> <i *ngIf="nhansu.active == 1" style="margin-right: 5px; color: chartreuse;"
@@ -208,14 +218,14 @@
                       <p class="nhansu-name">{{phanxuongview.ten_xuong}}</p>
                       </div>
                     <div class="col-sm-6" style="padding-top: 10px;">
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-hashtag"></i><strong>Mã:</strong>{{phanxuongview.ma_xuong}}</p>
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-user-circle"></i> <strong>Người đại diện:</strong> {{phanxuongview.nguoi_daidien}}</p>
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-phone-square"></i> <strong>Điện thoại: </strong>{{phanxuongview.sdt_lienhe}} </p>
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-hashtag"></i><strong>Mã: </strong> <span class="text-detail">{{phanxuongview.ma_xuong}}</span></p>
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-user-circle"></i> <strong>Người đại diện: </strong> <span class="text-detail">{{phanxuongview.nguoi_daidien}}</span></p>
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-phone-square"></i> <strong>Điện thoại: </strong><span class="text-detail">{{phanxuongview.sdt_lienhe}}</span> </p>
                     </div>
                     <div class="col-sm-6" style="padding-top: 10px;">                     
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-map-marker"></i><strong> Địa chỉ:</strong> {{phanxuongview.diachi}}</p>
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-building"></i><strong>Tỉnh thành:</strong> {{phanxuongview.ten_tinh}}</p>
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-bars"></i><strong>Số tuyến đường:</strong> {{phanxuongview.so_luong_tuyen}}</p>
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-map-marker"></i><strong> Địa chỉ: </strong> <span class="text-detail">{{phanxuongview.diachi}}</span></p>
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-building"></i><strong>Tỉnh thành: </strong> <span class="text-detail">{{phanxuongview.ten_tinh}}</span></p>
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-bars"></i><strong>Số tuyến đường: </strong> <span class="text-detail">{{phanxuongview.so_luong_tuyen}}</span></p>
                     </div>
                   </div>
 
@@ -224,14 +234,14 @@
                       <p class="nhansu-name">{{tuyenduongview.ten_duong}}</p>
                       </div>
                     <div class="col-sm-6" style="padding-top: 10px;">
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-hashtag"></i><strong>Mã: </strong>{{tuyenduongview.ma_duong}}</p>
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-hashtag"></i><strong>Mã: </strong><span class="text-detail">{{tuyenduongview.ma_duong}}</span></p>
                       
                     </div>
                     <div class="col-sm-6">
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-bars"></i><strong>Số luống:</strong>{{tuyenduongview.so_luong}}</p>                      
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-bars"></i><strong>Số luống: </strong><span class="text-detail">{{tuyenduongview.so_luong}}</span></p>                      
                     </div>
                     <div class="col-sm-12">
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-info-circle"></i><strong>Mô tả:</strong> {{tuyenduongview.mota}}</p>                      
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-info-circle"></i><strong>Mô tả: </strong> <span class="text-detail">{{tuyenduongview.mota}}</span></p>                      
                     </div>
                   </div>
 
@@ -240,17 +250,17 @@
                       <p class="nhansu-name">{{luongview.ten_luong}}</p>
                       </div>
                     <div class="col-sm-6" style="padding-top: 10px;">
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-hashtag"></i><strong>Mã:</strong> {{luongview.ma_luong}}</p>                     
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-hashtag"></i><strong>Mã: </strong> <span class="text-detail">{{luongview.ma_luong}}</span></p>                     
                     </div>
                     <div class="col-sm-6" >
-                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-balance-scale"></i><strong>Trạng thái:</strong> {{luongview.ten_trangthai}} </p>                                           
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-balance-scale"></i><strong>Trạng thái: </strong> <span class="text-detail">{{luongview.ten_trangthai}} </span></p>                                           
                     </div>
                     <div class="col-sm-12" >
                       <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-cubes"></i> <strong>NGUYÊN LIỆU TRONG LUỐNG</strong></p>                                 
                     </div>
                     <div *ngFor="let nguyenlieu of nguyenlieuview ; let i = index" class="col-sm-12" style="padding-top: 10px;">                      
-                      <p  class="col-sm-8"> <i style="margin-right: 5px; color: #12A551;" class="fa fa-dot-circle-o"></i><strong>Tên:</strong> {{nguyenlieu.ten_vattu}}</p>                      
-                      <p  class="col-sm-4"> <i style="margin-right: 5px; color: #12A551;" class="fa fa-balance-scale"></i><strong>Khối lượng:</strong> {{nguyenlieu.soluong}} ({{nguyenlieu.ten_dv_tinh}})</p>                   
+                      <p  class="col-sm-8"> <i style="margin-right: 5px; color: #12A551;" class="fa fa-dot-circle-o"></i><strong>Tên: </strong> <span class="text-detail">{{nguyenlieu.ten_vattu}}</span></p>                      
+                      <p  class="col-sm-4"> <i style="margin-right: 5px; color: #12A551;" class="fa fa-balance-scale"></i><strong>Khối lượng: </strong> <span class="text-detail">{{nguyenlieu.soluong}} ({{nguyenlieu.ten_dv_tinh}})</span></p>                   
                     </div>
                     
                   </div>

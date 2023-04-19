@@ -112,7 +112,7 @@ export class DashboardComponent {
       this.dashboardService.get_data_htx()
         .subscribe(
           _data => {
-            this.data_htxs  = _data;
+            this.data_htxs  = _data;            
           }
         );
     })
