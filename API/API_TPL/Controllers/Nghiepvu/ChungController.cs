@@ -95,6 +95,7 @@ namespace API_TPL.Controllers.Danhmuc
                 {
                     Donvi dv0 = new Donvi();
                     dv0.id = kq.Rows[0]["ma_dv"].ToString();
+                    dv0.cap = kq.Rows[0]["cap"].ToString();
                     dv0.name = kq.Rows[0]["ten_dv"].ToString() + " - " + kq.Rows[0]["ma_dv"].ToString();
                     dv0.children = Danh_sach_node(kq, kq.Rows[0]["ma_dv"].ToString()).ToArray();
                     listreturndv.Add(dv0);
@@ -126,6 +127,7 @@ namespace API_TPL.Controllers.Danhmuc
                     Donvi cls = new Donvi();
                     cls.name = dtr["ten_dv"].ToString() + " - " + dtr["ma_dv"].ToString();
                     cls.id = dtr["ma_dv"].ToString();
+                    cls.cap = dtr["cap"].ToString();
                     List<Donvi> dv_con = new List<Donvi>();
                     dv_con = Danh_sach_node(kq, dtr["ma_dv"].ToString());
                     if (dv_con != null)
