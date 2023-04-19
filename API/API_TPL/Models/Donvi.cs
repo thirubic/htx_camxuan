@@ -9,6 +9,7 @@ namespace API_TPL.Models
     {
         public string id { get; set; }
         public string name { get; set; }
+        public string cap { get; set; }
         public Array children { get; set; }
     }
 
