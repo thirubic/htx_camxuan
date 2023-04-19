@@ -201,18 +201,19 @@ export class GsluongComponent {
               ;    
 
             this.giamsatluongService.capnhatrangthai(model)
-              .subscribe(
-                _data => {
-                  this.getluong_trongduong();
-                }
-              );
+            .subscribe({
+              next: (_data) => {
+                this.getluong_trongduong();
+              },
+              error: error => {
+                this.toastr.error(error)
+              }
+            });
           }
         });
     }else{
       
       if(trangthai==3){
-        console.log(111111111)
-        console.log(this.vitris_all)
         this.vitri = this.vitris_all.find(x => x.vitri == "8").id
       }else{
         this.vitri = this.vitris_all.find(x => x.vitri == "1").id
@@ -229,11 +230,14 @@ export class GsluongComponent {
         ;    
 
       this.giamsatluongService.capnhatrangthai(model)
-        .subscribe(
-          _data => {
+        .subscribe({
+          next: (_data) => {
             this.getluong_trongduong();
+          },
+          error: error => {
+            this.toastr.error(error)
           }
-        );
+        });
     }
   };
   ngOnInit(): void {

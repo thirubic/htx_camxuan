@@ -93,11 +93,12 @@ export class NhapluongComponent implements OnInit {
         .subscribe(
           _data => {
             console.log(_data);
-            this.dataduong = _data;     
+            this.dataduong = _data; 
+            this.dataduong.push({"ma_duong":"0","ten_duong": "Tất cả"})          
             this.totalItems = _data.length;
             this.p = 1;
             if (_data.length > 0) {
-              this.ma_duong_select = _data[0].ma_duong;
+              this.ma_duong_select = _data.find(x => x.ma_duong == '0').ma_duong;
               this.getluong_trongduong()
             }
           }

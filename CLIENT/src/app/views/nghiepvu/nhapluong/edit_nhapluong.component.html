@@ -180,6 +180,62 @@
                     </div>
                   </div>
                 </tab>
+                <tab  class="bg-success" heading="Nhập phân đã qua xử lí" (selectTab)="onTabChange(1)">
+                  <div>
+                    <div class="col-sm-6">
+                      <div class="float-input" title="Chọn phương tiện vận chuyển">
+                        <label class="disabled">Phương tiện</label>
+                        <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
+                        <ng-select bindLabel="name" placeholder="Mã phương tiện" appendTo="body" [searchable]="true"
+                          formControlName="ma_pt" (change)="change_pt()">
+                          <ng-option [value]="item.ma_pt" *ngFor="let item of phuongtiendata">
+                            <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
+                            {{item.ten_pt}}
+                          </ng-option>
+                        </ng-select>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="float-input" title="Vật tư/Nguyên liệu">
+                        <label class="disabled">Vật tư/Nguyên liệu</label>
+                        <ng-select bindLabel="name" placeholder="Mã vật tư" appendTo="body" [searchable]="true"
+                          [clearable]="true" formControlName="ma_vattu" (change)="change_vattu()">
+                          <ng-option [value]="item.ma_vattu" *ngFor="let item of datavattu">
+                            <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
+                            {{item.ten_vattu}}
+                          </ng-option>
+                        </ng-select>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="float-input" title="Ghi chú">
+                        <label class="disabled">Ghi chú <span class="required"></span></label>
+                        <input type="text" formControlName="ghichu" class="form-control" />
+                      </div>
+                    </div>
+                    <div class="row col-sm-6">
+                      <div class="col-sm-12">
+                        <div class="float-input" title="Số lượng">
+                          <label class="disabled">Số lượng <span class="required"></span></label>
+                          <input type="number" min="0" [max]="soluong_max" step="1" formControlName="soluong"
+                            class="form-control" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="float-input" title="Đơn vị tính">
+                        <label class="disabled">Đơn vị tính</label>
+                        <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
+                        <ng-select bindLabel="name" placeholder="Đơn vị tính" appendTo="body" [searchable]="true"
+                          [clearable]="true" formControlName="donvi_tinh">
+                          <ng-option [value]="item.ma_dv_tinh" *ngFor="let item of datadonvitinh">
+                            {{item.ten_dv_tinh}}
+                          </ng-option>
+                        </ng-select>
+                      </div>
+                    </div>
+                  </div>
+                </tab>
               </tabset>
             </div>
             <div class="col-sm-12" style="text-align: center;">

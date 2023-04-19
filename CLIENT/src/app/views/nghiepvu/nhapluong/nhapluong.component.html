@@ -59,11 +59,14 @@
                       <th class="col-sm-1 text-center">STT</th>
                       <th class="col-sm-1">Mã luống</th>
                       <th class="col-sm-1">Tên luống</th>
-                      <th class="col-sm-3">Nguyên liệu trong luống</th>
-                      <th class="col-sm-1">khối lượng</th>
+                      <th class="col-sm-1">Tên đường</th>
+                      <th class="col-sm-1">Vị trí luống</th>
+                      <th class="col-sm-1">Loại phân</th>
                       <th class="col-sm-1">Mô tả</th>
+                      <th class="col-sm-2">Nguyên liệu trong luống</th>
+                      <th class="col-sm-1">Khối lượng</th>
                       <th class="col-sm-1">Trạng thái</th>
-                      <th class="col-sm-1"></th>
+                      <th class="col-sm-2"></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -77,13 +80,22 @@
                         {{dataluong.ten_luong}}
                       </td>
                       <td>
+                        {{dataluong.ten_duong}}
+                      </td>
+                      <td>
+                        {{dataluong.ma_duong}} - Vị trí {{dataluong.stt}}
+                      </td>
+                      <td>
+                        {{dataluong.ten_loaiphan}}
+                      </td>
+                      <td>
+                        {{dataluong.mota}}
+                      </td>
+                      <td>
                         {{dataluong.soluong_nguyenlieu}}
                       </td>
                       <td>
                         {{dataluong.trongluong}}
-                      </td>
-                      <td>
-                        {{dataluong.mota}}
                       </td>
                       <td>
                         <p> <i *ngIf="dataluong.trangthai == 3" style="margin-right: 5px; color: chartreuse;"

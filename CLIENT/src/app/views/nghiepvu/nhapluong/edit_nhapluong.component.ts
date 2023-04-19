@@ -33,7 +33,6 @@ export class Edit_NhapluongComponent implements OnInit {
   @Input() title: string;
   @Input() data: any;
   @Input() phanxuong: string;
-  @Input() ma_duong: string;
 
 
   @Output() event = new EventEmitter<boolean>();
@@ -111,7 +110,7 @@ export class Edit_NhapluongComponent implements OnInit {
     this.getkho_byphanxuong()
     this.form = this.formBuilder.group({
         ma_xuong: [this.phanxuong],
-        ma_duong: [this.ma_duong],
+        ma_duong: [this.data.ma_duong],
         ma_luong: [this.data.ma_luong],
         ghichu: [this.data.ghichu],
         ma_pt: [this.data.ma_pt],
@@ -128,7 +127,7 @@ export class Edit_NhapluongComponent implements OnInit {
         ghichu_luongkhac:['']
     });
     this.f.ma_xuong.setValue(this.phanxuong)
-    this.f.ma_duong.setValue(this.ma_duong)
+    this.f.ma_duong.setValue(this.data.ma_duong)
     
   }
 
@@ -409,7 +408,7 @@ export class Edit_NhapluongComponent implements OnInit {
   }
   getluong_trongduong() { 
     return new Promise<any>((resolve) => {
-      this.luongphanService.get_byduong({"ma_duong":this.ma_duong})
+      this.luongphanService.get_byduong({"ma_duong":this.data.ma_duong})
         .subscribe(
           _data => {
             this.dataluongs = _data; 

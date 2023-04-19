@@ -167,10 +167,10 @@
                 (initialized)="onInitialized(tree)">
                 <ng-template #treeNodeTemplate let-node let-index="index">
                   <p [ngClass]="node.data.classes" style="margin-bottom: 2px;">
-                    <img *ngIf="node.data.cap == 0"src="../../../assets/images/slider/icon_cx_2.png" style="width: 18px; margin-top: -2px;">
-                    <img *ngIf="node.data.cap == 1"src="../../../assets/images/slider/warehouse.png" style="width: 18px; margin-top: -2px;">
-                    <img *ngIf="node.data.cap == 2"src="../../../assets/images/slider/two-way-street.png" style="width: 18px; margin-top: -2px;">
-                    <img *ngIf="node.data.cap == 3"src="../../../assets/images/slider/land.png" style="width: 18px; margin-top: -2px;">
+                    <img *ngIf="node.data.cap == 0" src="../../../assets/images/slider/icon_cx_2.png" style="width: 18px; margin-top: -2px;" alt="">
+                    <img *ngIf="node.data.cap == 1" src="../../../assets/images/slider/warehouse.png" style="width: 18px; margin-top: -2px;" alt="">
+                    <img *ngIf="node.data.cap == 2" src="../../../assets/images/slider/two-way-street.png" style="width: 18px; margin-top: -2px;" alt="">
+                    <img *ngIf="node.data.cap == 3" src="../../../assets/images/slider/land.png" style="width: 18px; margin-top: -2px;" alt="">
                    <span *ngIf="node.data.cap == 0" style="padding-left: 5px; color: red; font-weight: bold;">{{ node.data.name }}</span>
                    <span *ngIf="node.data.cap != 0" style="padding-left: 5px;">{{ node.data.name }}</span>
                   </p>
@@ -188,10 +188,6 @@
                 <div id="grid-result" class="body">
                   
                   <div *ngIf="view_cap== 0" >
-                    <!-- <div class="col-sm-2" style="text-align: center;">
-                      <img class="img-nhansu" src="../../../assets/images/slider/icon_cx_2.png"
-                        onerror="this.src='../../../../assets/images/icon_account.png';" />
-                    </div> -->
                     <div class="col-sm-12" style="padding-top: 10px;">
                       <p class="nhansu-name">HỢP TÁC XÃ NÔNG NGHIỆP SINH THÁI CẨM XUÂN</p>
                       <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-map-marker"></i> <strong>Địa chỉ:</strong> <span class="text-detail">Tổ 13 ấp Cọ Dầu 2, xã Xuân Đông, huyện Cẩm Mỹ, tỉnh Đồng Nai</span> </p>
@@ -267,12 +263,6 @@
 
                 </div>
               </tab>
-              <!-- <tab heading="Chi tiết 2 " class="mt-2" (selectTab)="onSelect(2)">
-                <div id="grid-result" class="body">                  
-                  
-                  
-                </div>
-              </tab> -->
             </tabset>
           </div>
         </div>
