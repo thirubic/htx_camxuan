@@ -15,6 +15,9 @@ export class DMChungService {
   get_all() {
       return this.http.get<any[]>(`${baseUrl}/getAll`);
   }
+  getdatatree() {
+    return this.http.get<any[]>(`${baseUrl}/getdatatree`);
+  }
   get_key(formData: any): Observable<any> {
     return this.http.post(
       `${baseUrl}/get_key`,

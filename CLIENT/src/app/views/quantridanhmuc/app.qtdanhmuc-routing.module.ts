@@ -8,6 +8,7 @@ import { TuyenduongComponent } from "./tuyenduong/tuyenduong.component";
 import { TraicungcapComponent } from "./traicungcap/traicungcap.component";
 import { VattuComponent } from "./vattu/vattu.component";
 import { PhuongtienComponent } from "././phuongtien/phuongtien.component";
+import { LoaiphanComponent } from "./loaiphan/loaiphan.component";
 
 
 
@@ -21,6 +22,7 @@ const routes: Routes = [
     { path: 'kho',              component: KhoComponent },
     { path: 'luongphan',              component: LuongphanComponent },
     { path: 'phuongtien',              component: PhuongtienComponent },
+    { path: 'loaiphan',              component: LoaiphanComponent },
 ];
 
 @NgModule({

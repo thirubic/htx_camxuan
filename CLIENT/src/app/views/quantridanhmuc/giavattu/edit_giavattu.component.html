@@ -31,9 +31,16 @@
               </div>
             </div> 
             <div class="col-sm-6">
-              <div class="float-input" title="Đơn vị tính">
-                <label  class="disabled">Đơn vị tính <span class="required"></span></label>
-                <input type="text" formControlName="donvi_tinh" class="form-control" />
+              <div class="float-input" title=">Đơn vị tính">
+                <label class="disabled">Đơn vị tính</label>
+                <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
+                <ng-select bindLabel="name" placeholder="Đơn vị tính" appendTo="body" [searchable]="true"
+                  [clearable]="true" formControlName="donvi_tinh_luongkhac">
+                  <ng-option [value]="item.ma_dv_tinh" *ngFor="let item of datadonvitinh">
+                    <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
+                    {{item.ten_dv_tinh}}
+                  </ng-option>
+                </ng-select>
               </div>
             </div> 
             <div class="col-sm-6">

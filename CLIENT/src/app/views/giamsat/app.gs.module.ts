@@ -15,6 +15,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 //giám sát trạng thái luống phân
 import { GsluongComponent } from './trangthailuong/gsluong.component';
 import { View_ctluongComponent } from './trangthailuong/view_ctluong.component';
+import { Chonvitri_ctluongComponent } from './trangthailuong/chonvitri.component';
 // import { View_cvcuatoiComponent  } from './cuatoi/view_cvcuatoi.component';
 // //Công việc chủ trì
 // import { CvduocgiaoComponent } from './cvduocgiao/cvduocgiao.component';
@@ -46,7 +47,7 @@ import { View_ctluongComponent } from './trangthailuong/view_ctluong.component';
         // CvphoihopComponent,Ins_cvphoihopComponent,
         // CvgiamsatComponent
 
-        GsluongComponent, View_ctluongComponent
+        GsluongComponent, View_ctluongComponent,Chonvitri_ctluongComponent
         ]
 })
 export class AppGsModulue { }

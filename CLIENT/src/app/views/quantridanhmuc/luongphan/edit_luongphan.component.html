@@ -28,11 +28,34 @@
               <div class="float-input" title="Đường">
                 <label  class="disabled">Đường</label>
                 <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
-                <ng-select readonly bindLabel="name" placeholder="Mã đường" appendTo="body"
+                <ng-select bindLabel="name" placeholder="Mã đường" appendTo="body"
                   [searchable]="true" [clearable]="true" formControlName="ma_duong">
-                  <ng-option [value]="item.ma_duong" [disabled]="disabled" *ngFor="let item of dataduong">
+                  <ng-option [value]="item.ma_duong" *ngFor="let item of dataduong">
                     <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
                     {{item.ten_duong}}
+                  </ng-option>
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="float-input" title="Loại phân">
+                <label  class="disabled">Loại phân</label>
+                <ng-select bindLabel="name" placeholder="Mã loại phân" appendTo="body"
+                  [searchable]="true" [clearable]="true" formControlName="ma_loaiphan" (change)="change_loaiphan($event)">
+                  <ng-option [value]="item.ma_loaiphan" *ngFor="let item of loaiphans">
+                    <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
+                    {{item.ten_loaiphan}}
+                  </ng-option>
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="float-input" title="Vị trí">
+                <label  class="disabled">Vị trí</label>
+                <ng-select bindLabel="name" placeholder="Vị trí" appendTo="body"
+                  [searchable]="true" [clearable]="true" formControlName="vitri">
+                  <ng-option readonly [value]="item.id" *ngFor="let item of vitris">
+                    Vị trí {{item.vitri}}
                   </ng-option>
                 </ng-select>
               </div>

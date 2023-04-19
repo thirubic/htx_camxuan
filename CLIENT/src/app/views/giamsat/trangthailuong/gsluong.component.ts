@@ -18,6 +18,8 @@ import { NhapluongService } from '@app/_services/danhmuc/nhapluong.service';
 import { DuongService } from '@app/_services/danhmuc/a_duong.service';
 import { LuongphanService } from '@app/_services/danhmuc/luongphan.service';
 import { GiamsatluongService } from '@app/_services/danhmuc/giamsatluong.service';
+import { Chonvitri_ctluongComponent } from './chonvitri.component';
+import { TuyenduongService } from '@app/_services/danhmuc/tuyenduong.service';
 
 @Component({
   selector: 'app-gsluong',
@@ -40,13 +42,16 @@ export class GsluongComponent {
     private duongService: DuongService,
     private luongphanService: LuongphanService,
     private giamsatluongService: GiamsatluongService,
+    private tuyenduongService: TuyenduongService,
   ) { }  
   macongviec_input = '';
   myParam: any;
   serviceBase = `${environment.apiURL}`;
   ds_list_moi: any = [];
+  vitris: any = [];
   ds_list_choxl: any = [];
   dang_xuli: number = 0;
+  vitri = 0;
   moi_tiepnhan: number = 0;
   xuli_dunghan: number = 0;
   xuli_trehan: number = 0;
@@ -56,6 +61,7 @@ export class GsluongComponent {
   ma_xuong_select = '';
   ma_duong_select: '';
   dataluongs = []; 
+  vitris_all= []; 
   ma_xuong_user = localStorage.getItem('Ma_donvi') ? localStorage.getItem('Ma_donvi') : sessionStorage.getItem('Ma_donvi') || '';
   dataxuong = [];
   dataduong = [];
@@ -99,7 +105,6 @@ export class GsluongComponent {
   };
   dialogOpen(args: DialogEventArgs): void {
     args.cancel = true;
-    this.View_detail(args.data);
   }
   viewbyboard() {
     this.swimlaneSettings = {
@@ -115,48 +120,6 @@ export class GsluongComponent {
     };
   }
 
-  ins_cvcuatoi() {
-    // const initialState = { title: "Thêm mới công việc", data: null };
-    // this.hide_title = false;
-    // this.modalRef = this.modalService.show(
-    //   Ins_gsluongComponent,
-    //   Object.assign({}, {
-    //     animated: true, keyboard: false, backdrop: false, ignoreBackdropClick: true
-    //   }, {
-    //     class: 'modal-lg xlg', initialState
-    //   }));
-
-    // this.modalRef.content.event
-    //   .subscribe(arg => {
-    //     if (arg) {
-    //       this.get_danhsachcongviecgiao();
-    //       this.hide_title = true;
-    //     }
-    //   });
-  }
-  View_detail(data) {
-    // const initialState = { title: "Chi tiết công việc", data: data };
-    // this.hide_title = false;
-    // this.modalRef = this.modalService.show(
-    //   View_GsluongComponent,
-    //   Object.assign({}, {
-    //     animated: true, keyboard: false, backdrop: false, ignoreBackdropClick: true
-    //   }, {
-    //     class: 'modal-lg xlg', initialState
-    //   }));
-
-    // this.modalRef.content.event
-    //   .subscribe(arg => {
-    //     if (arg) {
-    //       this.macongviec_input = '';
-    //       this.get_danhsachcongviecgiao();
-    //       this.hide_title = true;
-
-    //     }
-    //   });
-
-
-  }
   EnableDropdown(){
     this.content = !this.content
   }
@@ -174,7 +137,6 @@ export class GsluongComponent {
     this.modalRef.content.event
       .subscribe(arg => {
         if (arg) {
-          this.get_danhsachcongviecgiao();
           this.hide_title = true;
         }
       });
@@ -182,122 +144,106 @@ export class GsluongComponent {
   public Delete(key) {
     console.log(key);
   }
-  deleteCard(datain) {
-    if (datain.trangthai == 2) {
-      this.toastr.warning(
-        'Công việc đã hoàn thành không thể xóa',
-        'Cảnh báo',
-        {
-          timeOut: 3000,
-          closeButton: true,
-          positionClass: 'toast-bottom-right',
-        }
-      );
-      return;
-    }
-    let options = {
-      prompt: 'Bạn có muốn xóa công việc [' + datain.ten_cv + '] này không?',
-      title: "Thông báo",
-      okText: `Đồng ý`,
-      cancelText: `Hủy`,
-    };
-
-    this.confirmService.confirm(options).then((res: boolean) => {
-      if (res) {
-        this.congviecPSService.Del(datain.ma_congviec).subscribe({
-          next: (_data) => {
-            this.toastr.success("Xóa thành công", 'Thông báo', {
-              timeOut: 3000,
-              closeButton: true,
-              positionClass: 'toast-bottom-right',
-            });
-            this.get_danhsachcongviecgiao();
-                
-          },
-          error: (error) => {
-            this.toastr.error(error);
-          },
-        });
-      }
-    });
-
+  // get nguoi phoi hop
+  get_vitri_theoduong_all(ma_duong) { 
+    return new Promise<any>((resolve) => {
+      this.tuyenduongService.getbyma(ma_duong)
+        .subscribe(
+          _data => {
+            this.vitris_all = _data
+            console.log(this.vitris_all)
+          }
+        );
+      })
+  }
+   // get nguoi phoi hop
+   get_vitri_theoduong(ma_duong) { 
+    return new Promise<any>((resolve) => {
+      this.tuyenduongService.getbyma(ma_duong)
+        .subscribe(
+          _data => {
+            this.vitris = _data.filter(x=> x.vitri != 1 && x.vitri != 8);     
+          }
+        );
+    })
   }
   onKanbanBDragStop(args: DragEventArgs) {
     var ma_luong = args.data[0].ma_luong;    
-    var trangthai = args.data[0].keyfield;    
-    // if (nguoi_chutriDrag != this.Ma_nhanvien) {
-    //   this.get_danhsachcongviecgiao();
-    //   this.toastr.warning(
-    //     'Chỉ được thay đổi trạng thái công việc anh/chị chủ trì',
-    //     'Cảnh báo',
-    //     {
-    //       timeOut: 3000,
-    //       closeButton: true,
-    //       positionClass: 'toast-bottom-right',
-    //     }
-    //   );
-    //   return;
-    // }
-    // if (trangthaiDrag == '2' && tylehoanthanh < 100) {
-    //   this.get_danhsachcongviecgiao();
-    //   this.toastr.warning(
-    //     'Tỷ lệ hoàn thành nhỏ hơn 100 nên không thể chuyển trạng thái của công việc sang hoàn thành',
-    //     'Cảnh báo',
-    //     {
-    //       timeOut: 3000,
-    //       closeButton: true,
-    //       positionClass: 'toast-bottom-right',
-    //     }
-    //   );
-    //   return;
-    // }
+    var trangthai = args.data[0].keyfield; 
+    var ma_duong = args.data[0].ma_duong; 
+    var vitri_cu = args.data[0].vitri; 
+     
+    if(trangthai == 2){
+       this.get_vitri_theoduong(ma_duong)
+      const initialState = { title:" Chọn vị trí chuyển", data:args.data[0] ,vitri: 0};
+      this.hide_title = false;
+      this.modalRef = this.modalService.show(
+        Chonvitri_ctluongComponent,
+        Object.assign({}, {
+          animated: true, keyboard: false, backdrop: false, ignoreBackdropClick: true
+        }, {
+          class: 'modal-lg xlg', initialState
+        }));
+        
+      this.modalRef.content.event
+        .subscribe(arg => {
+          if (arg) {
+            this.vitri = arg
+            this.hide_title = true;
+            const obj = {}
+            var model = {
+              "ma_luong": ma_luong,
+              "vitri_moi": this.vitri,
+              "vitri_cu": vitri_cu,
+              "trangthai": trangthai,
+              "nguoi_capnhat": this.UserName,
+            }
+              ;    
 
-    const obj = {}
-    var model = {
-      "ma_luong": ma_luong,
-      "trangthai": trangthai,
-      "nguoi_capnhat": this.UserName,
+            this.giamsatluongService.capnhatrangthai(model)
+              .subscribe(
+                _data => {
+                  this.getluong_trongduong();
+                }
+              );
+          }
+        });
+    }else{
+      
+      if(trangthai==3){
+        console.log(111111111)
+        console.log(this.vitris_all)
+        this.vitri = this.vitris_all.find(x => x.vitri == "8").id
+      }else{
+        this.vitri = this.vitris_all.find(x => x.vitri == "1").id
+      }
+
+      const obj = {}
+      var model = {
+        "ma_luong": ma_luong,
+        "vitri_moi": this.vitri,
+        "vitri_cu": vitri_cu,
+        "trangthai": trangthai,
+        "nguoi_capnhat": this.UserName,
+      }
+        ;    
+
+      this.giamsatluongService.capnhatrangthai(model)
+        .subscribe(
+          _data => {
+            this.getluong_trongduong();
+          }
+        );
     }
-      ;    
-
-    this.giamsatluongService.capnhatrangthai(model)
-      .subscribe(
-        _data => {
-          this.getluong_trongduong();
-        }
-      );
-
   };
-  // public swimlaneSettings: SwimlaneSettingsModel = { keyField: 'Assignee' };
   ngOnInit(): void {
-    // this.route.paramMap.subscribe((params: ParamMap) => {
-    //   this.macongviec_input = params.get('id')
-    // })
-    //this.get_danhsachcongviecgiao(); 
     this.ma_xuong_select = this.ma_xuong_user;
-    console.log(this.ma_xuong_select);
+    
     this.get_danhsachxuong();
-    this.getduong_byphanxuong();
     this.getluong_trongduong();
     
   }
 
-  // lấy danh sách công việc giao
-  get_danhsachcongviecgiao() {
-    this.congviecPSService.get_congviecgiao(this.Ma_nhanvien, this.UserName)
-      .subscribe(
-        _data => {
-          this.data = _data;
-          this.data_search = _data;
-          if(this.macongviec_input != '' && this.macongviec_input != null){            
-            var congviecview = this.data.filter((x) => x.ma_congviec == this.macongviec_input);
-            if (congviecview.length > 0) {
-              this.View_detail(congviecview[0]);
-            }
-          }
-        }
-      );
-  }
   timkiemcongviec_bydate() {
     if (this.ngaybatdau_tk == '' || this.ngayketthuc_tk == '') {
       this.toastr.warning(
@@ -331,32 +277,6 @@ export class GsluongComponent {
         }
       );
   }
-
-  // Gửi data realtime cho những người liên quan
-  send_data_realtime(data_in) {
-    this.congviecPSService.get_congviec_nguoiphoihop(data_in.ma_congviec)
-      .subscribe(
-        _data => {                  
-           var prmnguoiphoidhop = '';
-        _data.forEach(element => {
-            prmnguoiphoidhop = prmnguoiphoidhop + element.ma_nv_ph + ',';
-        });       
-
-         prmnguoiphoidhop = prmnguoiphoidhop.substring(0, prmnguoiphoidhop.length - 1);
-         // gửi thông báo realtime
-             var data={
-              Type: 'Thông báo',
-              Information: data_in.ten_cv,
-              Id: data_in.nguoi_chutri + ',' + data_in.nguoi_giamsat + ',' + prmnguoiphoidhop,
-              Nguoigui: this.Ma_nhanvien,
-              Nguoichutri: data_in.nguoi_chutri,
-              Nguoiphoihop: prmnguoiphoidhop,
-              Nguoigiamsat: data_in.nguoi_giamsat
-              
-            } 
-        }
-      );
-  }
   onSearchChange(event) {
     if (event == '' || event == null) {
       this.data = this.data_search;
@@ -382,6 +302,7 @@ export class GsluongComponent {
             this.totalItems = _data.length;
             this.p = 1;
             this.ma_duong_select = _data[0].ma_duong;
+            this.get_vitri_theoduong_all(this.ma_duong_select)
             this.getluong_trongduong()
           }
         );
@@ -391,8 +312,10 @@ export class GsluongComponent {
     this.getduong_byphanxuong()
   }
   change_duong(){
-    this.getluong_trongduong()
+    this.getluong_trongduong();
+    this.get_vitri_theoduong_all(this.ma_duong_select)
   }
+  
   getluong_trongduong() { 
     return new Promise<any>((resolve) => {
       this.luongphanService.get_byduong({"ma_duong":this.ma_duong_select})
@@ -413,9 +336,6 @@ export class GsluongComponent {
               this.data.push(element);
             }
               );
-            console.log(this.data);   
-            //     this.totalItems = _data.length;
-            // this.p = 1;
           }
         );
     })

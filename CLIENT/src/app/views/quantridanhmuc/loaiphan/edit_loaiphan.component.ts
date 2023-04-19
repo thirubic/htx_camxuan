@@ -8,17 +8,16 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { ConfirmService } from '@app/_modules/confirm/confirm.service';
 import { DonviService } from "@app/_services/danhmuc/donvi.service";
-import { GiavattuService } from "@app/_services/danhmuc/giavattu.service";
+import { LoaiphanService } from "@app/_services/danhmuc/loaiphan.service";
 import { VattuService } from "@app/_services/danhmuc/vattu.service";
 import { CongviecphatsinhService } from '@app/_services/congviec/congviecphatsinh.service';
 import * as moment from "moment";
-import { DonvitinhService } from "@app/_services/danhmuc/donvitinh.service";
 
 @Component({
-  selector: 'app-qlgiavattu-Edit',
-  templateUrl: './edit_giavattu.component.html'
+  selector: 'app-qlloaiphan-Edit',
+  templateUrl: './edit_loaiphan.component.html'
 })
-export class Edit_GiavattuComponent implements OnInit {
+export class Edit_LoaiphanComponent implements OnInit {
   @Input() title: string;
   @Input() data: any;
 
@@ -32,8 +31,7 @@ export class Edit_GiavattuComponent implements OnInit {
   fileinput = '';
   fileattachs: any = [];
   danhsachfile: any = [];
-  datagiavattu: any = [];
-  datadonvitinh: any = [];
+  dataloaiphan: any = [];
   mavattu_select = '';
   serviceBase = `${environment.apiURL}`;
   viewtrangthai = false;
@@ -46,11 +44,9 @@ export class Edit_GiavattuComponent implements OnInit {
     private quantriService: QuantrinoidungService,
     private confirmService: ConfirmService,
     private donviService: DonviService,
-    private giavattuService: GiavattuService,
+    private loaiphanService: LoaiphanService,
     private vattuService: VattuService,
     private congviecPSService: CongviecphatsinhService,
-    private donvitinhService: DonvitinhService,
-    
   ) { }
 
   html: string;
@@ -60,26 +56,18 @@ export class Edit_GiavattuComponent implements OnInit {
 
   ngOnInit(): void {    
     this.get_danhsachvatu();
-    this.get_donvitinh()
     if(this.data=='0'){
       this.form = this.formBuilder.group({
-        ma_vattu: [''],
-        gia: [''],
-        donvi_tinh: [''],
-        ghichu: [''],
-        tungay: [''],
-        denngay: [''],
+        ma_loaiphan: [''],
+        ten_loaiphan: [''],
+        ghichu: ['']
       });
     }else{
       this.form = this.formBuilder.group({        
-        ma_vattu: [this.data.ma_vattu, Validators.required],
-        gia: [this.data.gia],
-        donvi_tinh: [this.data.donvi_tinh],
+        ma_loaiphan: [this.data.ma_loaiphan, Validators.required],
+        ten_loaiphan: [this.data.ten_loaiphan],
         ghichu: [this.data.ghichu],
-        tungay: moment(this.data.tungay).format('YYYY-MM-DD'),
-        denngay: moment( this.data.denngay).format('YYYY-MM-DD'),
       });
-      this.mavattu_select = this.data.ma_vattu;
     }
   }
   
@@ -120,22 +108,19 @@ export class Edit_GiavattuComponent implements OnInit {
     this.loading = true;
     const obj = {}
     const formData = {}
-    obj['MA_VATTU'] = this.f.ma_vattu.value;
-    obj['GIA'] = this.f.gia.value;
-    obj['DONVI_TINH'] = this.f.donvi_tinh.value;
-    obj['TUNGAY'] = this.f.tungay.value;
-    obj['DENNGAY'] = this.f.denngay.value;
+    obj['MA_LOAIPHAN'] = this.f.ma_loaiphan.value;
+    obj['TEN_LOAIPHAN'] = this.f.ten_loaiphan.value;
     obj['GHICHU'] = this.f.ghichu.value;
     obj['NGUOI_CAPNHAT'] = this.UserName;
     formData['data'] = JSON.stringify(obj);
     if(this.data=='0'){
       try{
-        this.giavattuService.giavattu_ins(formData)
+        this.loaiphanService.loaiphan_ins(formData)
         .subscribe({
           next: (_data) => {
             this.event.emit(true);
             this.modalRef.hide();
-            this.toastr.success("Thêm mới giá vật tư thành công", "",
+            this.toastr.success("Thêm mới loại phân thành công", "",
               {
                 timeOut: 3000,
                 closeButton: true,
@@ -148,13 +133,13 @@ export class Edit_GiavattuComponent implements OnInit {
       }
     
     }else{
-      this.giavattuService.giavattu_up(formData)
+      this.loaiphanService.loaiphan_up(formData)
       .subscribe({
         next: (_data) => {
           console.log(_data)
           this.event.emit(true);
           this.modalRef.hide();
-          this.toastr.success("Cập nhật giá vật tư thành công", "",
+          this.toastr.success("Cập nhật loại phân thành công", "",
             {
               timeOut: 3000,
               closeButton: true,
@@ -178,17 +163,8 @@ export class Edit_GiavattuComponent implements OnInit {
       this.vattuService.get_all()
           .subscribe(
               _data => {
-                  this.datagiavattu = _data.filter(x => x.tinhchat != 2);;
-                  this.f.ma_vattu.setValue(this.datagiavattu[0].ma_vattu)
-              }
-          );
-    }
-    get_donvitinh(): void {
-      this.donvitinhService.get_all()
-          .subscribe(
-              _data => {
-                  this.datadonvitinh = _data;
-                  this.f.donvi_tinh.setValue(_data.find(x => x.ma_dv_tinh =='TAN').ma_dv_tinh)
+                  this.dataloaiphan = _data.filter(x => x.tinhchat != 2);;
+                  this.f.ma_vattu.setValue(this.dataloaiphan[0].ma_vattu)
               }
           );
     }

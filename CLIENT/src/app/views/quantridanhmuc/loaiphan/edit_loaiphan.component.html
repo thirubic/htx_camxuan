@@ -1,0 +1,42 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="modal-header" style="display: flow-root;">
+    <button type="button" class="close" (click)="closed()">
+      <span aria-hidden="true">×</span>
+    </button>
+    <h4 class="modal-title">
+      <i style="margin-right: 10px; color: #17b799; font-size: 20px;" class="fa fa-plus-square"></i> {{title}}
+    </h4>
+  </div>
+  <div class="modal-body">
+    <div class="clearfix">
+      <div class="row">      
+        <div class="col-sm-12">
+          <div class="row row-frm">
+            <div class="col-sm-6">
+              <div class="float-input" title="Mã loại phân">
+                <label  class="disabled">Mã loại phân <span class="required"></span></label>
+                <input type="text" formControlName="ma_loaiphan" class="form-control" />
+              </div>
+            </div> 
+            <div class="col-sm-6">
+              <div class="float-input" title="Tên loại phân">
+                <label  class="disabled">Tên loại phân <span class="required"></span></label>
+                <input type="text" formControlName="ten_loaiphan" class="form-control" />
+              </div>
+            </div> 
+            <div class="col-sm-6">
+              <div class="float-input" title="Ghi chú">
+                <label  class="disabled">Ghi chú <span class="required"></span></label>
+                <input type="text" formControlName="ghichu" class="form-control" />
+              </div>
+            </div> 
+          </div>
+        </div>
+      </div>    
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-check"></i> Lưu</button>
+    <button type="button" class="btn btn-sm btn-default" (click)="closed()">Đóng</button>
+  </div>
+</form>

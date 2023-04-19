@@ -16,6 +16,8 @@ import { PhanxuongService } from "@app/_services/danhmuc/phanxuong.service";
 import { DuongService } from "@app/_services/danhmuc/a_duong.service";
 import { DMChungService } from "@app/_services/danhmuc/dmchung.service";
 import { VattuService } from "@app/_services/danhmuc/vattu.service";
+import { LoaiphanService } from '@app/_services/danhmuc/loaiphan.service';
+import { TuyenduongService } from "@app/_services/danhmuc/tuyenduong.service";
 @Component({
   selector: 'app-qlluongphan-Edit',
   templateUrl: './edit_luongphan.component.html'
@@ -34,9 +36,14 @@ export class Edit_LuongphanComponent implements OnInit {
   file: any = null;
   fileinput = '';
   fileattachs: any = [];
+  
   danhsachfile: any = [];
   ma_xuong_user = localStorage.getItem('Ma_donvi') ? localStorage.getItem('Ma_donvi') : sessionStorage.getItem('Ma_donvi') || '';
   dataduong: any = [];
+  loaiphans: any = [];
+  currentDate = new Date();
+  ten_loaiphan: '';
+  vitris: any = [];
   dataloailuongphan = [{"loailuongphan_id": 1,"ten_loailuongphan":"luongphan vật tư"},{"loailuongphan_id": 2,"ten_loailuongphan":"luongphan thành phẩm"},{"loailuongphan_id": 3,"ten_loailuongphan":"luongphan nguyên liệu"}]
   maxuong_select = '';
   disabled= false;
@@ -54,6 +61,8 @@ export class Edit_LuongphanComponent implements OnInit {
     private duongService: DuongService,
     private dmchungService: DMChungService,
     private vattuService: VattuService,
+    private loaiphanService: LoaiphanService,
+    private tuyenduongService: TuyenduongService,
     
     
   ) { }
@@ -66,24 +75,28 @@ export class Edit_LuongphanComponent implements OnInit {
   ngOnInit(): void {    
     this.get_danhsachduong();
     if(this.data=='0'){
+      this.get_key();
       this.disabled = false;
       this.form = this.formBuilder.group({
         ma_luong: [''],
         ten_luong: [''],
         ma_duong: [''],
-        mota: ['']
+        ma_loaiphan: [''],
+        mota: [''],
+        vitri:[''],
       });
-      this.get_key();
     }else{
       this.disabled = true;
       this.form = this.formBuilder.group({        
         ma_luong: [this.data.ma_luong, Validators.required],
         ten_luong: [this.data.ten_luong],
         ma_duong: [this.data.ma_duong],
-        mota: [this.data.mota]
+        ma_loaiphan: [this.data.ma_loaiphan],
+        mota: [this.data.mota],
+        vitri:[this.data.vitri],
       });
     }
-    this.f.ma_duong.setValue(this.ma_duong)
+    this.f.ma_duong.setValue(this.ma_duong);
   }
   
 
@@ -100,9 +113,21 @@ export class Edit_LuongphanComponent implements OnInit {
               }else{
                 this.f.ma_luong.setValue(this.ma_duong+'/L01')
               }
-              
+              this.get_all();
             }
         );
+  }
+  get_all() { 
+    return new Promise<any>((resolve) => {
+      this.loaiphanService.get_all()
+        .subscribe(
+          _data => {
+            this.loaiphans = _data;   
+            this.f.ma_loaiphan.setValue(this.loaiphans[0].ma_loaiphan) ;
+            this.f.ten_luong.setValue(this.loaiphans.find(x => x.ma_loaiphan == this.f.ma_loaiphan.value).ten_loaiphan + ' - '+this.f.ma_luong.value.substring(0, 3)+'-'+(this.currentDate.getMonth()+1).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})+''+this.currentDate.getFullYear()+ ' - 00'+ this.f.ma_luong.value.slice(-1));
+          }
+        );
+    })
   }
   checknull(text): boolean {
     if (text == null || text == '' || text == undefined) {
@@ -119,6 +144,10 @@ export class Edit_LuongphanComponent implements OnInit {
         return Object.assign(hash, { [obj[key]]: (hash[obj[key]] || []).concat(obj) })
       }, {})
   };
+  change_loaiphan(item){
+    this.ten_loaiphan = this.loaiphans.find(x => x.ma_loaiphan == item).ten_loaiphan;
+    this.f.ten_luong.setValue(this.ten_loaiphan + ' - '+this.f.ma_luong.value.substring(0, 3)+'-'+(this.currentDate.getMonth()+1).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})+''+this.currentDate.getFullYear()+ '- 00'+this.f.ma_luong.value.slice(-1))
+  }
   checkiteminlist(aryy_, ilevel): boolean {
     for (let k = 0; k < aryy_.length; k++) {
       if (aryy_[k] == ilevel) {
@@ -127,7 +156,18 @@ export class Edit_LuongphanComponent implements OnInit {
     }
     return true;
   }
-
+  get_vitri_theoduong() { 
+    return new Promise<any>((resolve) => {
+      this.tuyenduongService.getbyma(this.f.ma_duong.value)
+        .subscribe(
+          _data => {
+            this.vitris = _data.filter(x => x.id == _data[0].id);   
+            console.log(_data[0])
+            this.f.vitri.setValue(_data[0].id)  
+          }
+        );
+    })
+  }
   onSubmit(): void {
 
     this.submitted = true;
@@ -155,7 +195,9 @@ export class Edit_LuongphanComponent implements OnInit {
     obj['MA_LUONG'] = this.f.ma_luong.value;
     obj['TEN_LUONG'] = this.f.ten_luong.value;
     obj['MA_DUONG'] = this.f.ma_duong.value;
+    obj['MA_LOAIPHAN'] = this.f.ma_loaiphan.value;
     obj['MOTA'] = this.f.mota.value;
+    obj['VITRI'] = this.f.vitri.value;
     obj['NGUOI_CAPNHAT'] = this.UserName;
     formData['data'] = JSON.stringify(obj);
     if(this.data=='0'){
@@ -171,7 +213,9 @@ export class Edit_LuongphanComponent implements OnInit {
                 closeButton: true,
                 positionClass: 'toast-bottom-right'
               });
-          }
+          },error: (error) => {
+            this.toastr.error(error);
+          },
         });
       }catch(err){
         this.toastr.error(err)
@@ -208,6 +252,7 @@ export class Edit_LuongphanComponent implements OnInit {
           .subscribe(
               _data => {
                   this.dataduong = _data;
+                  this.get_vitri_theoduong()
               }
           );
     }

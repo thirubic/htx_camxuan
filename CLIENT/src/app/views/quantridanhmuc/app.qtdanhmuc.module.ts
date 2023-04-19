@@ -34,6 +34,9 @@ import { TuyenduongComponent } from './tuyenduong/tuyenduong.component';
 
 import { PhuongtienComponent } from './phuongtien/phuongtien.component';
 import { Edit_PhuongtienComponent } from './phuongtien/edit_phuongtien.component';
+import { LoaiphanComponent } from './loaiphan/loaiphan.component';
+import { Edit_LoaiphanComponent } from './loaiphan/edit_loaiphan.component';
+import { Vitri_tuyenduongComponent } from './tuyenduong/vitri_tuyenduong.component';
 
 @NgModule({
     imports: [
@@ -59,7 +62,7 @@ import { Edit_PhuongtienComponent } from './phuongtien/edit_phuongtien.component
         Edit_phanxuongComponent, PhanxuongComponent, GiavattuComponent,Edit_GiavattuComponent,VattuComponent,
         Edit_VattuComponent,TraicungcapComponent,Edit_TraiComponent,KhoComponent,Edit_KhoComponent,LuongphanComponent,Edit_LuongphanComponent,
         TuyenduongComponent, Edit_tuyenduongComponent,
-        PhuongtienComponent, Edit_PhuongtienComponent
+        PhuongtienComponent, Edit_PhuongtienComponent,LoaiphanComponent,Edit_LoaiphanComponent,Vitri_tuyenduongComponent
     ]
 })
 export class AppqtdanhmucModulue { }

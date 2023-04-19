@@ -1,0 +1,63 @@
+<form [formGroup]="form" >
+  <div class="modal-header" style="display: flow-root;">
+    <button type="button" class="close" (click)="closed()">
+      <span aria-hidden="true">×</span>
+    </button>
+    <h4 class="modal-title">
+      <i style="margin-right: 10px; color: #17b799; font-size: 20px;" class="fa fa-plus-square"></i> {{title}} {{ten_duong}}
+    </h4>
+  </div>
+  <div class="modal-body">
+    <div class="clearfix">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="row row-frm">
+            <div class="col-sm-12">
+              <div class="col-sm-12">
+                <table class="table table-condensed table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th class="col-sm-1 text-center">Vị trí</th>
+                      <th class="col-sm-2">Công đoạn</th>
+                      <th class="col-sm-1">Tên luống</th>
+                      <th class="col-sm-1">Số lượng nguyên liệu</th>
+                      <th class="col-sm-1">Khối lượng</th>
+                      <th class="col-sm-1">Đơn vị tính</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor="let tuyenduong of tuyenduongs | paginate: { itemsPerPage: 15, currentPage: p };let i = index">
+                       <td class="text-center">
+                        {{tuyenduong.vitri}}
+                      </td>
+                      <td>
+                        {{tuyenduong.congdoan}}
+                      </td>
+                      <td>
+                        {{tuyenduong.ten_luong}}
+                      </td>
+                      <td>
+                        {{tuyenduong.soluong}}
+                      </td>
+                      <td>
+                        {{tuyenduong.khoiluong}}
+                      </td>
+                      <td>
+                        {{tuyenduong.ten_dv_tinh}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>         
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-default" (click)="closed()">Đóng</button>
+  </div>
+</form>

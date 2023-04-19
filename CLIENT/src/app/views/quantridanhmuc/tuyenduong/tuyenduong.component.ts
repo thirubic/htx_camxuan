@@ -8,6 +8,7 @@ import {Edit_tuyenduongComponent  } from './edit_tuyenduong.component';
 import { environment } from '@environments/environment';
 import { NgModule } from '@angular/core';
 import { DMChungService } from "@app/_services/danhmuc/dmchung.service";
+import { Vitri_tuyenduongComponent } from './vitri_tuyenduong.component';
 @Component({
   selector: 'app-tuyenduong',
   templateUrl: './tuyenduong.component.html',
@@ -82,7 +83,27 @@ export class TuyenduongComponent implements OnInit {
     });
   }
 
+  view_vitri(duong){
+   
+    const initialState = { title:"Vị trí luống phân trên tuyến đường", data:duong};
+      this.modalRef = this.modalService.show(
+        Vitri_tuyenduongComponent,
+        Object.assign({}, {
+          animated: true, keyboard: false, backdrop: false, ignoreBackdropClick: true
+        }, {
+          class: 'modal-lg xlg', initialState
+        }));
 
+      this.modalRef.content.event
+        .subscribe(arg => {
+          if (arg) {
+            this.ma_duong_key = '';
+            this.getValueWithAsync().then(() =>            
+                this.isDataAvailable = true
+            );
+          }
+        });
+  }
   async add() {
       const initialState = { title: GlobalConstants.THEMMOI + " tuyến đường", data:'0'};
       this.modalRef = this.modalService.show(
@@ -166,30 +187,4 @@ export class TuyenduongComponent implements OnInit {
     });
   }
 
-}
-
-function fuzzysearch(needle: string, haystack: string) {
-  const haystackLC = haystack.toLowerCase();
-  const needleLC = needle.toLowerCase();
-
-  const hlen = haystack.length;
-  const nlen = needleLC.length;
-
-  if (nlen > hlen) {
-    return false;
-  }
-  if (nlen === hlen) {
-    return needleLC === haystackLC;
-  }
-  outer: for (let i = 0, j = 0; i < nlen; i++) {
-    const nch = needleLC.charCodeAt(i);
-
-    while (j < hlen) {
-      if (haystackLC.charCodeAt(j++) === nch) {
-        continue outer;
-      }
-    }
-    return false;
-  }
-  return true;
 }
