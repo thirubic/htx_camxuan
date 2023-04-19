@@ -18,6 +18,7 @@ import { DMChungService } from "@app/_services/danhmuc/dmchung.service";
 import { VattuService } from "@app/_services/danhmuc/vattu.service";
 import { LoaiphanService } from '@app/_services/danhmuc/loaiphan.service';
 import { TuyenduongService } from "@app/_services/danhmuc/tuyenduong.service";
+import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 @Component({
   selector: 'app-qlluongphan-Edit',
   templateUrl: './edit_luongphan.component.html'
@@ -25,7 +26,6 @@ import { TuyenduongService } from "@app/_services/danhmuc/tuyenduong.service";
 export class Edit_LuongphanComponent implements OnInit {
   @Input() title: string;
   @Input() data: any;
-  @Input() ma_duong: string;
 
 
   @Output() event = new EventEmitter<boolean>();
@@ -96,7 +96,6 @@ export class Edit_LuongphanComponent implements OnInit {
         vitri:[this.data.vitri],
       });
     }
-    this.f.ma_duong.setValue(this.ma_duong);
   }
   
 
@@ -109,9 +108,9 @@ export class Edit_LuongphanComponent implements OnInit {
         .subscribe(
             _data => {
               if(_data.length > 0){
-                this.f.ma_luong.setValue(this.ma_duong+'/'+_data[0].ma_luong)
+                this.f.ma_luong.setValue(this.f.ma_duong.value+'/'+_data[0].ma_luong)
               }else{
-                this.f.ma_luong.setValue(this.ma_duong+'/L01')
+                this.f.ma_luong.setValue(this.f.ma_duong.value+'/L01')
               }
               this.get_all();
             }
@@ -123,8 +122,8 @@ export class Edit_LuongphanComponent implements OnInit {
         .subscribe(
           _data => {
             this.loaiphans = _data;   
-            this.f.ma_loaiphan.setValue(this.loaiphans[0].ma_loaiphan) ;
-            this.f.ten_luong.setValue(this.loaiphans.find(x => x.ma_loaiphan == this.f.ma_loaiphan.value).ten_loaiphan + ' - '+this.f.ma_luong.value.substring(0, 3)+'-'+(this.currentDate.getMonth()+1).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})+''+this.currentDate.getFullYear()+ ' - 00'+ this.f.ma_luong.value.slice(-1));
+            //this.f.ma_loaiphan.setValue(this.loaiphans[0].ma_loaiphan) ;
+            //this.f.ten_luong.setValue(this.loaiphans.find(x => x.ma_loaiphan == this.f.ma_loaiphan.value).ten_loaiphan + ' - '+this.f.ma_luong.value.substring(0, 3)+'-'+(this.currentDate.getMonth()+1).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})+''+this.currentDate.getFullYear()+ ' - 00'+ this.f.ma_luong.value.slice(-1));
           }
         );
     })
@@ -148,6 +147,10 @@ export class Edit_LuongphanComponent implements OnInit {
     this.ten_loaiphan = this.loaiphans.find(x => x.ma_loaiphan == item).ten_loaiphan;
     this.f.ten_luong.setValue(this.ten_loaiphan + ' - '+this.f.ma_luong.value.substring(0, 3)+'-'+(this.currentDate.getMonth()+1).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})+''+this.currentDate.getFullYear()+ '- 00'+this.f.ma_luong.value.slice(-1))
   }
+  change_duong(item){
+    this.get_key();
+    this.get_vitri_theoduong()
+  }
   checkiteminlist(aryy_, ilevel): boolean {
     for (let k = 0; k < aryy_.length; k++) {
       if (aryy_[k] == ilevel) {
@@ -162,7 +165,6 @@ export class Edit_LuongphanComponent implements OnInit {
         .subscribe(
           _data => {
             this.vitris = _data.filter(x => x.id == _data[0].id);   
-            console.log(_data[0])
             this.f.vitri.setValue(_data[0].id)  
           }
         );
@@ -252,6 +254,7 @@ export class Edit_LuongphanComponent implements OnInit {
           .subscribe(
               _data => {
                   this.dataduong = _data;
+                  //this.f.ma_duong.setValue(_data[0].ma_duong)
                   this.get_vitri_theoduong()
               }
           );

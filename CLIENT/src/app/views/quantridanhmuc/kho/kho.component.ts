@@ -63,8 +63,8 @@ export class KhoComponent implements OnInit {
       this.khoService.get_byphanxuong({"ma_xuong":this.ma_xuong_select})
         .subscribe(
           _data => {
-            this.khos = _data;     
-                this.totalItems = _data.length;
+            this.khos = _data;  
+            this.totalItems = _data.length;
             this.p = 1;
           }
         );

@@ -85,10 +85,11 @@ export class LuongphanComponent implements OnInit {
       this.duongService.get_byphanxuong({"ma_xuong":this.ma_xuong_select})
         .subscribe(
           _data => {
-            this.dataduong = _data;     
-                this.totalItems = _data.length;
+            this.dataduong = _data;   
+            this.dataduong.push({"ma_duong":"0","ten_duong": "Tất cả"})  
+            this.totalItems = _data.length;
             this.p = 1;
-            this.ma_duong_select = this.dataduong[0].ma_duong;
+            this.ma_duong_select = this.dataduong.find(x=>x.ma_duong == "0").ma_duong;
             this.getluongphan_byduong()
           }
         );

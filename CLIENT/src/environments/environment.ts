@@ -5,9 +5,9 @@
 export const environment = {
   production: false,
     //apiURL: 'http://cskhhue-api.vnpthue.com.vn/',
-    apiURL_Realtime: 'http://10.47.135.141:8686/',
-    apiURL: 'http://localhost:56384/',    
-    //apiURL_Realtime: 'https://localhost:44368/'
+    //apiURL_Realtime: 'http://10.47.135.141:8686/',
+    apiURL: 'http://api.htxcamxuan.com.vn/',    
+    //apiURL: 'http://localhost:56384/' 
 };
 
 /*

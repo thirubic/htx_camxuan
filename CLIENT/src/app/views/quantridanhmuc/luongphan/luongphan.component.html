@@ -61,12 +61,12 @@
                       <th class="text-center">STT</th>
                       <th >Mã luống</th>
                       <th class="col-sm-3">Tên luống</th>
-                      <th class="col-sm-1">Số lượng NL</th>
-                      <th class="col-sm-1">Trọng lượng</th>
                       <th class="col-sm-1">Tên đường</th>
-                      <th class="col-sm-1">Loại phân</th>
                       <th class="col-sm-2">Vị trí luống</th>
                       <th class="col-sm-1">Mô tả</th>
+                      <th class="col-sm-1">Số lượng NL</th>
+                      <th class="col-sm-1">Trọng lượng</th>
+                      <th class="col-sm-1">Loại phân</th>
                       <th class="col-sm-1">Trạng thái</th>
                       <th class="col-sm-2"></th>
                     </tr>
@@ -82,22 +82,23 @@
                         {{luongphan.ten_luong}}
                       </td>
                       <td>
+                        {{luongphan.ten_duong}}
+                      </td>
+                      <td>
+                        {{luongphan.ma_duong}} - Vị trí {{luongphan.stt}}
+                      </td>
+                       <td>
+                        {{luongphan.mota}}
+                      </td>
+                      <td>
                         {{luongphan.soluong_nguyenlieu}}
                       </td>
                       <td>
                         {{luongphan.trongluong}}
                       </td>
-                      <td>
-                        {{luongphan.ten_duong}}
-                      </td>
+                      
                       <td>
                         {{luongphan.ten_loaiphan}}
-                      </td>
-                      <td>
-                        {{luongphan.ma_duong}} - Vị trí {{luongphan.stt}}
-                      </td>
-                      <td>
-                        {{luongphan.mota}}
                       </td>
                       <td>
                         <p> <i *ngIf="luongphan.trangthai == 3" style="margin-right: 5px; color: chartreuse;"

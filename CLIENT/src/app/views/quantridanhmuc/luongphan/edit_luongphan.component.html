@@ -29,7 +29,7 @@
                 <label  class="disabled">Đường</label>
                 <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
                 <ng-select bindLabel="name" placeholder="Mã đường" appendTo="body"
-                  [searchable]="true" [clearable]="true" formControlName="ma_duong">
+                  [searchable]="true" [clearable]="true" formControlName="ma_duong" (change)="change_duong($event)">
                   <ng-option [value]="item.ma_duong" *ngFor="let item of dataduong">
                     <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
                     {{item.ten_duong}}
