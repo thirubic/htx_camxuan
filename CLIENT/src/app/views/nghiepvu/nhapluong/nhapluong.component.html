@@ -16,7 +16,7 @@
       <div class="col-sm-12">
         <div class="modal-body">
           <div class="clearfix">
-            <div id="grid-result" class="body">
+            <div id="grid-result" class="body" style="overflow-x: scroll;">
               <div style="justify-content: space-between;">
                 <div class="col-sm-4">
                   <div class="input-group" style="height:35px">
@@ -52,28 +52,39 @@
                   </div>
                 </div>
               </div>
-              <div *ngIf="type_view == false">
+              <div *ngIf="type_view == false" style="border-bottom: 1px solid #ced4da;
+              margin-bottom: 10px; width: 2000px;">
                 <table class="table table-condensed table-striped table-bordered">
                   <thead>
                     <tr>
-                      <th class="col-sm-1 text-center">STT</th>
+                      <th class="text-center" style="width: 50px;">STT</th>
+                      <th class="col-sm-1 text-center">Chức năng</th>
                       <th class="col-sm-1">Mã luống</th>
-                      <th class="col-sm-1">Tên luống</th>
+                      <th class="col-sm-2">Tên luống</th>
                       <th class="col-sm-1">Tên đường</th>
                       <th class="col-sm-1">Vị trí luống</th>
                       <th class="col-sm-1">Loại phân</th>
                       <th class="col-sm-1">Mô tả</th>
-                      <th class="col-sm-2">Nguyên liệu trong luống</th>
-                      <th class="col-sm-1">Khối lượng</th>
-                      <th class="col-sm-1">Trạng thái</th>
-                      <th class="col-sm-2"></th>
+                      <th class="col-sm-3">Nguyên liệu trong luống</th>
+                      <th class="col-sm-1">Khối lượng</th>                      
                     </tr>
                   </thead>
                   <tbody>
                     <tr
                       *ngFor="let dataluong of dataluongs | filter:term | paginate: { itemsPerPage: 15, currentPage: p };let i = index">
                       <td class="text-center">{{i + 1 }}</td>
+                      <td *ngIf="dataluong.trangthai == 1||dataluong.trangthai == 2" class="text-center chucnang-fa">
+                        <a href="javascript:void(0);" (click)="edit(dataluong)">
+                          <span class="glyphicon glyphicon-plus" style="color: #11A34F;" aria-hidden="true"></span>
+                        </a>
+                        <a href="javascript:void(0);" (click)="edit_phuongtien(dataluong)">
+                          <img src="../../../../assets/images/slider/pick-up-truck.png" style="margin-left: 8px;" width="25px" height="25px" />
+                        </a>
+                      </td>
                       <td>
+                        <i *ngIf="dataluong.trangthai == 3" style=" padding-right: 10px; color: #28a745;" class="fa fa-circle"></i>
+                        <i *ngIf="dataluong.trangthai == 1" style=" padding-right: 10px; color: red;" class="fa fa-circle"></i>
+                        <i *ngIf="dataluong.trangthai == 2" style=" padding-right: 10px; color: #ffc107  ;" class="fa fa-circle"></i>
                         <strong>{{dataluong.ma_luong}}</strong>
                       </td>
                       <td>
@@ -96,92 +107,38 @@
                       </td>
                       <td>
                         {{dataluong.trongluong}}
-                      </td>
-                      <td>
-                        <p> <i *ngIf="dataluong.trangthai == 3" style="margin-right: 5px; color: chartreuse;"
-                            class="fa fa-circle"></i>
-                          <i *ngIf="dataluong.trangthai == 1" style="margin-right: 5px; color: red;" class="fa fa-circle"></i>
-                          <i *ngIf="dataluong.trangthai == 2" style="margin-right: 5px; color: rgb(255, 115, 0);" class="fa fa-circle"></i>
-                          {{dataluong.ten_trangthai}}
-                        </p>
-                      </td>
-                      <td *ngIf="dataluong.trangthai == 1||dataluong.trangthai == 2" class="text-center chucnang-fa">
-                        <a href="javascript:void(0);" (click)="edit(dataluong)">
-                          <span class="glyphicon glyphicon-plus" style="color: #11A34F;" aria-hidden="true"></span>
-                        </a>
-                        <a href="javascript:void(0);" (click)="edit_phuongtien(dataluong)">
-                          <img src="../../../../assets/images/slider/pick-up-truck.png" style="margin-left: 8px;" width="25px" height="25px" />
-                        </a>
-                      </td>
+                      </td>                      
                     </tr>
                   </tbody>
                 </table>
-              </div>
-              <div *ngIf="type_view">
-                <div
-                  *ngFor="let dataluong of dataluongkhos  | filter:term | paginate: { itemsPerPage: 8, currentPage: p }; let i = index"
-                  class="col-sm-12 nhansu-detail">
-                  <div class="edit-card-custom">
-                    <a class="text-center tooltips c-pointer" (click)="edit(dataluong)"
-                      style="position: absolute; right: 30px; cursor:pointer;">
-                      <i class="fa fa-edit" ></i>
-                    </a>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <p class="nhansu-name">
-                        <i *ngIf="dataluong.trangthai == 0" style="margin-right: 5px; color: chartreuse;"
-                          class="fa fa-circle"></i>
-                        <i *ngIf="dataluong.trangthai != 0" style="margin-right: 5px; color: red;" class="fa fa-circle"></i>
-                        {{dataluong.ten}}
-                      </p>
-                    </div>
-                    <div class="col-sm-6">
-                      <label> Tên đơn vị: {{dataluong.tendonvi}}</label>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="float-input" title="Nội dung">
-                        <label class="disabled">Nội dung <span class="required"></span></label>
-                        <textarea type="text" readonly style="background-color: #fff;" [(ngModel)]="dataluong.noidung"
-                          class="form-control trichyeuvanban"></textarea>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="float-input" title="Văn bản đính kèm">
-                        <table class="table table-condensed table-striped table-bordered">
-                          <thead>
-                            <tr>
-                              <th class="col-sm-1">STT</th>
-                              <th class="col-sm-7">Tên File</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let fileat of dataluong.file; let i = index">
-                              <td>{{i + 1 }}</td>
-                              <td>
-                                <a href="{{serviceBase}}/{{fileat[8]}}" target="_blank">{{ fileat[9] }}</a>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="gray-bg btn-block">
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="row row-frm">
-                      <div class="col-md-6">
-                        <span class="grid-counter gray-color fc-666 pull-left">Số bản ghi:
-                          <strong>{{totalItems}}</strong>
+              </div> 
+            </div>
+            <div class="gray-bg btn-block">
+              <div class="row" style="padding-top: 20px;">
+                <div class="col-sm-12">
+                  <div class="row row-frm">
+                    <div class="col-md-6">
+                      <p>
+                        <span>
+                          <i style="margin-left: 10px; margin-right: 10px; color: red;" class="fa fa-circle"> </i> Mới                        
+                      
                         </span>
-                      </div>
-                      <div class="col-md-6">
-                        <pagination-controls (pageChange)="p = $event" class="pull-right" previousLabel="" nextLabel="">
-                        </pagination-controls>
-                      </div>
+                        <span>                            
+                          <i style="margin-left: 10px; margin-right: 10px; color: #ffc107;" class="fa fa-circle"> </i> Đang xử lý
+                        </span>
+                        <span>                            
+                          <i style="margin-left: 10px; margin-right: 10px; color: #28a745;" class="fa fa-circle"> </i> Hoàn thành
+                        </span>
+                      </p>    
+                    </div>
+                    <div class="col-md-6">                          
+                      <pagination-controls (pageChange)="p = $event" class="pull-right" previousLabel="" nextLabel="">
+                      </pagination-controls>
+
+                      <span style="float: right !important;" class="grid-counter gray-color fc-666 pull-left">Số bản ghi:
+                        <strong>{{totalItems}}</strong> 
+
+                      </span>   
                     </div>
                   </div>
                 </div>
