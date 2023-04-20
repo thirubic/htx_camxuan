@@ -172,7 +172,7 @@
                     <img *ngIf="node.data.cap == 2" src="../../../assets/images/slider/two-way-street.png" style="width: 18px; margin-top: -2px;" alt="">
                     <img *ngIf="node.data.cap == 3" src="../../../assets/images/slider/land.png" style="width: 18px; margin-top: -2px;" alt="">
                    <span *ngIf="node.data.cap == 0" style="padding-left: 5px; color: red; font-weight: bold;">{{ node.data.name }}</span>
-                   <span *ngIf="node.data.cap != 0" style="padding-left: 5px;">{{ node.data.name }}</span>
+                   <span *ngIf="node.data.cap != 0" [style.color]="node.data.trangthai =='1'?'#dc3545':(node.data.trangthai =='2'?'orange':'black')" style="padding-left: 5px;">{{ node.data.name }}</span>
                   </p>
                 </ng-template>
               </tree-root>
@@ -247,6 +247,12 @@
                       </div>
                     <div class="col-sm-6" style="padding-top: 10px;">
                       <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-hashtag"></i><strong>Mã: </strong> <span class="text-detail">{{luongview.ma_luong}}</span></p>                     
+                    </div>
+                    <div class="col-sm-6" style="padding-top: 10px;">
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-map-marker"></i><strong>Vị trí luống: </strong> <span class="text-detail">{{luongview.stt}}</span></p>                     
+                    </div>
+                    <div class="col-sm-6">
+                      <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-circle"></i><strong>Loại luống phân: </strong> <span class="text-detail">{{luongview.ten_loaiphan}}</span></p>                     
                     </div>
                     <div class="col-sm-6" >
                       <p> <i style="margin-right: 5px; color: #12A551;" class="fa fa-balance-scale"></i><strong>Trạng thái: </strong> <span class="text-detail">{{luongview.ten_trangthai}} </span></p>                                           

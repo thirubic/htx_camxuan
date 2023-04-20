@@ -69,8 +69,6 @@ export class Xuat_thanhphamComponent implements OnInit {
     this.getvattu_trongkho()
   }
   getvattu_trongkho() { 
-    console.log(111111)
-    console.log(this.ma_kho_select)
     return new Promise<any>((resolve) => {
       this.nhapkhoService.get_bymakho({"ma_kho":this.ma_kho_select})
         .subscribe(

@@ -32,19 +32,19 @@
               </div>
             </div>
             <div id="grid-result" class="body">
-              <div *ngIf="type_view == false">
+              <div>
                 <table class="table table-condensed table-striped table-bordered">
                   <thead>
                     <tr>
-                      <th class="col-sm-1 text-center">STT</th>
+                      <th class="text-center">STT</th>
                       <th class="col-sm-1">Mã vật tư</th>
-                      <th class="col-sm-2">Tên vật tư</th>
+                      <th class="col-sm-3">Tên vật tư</th>
                       <th class="col-sm-1">Giá</th>
                       <th class="col-sm-1">Đơn vị tính</th>
-                      <th class="col-sm-1">Ghi chú</th>
+                      <th class="col-sm-2">Ghi chú</th>
                       <th class="col-sm-1">Từ ngày</th>
                       <th class="col-sm-1">Đến ngày</th>
-                      <th class="col-sm-2"></th>
+                      <th class="col-sm-1"></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -83,65 +83,7 @@
                     </tr>
                   </tbody>
                 </table>
-              </div>
-              <div *ngIf="type_view">
-                <div
-                  *ngFor="let giavattu of giavattus  | filter:term | paginate: { itemsPerPage: 8, currentPage: p }; let i = index"
-                  class="col-sm-12 nhansu-detail">
-                  <div class="edit-card-custom">
-                    <a class="text-center tooltips c-pointer" (click)="edit(giavattu)"
-                      style="position: absolute; right: 30px; cursor:pointer;">
-                      <i class="fa fa-edit" ></i>
-                    </a>
-                    <a class="text-center tooltips c-pointer" (click)="deletegiavattu(giavattu)"
-                      style="position: absolute; right: 8px; cursor:pointer;">
-                      <i class="fa fa-times-circle" style="color: red; font-size: 20px;"></i>
-
-                    </a>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <p class="nhansu-name">
-                        <i *ngIf="giavattu.trangthai == 0" style="margin-right: 5px; color: chartreuse;"
-                          class="fa fa-circle"></i>
-                        <i *ngIf="giavattu.trangthai != 0" style="margin-right: 5px; color: red;"
-                          class="fa fa-circle"></i>
-                        {{giavattu.ten}}
-                      </p>
-                    </div>
-                    <div class="col-sm-6">
-                      <label> Tên đơn vị: {{giavattu.tendonvi}}</label>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="float-input" title="Nội dung">
-                        <label class="disabled">Nội dung <span class="required"></span></label>
-                        <textarea type="text" readonly style="background-color: #fff;" [(ngModel)]="giavattu.noidung"
-                          class="form-control trichyeuvanban"></textarea>
-                      </div>                    
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="float-input" title="Văn bản đính kèm">
-                        <table class="table table-condensed table-striped table-bordered">
-                          <thead>
-                            <tr>
-                              <th class="col-sm-1">STT</th>
-                              <th class="col-sm-7">Tên File</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let fileat of giavattu.file; let i = index">
-                              <td>{{i + 1 }}</td>
-                              <td>
-                                <a href="{{serviceBase}}/{{fileat[8]}}" target="_blank">{{ fileat[9] }}</a>
-                              </td>                            
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              </div>              
               <div class="gray-bg btn-block">
                 <div class="row">
                   <div class="col-sm-12">

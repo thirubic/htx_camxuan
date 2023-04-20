@@ -236,7 +236,7 @@ export class Edit_NhapluongComponent implements OnInit {
             }
         }
       })
-    } else {
+    } else if(this.f.nhaptukho.value == '2') {
       let options = {
         prompt: 'Bạn có muốn thêm nguyên liệu vào luống không?',
         title: "Thông báo",
@@ -281,6 +281,57 @@ export class Edit_NhapluongComponent implements OnInit {
                   this.toastr.error(error)
                 }
               });
+          }
+        })
+      }else{
+        let options = {
+          prompt: 'Bạn có muốn thêm nguyên liệu [' + this.f.ma_vattu.value + '] vào luống không?',
+          title: "Thông báo",
+          okText: `Đồng ý`,
+          cancelText: `Hủy`,
+        };
+        this.confirmService.confirm(options).then((res: boolean) => {
+          if (res) {
+              if (this.f.soluong.value == "" || this.f.soluong.value == null) {
+                this.toastr.warning("Chưa nhập số lượng nguyên liệu cần nhập luống", "Cảnh báo",
+                  {
+                    timeOut: 3000,
+                    closeButton: true,
+                    positionClass: 'toast-bottom-right'
+                  });
+                return;
+              }
+              const obj = {}
+              const formData = {}
+              obj['MA_LUONG'] = this.f.ma_luong.value;
+              obj['MA_KHO'] = this.ma_kho;
+              obj['MA_PT'] = this.f.ma_pt.value;
+              obj['MA_VT'] = this.f.ma_vattu.value;
+              obj['SOLUONG'] = this.f.soluong.value;
+              obj['DONVI_TINH'] = this.f.donvi_tinh.value;
+              obj['GHICHU'] = this.f.ghichu.value;
+              obj['NGUOI_CAP'] = this.UserName;
+              formData['data'] = JSON.stringify(obj);
+              try {
+                this.nhapluongService.nhapnguyenlieu_tructiep(formData)
+                  .subscribe({
+                    next: (_data) => {
+                      this.event.emit(true);
+                      this.toastr.success("Nhập nguyên liệu vào luống thành công", "",
+                        {
+                          timeOut: 3000,
+                          closeButton: true,
+                          positionClass: 'toast-bottom-right'
+                        });
+                        this.getnguyenlieu_byluong(); 
+                    },
+                    error: (error) => {
+                      this.toastr.error(error);
+                    },
+                  });
+              } catch (err) {
+                this.toastr.error(err)
+              }
           }
         })
       }

@@ -6,6 +6,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { environment } from '@environments/environment';
 import * as moment from "moment";
 import { TraicungcapService } from "@app/_services/danhmuc/a_traicungcap.service";
+import { DMChungService } from "@app/_services/danhmuc/dmchung.service";
 
 @Component({
   selector: 'app-qltrai-Edit',
@@ -35,7 +36,8 @@ export class Edit_TraiComponent implements OnInit {
     public modalRef: BsModalRef,
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
-    private traiService: TraicungcapService
+    private traiService: TraicungcapService,
+    private dmchungService: DMChungService,
   ) { }
 
   html: string;
@@ -63,6 +65,7 @@ export class Edit_TraiComponent implements OnInit {
         mota: [this.data.mota]
       });
     }
+    this.get_key();
   }
   
 
@@ -95,7 +98,18 @@ export class Edit_TraiComponent implements OnInit {
     }
     return true;
   }
-
+  get_key(): void {
+    this.dmchungService.get_key({"key":"TRAI"})
+      .subscribe(
+          _data => {
+            if(_data.length > 0){
+              this.f.ma_trai.setValue(_data[0].ma_trai);
+            }else{
+              this.f.ma_trai.setValue('TRAI001');
+            }
+          }
+      );
+  }
   onSubmit(): void {
 
     this.submitted = true;

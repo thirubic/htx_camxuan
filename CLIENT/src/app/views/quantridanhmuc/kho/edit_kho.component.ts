@@ -13,6 +13,8 @@ import { CongviecphatsinhService } from '@app/_services/congviec/congviecphatsin
 import * as moment from "moment";
 import { TraicungcapService } from "@app/_services/danhmuc/a_traicungcap.service";
 import { PhanxuongService } from "@app/_services/danhmuc/phanxuong.service";
+import { DMChungService } from "@app/_services/danhmuc/dmchung.service";
+import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 
 @Component({
   selector: 'app-qlkho-Edit',
@@ -47,7 +49,8 @@ export class Edit_KhoComponent implements OnInit {
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
     private xuongService: PhanxuongService,
-    private khoService: KhoService
+    private khoService: KhoService,
+    private dmchungService: DMChungService
   ) { }
 
   html: string;
@@ -77,7 +80,8 @@ export class Edit_KhoComponent implements OnInit {
         ghichu: [this.data.ghichu]
       });
     }
-    this.f.ma_xuong.setValue(this.phanxuong)
+    this.f.ma_xuong.setValue(this.phanxuong);
+    this.get_key()
   }
   
 
@@ -86,7 +90,18 @@ export class Edit_KhoComponent implements OnInit {
     this.html = element.innerHTML;
   }
 
-
+  get_key(): void {
+    this.dmchungService.get_key({"key":"KHO"})
+      .subscribe(
+          _data => {
+            if(_data.length > 0){
+              this.f.ma_kho.setValue(_data[0].ma_kho);
+            }else{
+              this.f.ma_kho.setValue('KHO001');
+            }
+          }
+      );
+  }
   checknull(text): boolean {
     if (text == null || text == '' || text == undefined) {
       return true;
