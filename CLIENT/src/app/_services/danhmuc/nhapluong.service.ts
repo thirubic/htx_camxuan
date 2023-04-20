@@ -74,7 +74,13 @@ export class NhapluongService {
       `${baseUrl}/nhapnguyenlieu_tukho`,
       formData
     );
-  } 
+  }
+  nhapnguyenlieu_tructiep(formData: any): Observable<any> {
+    return this.http.post(
+      `${baseUrl}/nhapnguyenlieu_tructiep`,
+      formData
+    );
+  }  
   nhapnguyenlieu_tuluongkhac(formData: any): Observable<any> {
     return this.http.post(
       `${baseUrl}/nhapnguyenlieu_tuluongkhac`,
