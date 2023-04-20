@@ -216,3 +216,9 @@
     background-color: #0fa1d3 ;
     padding: 5px;
   }
+
+  .table.table-condensed tr th, .table.table-condensed tr td {
+    padding: 4px 5px;
+    border-right: 1px solid #ddd !important;
+}
+

@@ -62,7 +62,7 @@ export class VattuComponent implements OnInit {
         .subscribe(
           _data => {
             this.vattus = _data;     
-                this.totalItems = _data.length;
+            this.totalItems = _data.length;
             this.p = 1;
             console.log(this.vattus)
           }
@@ -123,6 +123,8 @@ export class VattuComponent implements OnInit {
         .subscribe(
             _data => {
                 this.vattus = _data;
+                this.totalItems = _data.length;
+                this.p = 1;
             }
         );
   }
