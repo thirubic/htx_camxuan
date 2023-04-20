@@ -58,23 +58,79 @@
                 <table class="table table-condensed table-striped table-bordered">
                   <thead>
                     <tr>
-                      <th class="text-center" style="width: 50px;">STT</th>
+                      <!-- <th class="text-center" style="width: 50px;">STT</th> -->
                       <th class="text-center col-sm-1">Chức năng</th>
                       <th class="col-sm-1">Mã luống</th>
                       <th class="col-sm-2">Tên luống</th>
                       <th class="col-sm-1">Tên đường</th>
-                      <th class="col-sm-2">Vị trí luống</th>
-                      <th class="col-sm-2">Mô tả</th>
-                      <th class="col-sm-1">Số lượng NL</th>
                       <th class="col-sm-1">Trọng lượng</th>
+                      <th class="col-sm-2">Vị trí luống</th>
+                      <th class="col-sm-1">Mô tả</th>
+                      <th class="col-sm-2">Số lượng NL</th>                      
                       <th class="col-sm-1">Loại phân</th>
                       <th ></th>
                     </tr>
                   </thead>
                   <tbody>
+
+                    <!-- Mới -->
+                    <tr>
+                      <td colspan="4"><strong>Đang nhập mới</strong></td>
+                      <td  colspan="5">
+                        <strong>{{tong_moi}} (Tấn)</strong>
+                      </td>
+                    </tr>
                     <tr
-                      *ngFor="let luongphan of luongphans | filter:term | paginate: { itemsPerPage: 15, currentPage: p };let i = index">
-                      <td class="text-center">{{i + 1 }}</td>
+                      *ngFor="let luongphan of luongphans_moi;let i = index">
+                      <!-- <td class="text-center">{{i + 1 }}</td> -->
+                      <td class="text-center chucnang-fa">
+                        <a href="javascript:void(0);" (click)="edit(luongphan)">
+                          <i class="fa fa-edit" ></i>
+                        </a>
+                        <a href="javascript:void(0);" (click)="deleteluongphan(luongphan)">
+                          <i class="fa fa-times-circle" style="color: red; font-size: 20px;"></i>
+                        </a>
+                      </td>
+                      <td>
+                        <i *ngIf="luongphan.trangthai == 3" style=" padding-right: 10px; color: #28a745;" class="fa fa-circle"></i>
+                        <i *ngIf="luongphan.trangthai == 1" style=" padding-right: 10px; color: red;" class="fa fa-circle"></i>
+                        <i *ngIf="luongphan.trangthai == 2" style=" padding-right: 10px; color: #ffc107  ;" class="fa fa-circle"></i>
+                        <strong>{{luongphan.ma_luong}}</strong>
+                      </td>
+                      <td>
+                        {{luongphan.ten_luong}}
+                      </td>
+                      <td>
+                        {{luongphan.ten_duong}}
+                      </td>
+                      
+                      <td>
+                        {{luongphan.trongluong}}
+                      </td>
+
+                      <td>
+                        {{luongphan.ma_duong}} - Vị trí {{luongphan.stt}}
+                      </td>
+                       <td>
+                        {{luongphan.mota}}
+                      </td>
+                      <td>
+                        {{luongphan.soluong_nguyenlieu}}
+                      </td>
+                      <td>
+                        {{luongphan.ten_loaiphan}}
+                      </td>   
+                    </tr>
+
+                    <!-- Đang xử lý -->
+                    <tr>
+                      <td colspan="4"><strong>Đang Xử lý</strong></td>
+                      <td colspan="5">
+                        <strong>{{tong_xuly}} (Tấn)</strong>
+                      </td>                     
+                    </tr>
+                    <tr
+                      *ngFor="let luongphan of luongphans_xuly;let i = index">                      
                       <td class="text-center chucnang-fa">
                         <a href="javascript:void(0);" (click)="edit(luongphan)">
                           <i class="fa fa-edit" ></i>
@@ -96,6 +152,54 @@
                         {{luongphan.ten_duong}}
                       </td>
                       <td>
+                        {{luongphan.trongluong}}
+                      </td>
+                      <td>
+                        {{luongphan.ma_duong}} - Vị trí {{luongphan.stt}}
+                      </td>
+                       <td>
+                        {{luongphan.mota}}
+                      </td>
+                      <td>
+                        {{luongphan.soluong_nguyenlieu}}
+                      </td>    
+                      <td>
+                        {{luongphan.ten_loaiphan}}
+                      </td>   
+                    </tr>
+                     <!-- Hoàn thành -->
+                     <tr>
+                      <td colspan="4"> <strong>Hoàn thành</strong></td>
+                      <td colspan="5">
+                        <strong>{{tong_hoanthanh}} (Tấn)</strong>
+                      </td>                      
+                    </tr>
+                    <tr
+                      *ngFor="let luongphan of luongphans_hoanthanh;let i = index">                      
+                      <td class="text-center chucnang-fa">
+                        <a href="javascript:void(0);" (click)="edit(luongphan)">
+                          <i class="fa fa-edit" ></i>
+                        </a>
+                        <a href="javascript:void(0);" (click)="deleteluongphan(luongphan)">
+                          <i class="fa fa-times-circle" style="color: red; font-size: 20px;"></i>
+                        </a>
+                      </td>
+                      <td>
+                        <i *ngIf="luongphan.trangthai == 3" style=" padding-right: 10px; color: #28a745;" class="fa fa-circle"></i>
+                        <i *ngIf="luongphan.trangthai == 1" style=" padding-right: 10px; color: red;" class="fa fa-circle"></i>
+                        <i *ngIf="luongphan.trangthai == 2" style=" padding-right: 10px; color: #ffc107  ;" class="fa fa-circle"></i>
+                        <strong>{{luongphan.ma_luong}}</strong>
+                      </td>
+                      <td>
+                        {{luongphan.ten_luong}}
+                      </td>
+                      <td>
+                        {{luongphan.ten_duong}}
+                      </td>
+                      <td>
+                        {{luongphan.trongluong}}
+                      </td>
+                      <td>
                         {{luongphan.ma_duong}} - Vị trí {{luongphan.stt}}
                       </td>
                        <td>
@@ -104,10 +208,6 @@
                       <td>
                         {{luongphan.soluong_nguyenlieu}}
                       </td>
-                      <td>
-                        {{luongphan.trongluong}}
-                      </td>
-                      
                       <td>
                         {{luongphan.ten_loaiphan}}
                       </td>   

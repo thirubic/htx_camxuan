@@ -60,7 +60,9 @@ import { Vitri_tuyenduongComponent } from './tuyenduong/vitri_tuyenduong.compone
     declarations: [
         // nguon phat sinh
         Edit_phanxuongComponent, PhanxuongComponent, GiavattuComponent,Edit_GiavattuComponent,VattuComponent,
-        Edit_VattuComponent,TraicungcapComponent,Edit_TraiComponent,KhoComponent,Edit_KhoComponent,LuongphanComponent,Edit_LuongphanComponent,
+        Edit_VattuComponent,TraicungcapComponent,Edit_TraiComponent,KhoComponent,Edit_KhoComponent,
+        LuongphanComponent,
+        Edit_LuongphanComponent,
         TuyenduongComponent, Edit_tuyenduongComponent,
         PhuongtienComponent, Edit_PhuongtienComponent,LoaiphanComponent,Edit_LoaiphanComponent,Vitri_tuyenduongComponent
     ]

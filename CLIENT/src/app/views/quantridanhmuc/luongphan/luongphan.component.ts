@@ -9,6 +9,7 @@ import { environment } from '@environments/environment';
 import { PhanxuongService } from "@app/_services/danhmuc/phanxuong.service";
 import { DuongService } from '@app/_services/danhmuc/a_duong.service';
 import { DMChungService } from "@app/_services/danhmuc/dmchung.service";
+
 @Component({
   selector: 'app-luongphan',
   templateUrl: './luongphan.component.html',
@@ -16,7 +17,8 @@ import { DMChungService } from "@app/_services/danhmuc/dmchung.service";
   providers: [
   ]
 })
-export class LuongphanComponent implements OnInit {
+
+export class LuongphanComponent implements OnInit  {
   donvis: any[];
   soluongphan: "10";
   totalItems = 0;
@@ -38,6 +40,13 @@ export class LuongphanComponent implements OnInit {
   id_donvi: any;
   isDataAvailable: boolean = false;
   luongphans = [];
+  luongphans_moi = [];
+  luongphans_xuly = [];
+  luongphans_hoanthanh = [];
+
+  tong_moi = 0;
+  tong_xuly = 0;
+  tong_hoanthanh = 0;
   serviceBase = `${environment.apiURL}`;
   type_view = false;  
   constructor(
@@ -73,8 +82,15 @@ export class LuongphanComponent implements OnInit {
       this.luongphanService.get_byduong({"ma_duong":this.ma_duong_select})
         .subscribe(
           _data => {
-            this.luongphans = _data;     
-                this.totalItems = _data.length;
+            this.luongphans = _data;    
+            this.luongphans_moi = _data.filter((x) => x.trangthai == 1); 
+            this.luongphans_xuly = _data.filter((x) => x.trangthai == 2); 
+            this.luongphans_hoanthanh = _data.filter((x) => x.trangthai == 3); 
+           
+            this.tong_moi = this.tinhtong_khoiluong(this.luongphans_moi);
+            this.tong_xuly = this.tinhtong_khoiluong(this.luongphans_xuly);
+            this.tong_hoanthanh = this.tinhtong_khoiluong(this.luongphans_hoanthanh);
+            this.totalItems = _data.length;
             this.p = 1;
           }
         );
@@ -142,6 +158,16 @@ export class LuongphanComponent implements OnInit {
           }
         });
     
+  }
+  tinhtong_khoiluong(list : any){
+    var tong = 0;
+    list.forEach(element => {
+      if(element.khoiluong != null || element.khoiluong != "")
+      {
+        tong = tong + element. khoiluong;
+      }     
+    });
+    return tong;
   }
 
   viewboard(){
