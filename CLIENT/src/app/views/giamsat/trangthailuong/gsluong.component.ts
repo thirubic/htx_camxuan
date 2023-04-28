@@ -57,6 +57,10 @@ export class GsluongComponent {
   xuli_trehan: number = 0;
   modalRef: BsModalRef;
   hide_title = true;
+  group = {
+    keyField: 'lan_xuly',
+    text: 'Lần xử lý'
+  }
   content = false;
   ma_xuong_select = '';
   ma_duong_select: '';
@@ -167,6 +171,7 @@ export class GsluongComponent {
         );
     })
   }
+  
   onKanbanBDragStop(args: DragEventArgs) {
     var ma_luong = args.data[0].ma_luong;    
     var trangthai = args.data[0].keyfield; 
@@ -303,9 +308,10 @@ export class GsluongComponent {
         .subscribe(
           _data => {
             this.dataduong = _data;     
+            this.dataduong.push({"ma_duong":"0","ten_duong": "Tất cả"})      
             this.totalItems = _data.length;
             this.p = 1;
-            this.ma_duong_select = _data[0].ma_duong;
+            this.ma_duong_select = _data.find(x => x.ma_duong == '0').ma_duong;
             this.get_vitri_theoduong_all(this.ma_duong_select)
             this.getluong_trongduong()
           }

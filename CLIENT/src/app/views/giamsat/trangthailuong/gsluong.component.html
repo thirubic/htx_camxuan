@@ -48,7 +48,7 @@
                       </ng-option>
                     </ng-select>
                   </div>
-                </div>
+                </div> 
               </div>
             </div>
           </div>
@@ -58,7 +58,8 @@
     <ejs-kanban locale='vi' keyField='keyfield' [dataSource]='data' [cardSettings]='cardSettings'
       [swimlaneSettings]='swimlaneSettings' (dragStop)='onKanbanBDragStop($event)' (dialogOpen)="dialogOpen($event)">
       <e-columns>
-        <e-column style="font-weight: bold;" headerText='Mới' keyField='1'></e-column>
+        <e-column style="font-weight: bold;" headerText='Mới' keyField='1'>
+        </e-column>
         <e-column headerText='Đang xử lý' keyField='2'></e-column>
         <e-column headerText='Hoàn thành' keyField='3'></e-column>
       </e-columns>
@@ -73,7 +74,7 @@
                   <img style="height:30px;width: 30px;" src="../../../../assets/images/slider/insert.png">
               </span>
                 <strong
-                [style.color]="data.trangthai ==1?'#dc3545':(data.trangthai ==2?'#ffc107':'#28a745')" class="text-uppercase">{{data.ma_luong}} ({{data.ten_luong}}): {{data.trongluong}}</strong><i class="fa fa-angle-down"></i>
+                [style.color]="data.trangthai ==1?'#dc3545':(data.trangthai ==2?'#ffc107':'#28a745')" class="text-uppercase">{{data.ten_duong}} - {{data.ma_luong}} ({{data.ten_luong}}) Vị trí {{data.stt}} ({{data.trongluong?data.trongluong:0}})</strong><i class="fa fa-angle-down"></i>
               </p>
 
             </a>
@@ -82,6 +83,8 @@
                 <div class="card-body">
                   <ul>
                     <li>Nguyên liệu trong luống: <strong>{{data.soluong_nguyenlieu}}</strong></li>
+                    <li>Trọng lượng: <strong>{{data.trongluong}}</strong></li>
+                    <li>Loại luống phân: <strong>{{data.loai_luongphan}}</strong></li>
                     <li>Mô tả: <strong>{{data.mota}}</strong></li>
                   </ul>
                   <a (click)="editcard(data)" style="color: blue; font-style: italic;text-decoration: underline;">Xem
@@ -93,6 +96,7 @@
         </div>
 
       </ng-template>
+      
       <ng-template #swimlaneSettingsTemplate let-data>
         <div id="swimlaneTemplate">
           <div class="swimlane-template e-swimlane-template-table">

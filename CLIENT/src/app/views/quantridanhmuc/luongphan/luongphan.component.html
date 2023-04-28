@@ -54,20 +54,21 @@
                     (click)="add()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Thêm mới</button>
                 </div>
               </div>
-              <div style="border-bottom: 1px solid #ced4da; margin-bottom: 10px; width: 2000px;" >
+              <div style="border-bottom: 1px solid #ced4da; margin-bottom: 10px; width: 2200px;" >
                 <table class="table table-condensed table-striped table-bordered">
                   <thead>
                     <tr>
                       <!-- <th class="text-center" style="width: 50px;">STT</th> -->
                       <th class="text-center col-sm-1">Chức năng</th>
+                      <th class="col-sm-1">Số lần xử lý</th>
                       <th class="col-sm-1">Mã luống</th>
                       <th class="col-sm-2">Tên luống</th>
                       <th class="col-sm-1">Tên đường</th>
                       <th class="col-sm-1">Trọng lượng</th>
-                      <th class="col-sm-2">Vị trí luống</th>
+                      <th class="col-sm-1">Vị trí luống</th>
                       <th class="col-sm-1">Mô tả</th>
                       <th class="col-sm-2">Số lượng NL</th>                      
-                      <th class="col-sm-1">Loại phân</th>
+                      <th class="col-sm-2">Loại phân</th>
                       <th ></th>
                     </tr>
                   </thead>
@@ -90,6 +91,9 @@
                         <a href="javascript:void(0);" (click)="deleteluongphan(luongphan)">
                           <i class="fa fa-times-circle" style="color: red; font-size: 20px;"></i>
                         </a>
+                      </td>
+                      <td>
+                       {{luongphan.lan_xuly?luongphan.lan_xuly:0}}
                       </td>
                       <td>
                         <i *ngIf="luongphan.trangthai == 3" style=" padding-right: 10px; color: #28a745;" class="fa fa-circle"></i>
@@ -140,6 +144,9 @@
                         </a>
                       </td>
                       <td>
+                        {{luongphan.lan_xuly?luongphan.lan_xuly:0}}
+                        </td>
+                      <td>
                         <i *ngIf="luongphan.trangthai == 3" style=" padding-right: 10px; color: #28a745;" class="fa fa-circle"></i>
                         <i *ngIf="luongphan.trangthai == 1" style=" padding-right: 10px; color: red;" class="fa fa-circle"></i>
                         <i *ngIf="luongphan.trangthai == 2" style=" padding-right: 10px; color: #ffc107  ;" class="fa fa-circle"></i>
@@ -155,7 +162,10 @@
                         {{luongphan.trongluong}}
                       </td>
                       <td>
-                        {{luongphan.ma_duong}} - Vị trí {{luongphan.stt}}
+                        {{luongphan.ma_duong}} - Vị trí {{luongphan.stt}} 
+                        <a href="javascript:void(0);" (click)="Chuyenvitri(luongphan)">
+                          <i class="fa fa-arrow-right" style="color: red; font-size: 20px;"></i>
+                        </a>
                       </td>
                        <td>
                         {{luongphan.mota}}
@@ -173,7 +183,7 @@
                       <td colspan="5">
                         <strong>{{tong_hoanthanh}} (Tấn)</strong>
                       </td>                      
-                    </tr>
+                    </tr> 
                     <tr
                       *ngFor="let luongphan of luongphans_hoanthanh;let i = index">                      
                       <td class="text-center chucnang-fa">
@@ -183,6 +193,9 @@
                         <a href="javascript:void(0);" (click)="deleteluongphan(luongphan)">
                           <i class="fa fa-times-circle" style="color: red; font-size: 20px;"></i>
                         </a>
+                      </td>
+                      <td>
+                        {{luongphan.lan_xuly?luongphan.lan_xuly:0}} 
                       </td>
                       <td>
                         <i *ngIf="luongphan.trangthai == 3" style=" padding-right: 10px; color: #28a745;" class="fa fa-circle"></i>
@@ -215,6 +228,7 @@
                   </tbody>
                 </table>
               </div> 
+          
             </div>
             <div class="gray-bg btn-block">
               <div class="row" style="padding-top: 20px;">
@@ -248,6 +262,15 @@
               </div>
             </div>
           </div>
+          <ag-grid-angular
+          style="width: 100%; height: 500px;"
+          class="ag-theme-alpine"
+          [columnDefs]="columnDefs"
+          [defaultColDef]="defaultColDef"
+          [groupDisplayType]="groupDisplayType"
+          [animateRows]="true"
+          [rowData]="luongphans"
+        ></ag-grid-angular>
         </div>
       </div>
     </div>

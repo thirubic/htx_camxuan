@@ -1,0 +1,49 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="modal-header" style="display: flow-root;">
+    <button type="button" class="close" (click)="closed()">
+      <span aria-hidden="true">×</span>
+    </button>
+    <h4 class="modal-title" style="margin-bottom: 0px;">
+      <i style="margin-right: 10px; color: #17b799; font-size: 20px;" class="fa fa-plus-square"></i> {{title}}
+    </h4>
+  </div>
+  <div class="modal-body" style="background-color:#f2f2f2">
+    <div class="clearfix">
+      <div class="row">        
+        <div class="col-sm-12" style="padding-left: 0;">
+          <div class="col-sm-12">
+            <div class="col-sm-6">
+              <div class="float-input" title="Đường">
+                <label  class="disabled">Đường</label>
+                <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
+                <ng-select bindLabel="name" placeholder="Mã đường" appendTo="body"
+                  [searchable]="true" [clearable]="true" formControlName="ma_duong" (change)="change_duong($event)">
+                  <ng-option [value]="item.ma_duong" *ngFor="let item of dataduong">
+                    <img src="../../../../assets/images/home.PNG" width="20px" height="20px" />
+                    {{item.ten_duong}}
+                  </ng-option>
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="float-input" title="Vị trí">
+                <label class="disabled">Vị trí</label>
+                <!-- <input type="text" formControlName="tencongviec" class="form-control" /> -->
+                <ng-select [disabled]="true" bindLabel="name" placeholder="Vị trí" appendTo="body"
+                  [searchable]="true" formControlName="vitri">
+                  <ng-option [value]="item.id" *ngFor="let item of vitris">
+                    Vị trí {{item.vitri}}
+                  </ng-option>
+                </ng-select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-check"></i> Chọn</button>
+    <button type="button" class="btn btn-sm btn-default" (click)="closed()">Đóng</button>
+  </div>
+</form>

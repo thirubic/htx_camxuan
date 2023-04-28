@@ -172,7 +172,7 @@
                     <img *ngIf="node.data.cap == 2" src="../../../assets/images/slider/two-way-street.png" style="width: 18px; margin-top: -2px;" alt="">
                     <img *ngIf="node.data.cap == 3" src="../../../assets/images/slider/land.png" style="width: 18px; margin-top: -2px;" alt="">
                    <span *ngIf="node.data.cap == 0" style="padding-left: 5px; color: red; font-weight: bold;">{{ node.data.name }}</span>
-                   <span *ngIf="node.data.cap != 0" [style.color]="node.data.trangthai =='1'?'#dc3545':(node.data.trangthai =='2'?'orange':'black')" style="padding-left: 5px;">{{ node.data.name }}</span>
+                   <span *ngIf="node.data.cap != 0" [style.color]="node.data.trangthai =='1'?'#dc3545':(node.data.trangthai =='2'?'orange':(node.data.trangthai =='3'?'green':'black'))" style="padding-left: 5px;">{{ node.data.name }}</span>
                   </p>
                 </ng-template>
               </tree-root>

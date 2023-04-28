@@ -216,3 +216,51 @@
     background-color: #0fa1d3 ;
     padding: 5px;
   }
+  .ag-full-width-row.ag-row-hover {
+    background-color: var(--ag-row-hover-color);
+  }
+  .groupTitle {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .medal {
+    margin: 0 5px;
+  }
+  .gold {
+    color: #e4ab11;
+  }
+  .silver {
+    color: #bbb4bb;
+  }
+  .bronze {
+    color: #be9088;
+  }
+  .flag {
+    margin: 0 4px;
+    position: relative;
+    top: 2px;
+  }
+  .ag-theme-alpine .ag-row.ag-row-level-0 {
+    background-color: #dddbdb;
+  }
+  
+  .ag-theme-alpine .ag-row.ag-row-level-1 {
+    background-color: #e6e5e5b3;
+  }
+  .ag-theme-alpine .ag-icon-tree-open,
+.ag-theme-alpine .ag-icon-tree-closed {
+  display: inline-block !important;
+}
+.detail-row {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+
+  .detail-cell {
+    display: inline-block;
+    margin-right: 20px;
+  }
+
+  .prop {
+    font-weight: bold;
+  }

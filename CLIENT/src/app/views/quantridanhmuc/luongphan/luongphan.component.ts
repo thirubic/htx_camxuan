@@ -9,7 +9,18 @@ import { environment } from '@environments/environment';
 import { PhanxuongService } from "@app/_services/danhmuc/phanxuong.service";
 import { DuongService } from '@app/_services/danhmuc/a_duong.service';
 import { DMChungService } from "@app/_services/danhmuc/dmchung.service";
-
+import { Chuyenvitri_ctluongComponent } from './chuyenvitri.component';
+import { Chonvitri_ctluongComponent } from '@app/views/giamsat/trangthailuong/chonvitri.component';
+import { AgGridModule } from 'ag-grid-angular';
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import 'ag-grid-enterprise';
+import {
+  ColDef,
+  GridReadyEvent,
+  ICellRendererParams,
+  RowGroupingDisplayType,
+} from 'ag-grid-community';
 @Component({
   selector: 'app-luongphan',
   templateUrl: './luongphan.component.html',
@@ -17,8 +28,33 @@ import { DMChungService } from "@app/_services/danhmuc/dmchung.service";
   providers: [
   ]
 })
-
 export class LuongphanComponent implements OnInit  {
+  columnDefs: ColDef[] = [
+    { headerName:"Trạng thái", field: 'ten_trangthai', rowGroup: true, hide: true,minWidth: 250 },
+    { headerName:"Lần xủ lý", field: 'ten_lanxl', rowGroup: true, hide: true },
+    {
+      headerName:"Mã luống",
+      field: 'ma_luong',
+      minWidth: 250,
+    },
+    { headerName:"Tên luống", field: 'ten_luong', minWidth: 200 },
+    { headerName:"Tên đường", field: 'ten_duong' },
+    { headerName:"Trọng lượng", field: 'trongluong',
+   },
+    { headerName:"Vị trí luống", field: 'vitri_luong' },
+    { headerName:"Mô tả", field: 'mota' }, 
+    { headerName:"Số lượng nguyên liệu", field: 'soluong_nguyenlieu' },
+    { headerName:"Loại phân", field: 'ten_loaiphan' }
+  ];
+  groupDefaultExpanded: -1;
+  defaultColDef: ColDef = {
+    flex: 1,
+    minWidth: 100,
+    sortable: true,
+    resizable: true,
+    cellRenderer: 'agGroupCellRenderer',
+  };
+  groupDisplayType: RowGroupingDisplayType = 'groupRows';
   donvis: any[];
   soluongphan: "10";
   totalItems = 0;
@@ -29,6 +65,7 @@ export class LuongphanComponent implements OnInit  {
   items: any;
   options = {
   };
+  
   ma_luong_key:'';
   ma_xuong_select = '';
   ma_duong_select= '';
@@ -43,13 +80,15 @@ export class LuongphanComponent implements OnInit  {
   luongphans_moi = [];
   luongphans_xuly = [];
   luongphans_hoanthanh = [];
-
   tong_moi = 0;
   tong_xuly = 0;
+  collapsed: true;
   tong_hoanthanh = 0;
   serviceBase = `${environment.apiURL}`;
   type_view = false;  
+ 
   constructor(
+    
     private luongphanService: LuongphanService,
     private toastr: ToastrService,
     private modalService: BsModalService,
@@ -58,7 +97,9 @@ export class LuongphanComponent implements OnInit  {
     private duongService: DuongService,
     private dmchungService: DMChungService,
     
-  ) { }
+  ) {
+    
+   }
 
   ngOnInit(): void {
     this.ma_xuong_select = this.ma_xuong_user;
@@ -70,6 +111,12 @@ export class LuongphanComponent implements OnInit  {
   async getValueWithAsync() {
     this.items = await this.getluongphan_byduong();    
     this.node = this.items;
+  }
+  onRowClicked(params) {
+    if (params.node.group && params.event.target.nodeName === "INPUT") {
+      const expanded = params.node.expanded ? 'collapsed' : 'expanded';
+      params.node.setExpanded(expanded === 'expanded');
+    }
   }
   change_duong(){
     this.getluongphan_byduong()
@@ -95,6 +142,25 @@ export class LuongphanComponent implements OnInit  {
           }
         );
     })
+  }
+  Chuyenvitri(luongphan) {
+      const initialState = { title:" Chọn vị trí chuyển",data: luongphan,vitri: 0};
+      this.modalRef = this.modalService.show(
+        Chuyenvitri_ctluongComponent,
+        Object.assign({}, {
+          animated: true, keyboard: false, backdrop: false, ignoreBackdropClick: true
+        }, {
+          class: 'modal-lg xlg', initialState
+        }));
+        
+        this.modalRef.content.event
+        .subscribe(arg => {
+          if (arg) {
+            this.getValueWithAsync().then(() =>            
+                this.isDataAvailable = true
+            );
+          }
+        });
   }
   getduong_byphanxuong() { 
     return new Promise<any>((resolve) => {

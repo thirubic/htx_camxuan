@@ -5,7 +5,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
 
 import { AppDmRoutingModule } from './app.qtdanhmuc-routing.module';
 import { KanbanModule } from '@syncfusion/ej2-angular-kanban';
@@ -37,7 +36,9 @@ import { Edit_PhuongtienComponent } from './phuongtien/edit_phuongtien.component
 import { LoaiphanComponent } from './loaiphan/loaiphan.component';
 import { Edit_LoaiphanComponent } from './loaiphan/edit_loaiphan.component';
 import { Vitri_tuyenduongComponent } from './tuyenduong/vitri_tuyenduong.component';
-
+import { Chuyenvitri_ctluongComponent } from './luongphan/chuyenvitri.component';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { AgGridModule } from 'ag-grid-angular';
 @NgModule({
     imports: [
         CommonModule,
@@ -53,7 +54,7 @@ import { Vitri_tuyenduongComponent } from './tuyenduong/vitri_tuyenduong.compone
         HttpClientModule,
         AngularEditorModule,
         TreeModule,
-        
+        AgGridModule
     // QuillModule.forRoot(),
     // QuillModule
     ], 
@@ -63,7 +64,7 @@ import { Vitri_tuyenduongComponent } from './tuyenduong/vitri_tuyenduong.compone
         Edit_VattuComponent,TraicungcapComponent,Edit_TraiComponent,KhoComponent,Edit_KhoComponent,
         LuongphanComponent,
         Edit_LuongphanComponent,
-        TuyenduongComponent, Edit_tuyenduongComponent,
+        TuyenduongComponent, Edit_tuyenduongComponent,Chuyenvitri_ctluongComponent,
         PhuongtienComponent, Edit_PhuongtienComponent,LoaiphanComponent,Edit_LoaiphanComponent,Vitri_tuyenduongComponent
     ]
 })
