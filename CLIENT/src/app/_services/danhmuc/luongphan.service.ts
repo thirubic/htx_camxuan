@@ -45,7 +45,12 @@ export class LuongphanService {
       formData
     );
   }
-
+  chuyenvitri(formData: any): Observable<any> {
+    return this.http.post(
+      `${baseUrl}/chuyenvitri`,
+      formData
+    );
+  }
   luongphan_up(formData: any): Observable<any> {
     return this.http.post(
       `${baseUrl}/capnhat`,
