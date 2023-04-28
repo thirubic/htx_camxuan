@@ -11,6 +11,8 @@
 @import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
 @import '../node_modules/@syncfusion/ej2-angular-kanban/styles/material.css';
 @import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~ag-grid-community/dist/styles/ag-grid.css";
+@import "~ag-grid-community/dist/styles/ag-theme-alpine.css";
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -111,7 +113,17 @@ $Angular11-theme: mat.define-light-theme((
 /*------------------------------------------------------------------------------------------
 . TABLE
 ------------------------------------------------------------------------------------------*/
-
+.ag-theme-alpine .ag-row.ag-row-level-0 {
+	background-color: #dddbdb;
+  }
+  
+  .ag-theme-alpine .ag-row.ag-row-level-1 {
+	background-color: #e6e5e5b3;
+  }
+  .ag-theme-alpine .ag-icon-tree-open,
+.ag-theme-alpine .ag-icon-tree-closed {
+    display: inline-block !important;
+}
 .text-right.command-bar .btn.btn-sm.btn-primary { padding:3px; }
 .table>tbody+tbody { border-top-width:1px; }
 .table-no-marging { margin-bottom:0; }
