@@ -64,6 +64,25 @@ namespace API_TPL.Controllers.Danhmuc
                 return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
             }
         }
+        [Route("nhapnguyenlieu_tructiep"), HttpPost]
+        public IHttpActionResult nhapnguyenlieu_tructiep([FromBody] dynamic obj)
+        {
+            string query_str = "nhap_nguyenlieu_tructiep";
+
+            object[] aParams = new object[1];
+            try
+            {
+                aParams[0] = helper.BuildParameter("data", obj.data, System.Data.SqlDbType.NVarChar);
+
+                DataTable kq = helper.ExecuteQueryStoreProcedure(query_str, aParams);
+
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, kq));
+            }
+            catch (Exception ex)
+            {
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
+            }
+        }
         [Route("quydoi_vattu"), HttpPost]
         public IHttpActionResult quydoi_vattu([FromBody] dynamic obj)
         {

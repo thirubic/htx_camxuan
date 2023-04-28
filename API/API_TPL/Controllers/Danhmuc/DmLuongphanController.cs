@@ -87,6 +87,28 @@ namespace API_TPL.Controllers.Danhmuc
                 return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
             }
         }
+        [Route("chuyenvitri"), HttpPost]
+        public IHttpActionResult chuyen_vitri([FromBody] dynamic obj)
+        {
+            string query_str = "chuyen_vitri";
+
+            object[] aParams = new object[4];
+            try
+            {
+                aParams[0] = helper.BuildParameter("ma_luong", obj.ma_luong, System.Data.SqlDbType.NVarChar);
+                aParams[1] = helper.BuildParameter("ma_duong", obj.ma_duong, System.Data.SqlDbType.NVarChar);
+                aParams[2] = helper.BuildParameter("vitri_cu", obj.vitri_cu, System.Data.SqlDbType.Int);
+                aParams[3] = helper.BuildParameter("vitri_moi", obj.vitri_moi, System.Data.SqlDbType.Int);
+
+                DataTable kq = helper.ExecuteQueryStoreProcedure(query_str, aParams);
+
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, kq));
+            }
+            catch (Exception ex)
+            {
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
+            }
+        }
         [Route("getbyma"), HttpPost]
         public IHttpActionResult HOSO_LUONGPHAN_BYID([FromBody] dynamic obj)
         {
