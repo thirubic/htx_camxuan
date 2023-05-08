@@ -115,6 +115,18 @@
                 </table>
               </div> 
             </div>
+            <ag-grid-angular
+            style="width: 100%; height: 500px;"
+            class="ag-theme-alpine"
+            [columnDefs]="columnDefs"
+            [groupDefaultExpanded]="1" 
+            [defaultColDef]="defaultColDef"
+            [groupDisplayType]="groupDisplayType"
+            [animateRows]="true"
+            [rowData]="dataluongs"
+            (cellClicked)="onCellClicked($event)"
+          ></ag-grid-angular>
+
             <div class="gray-bg btn-block">
               <div class="row" style="padding-top: 20px;">
                 <div class="col-sm-12">

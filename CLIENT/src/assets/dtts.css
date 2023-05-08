@@ -2880,3 +2880,13 @@ input.question:valid ~ input[type="submit"], textarea.question:valid ~ input[typ
     padding: 10px;
     font-size: 14px;
 }
+.ag-row-group .ag-group-value, .ag-theme-alpine .ag-ltr .ag-group-child-count{
+    font-weight: bold !important;
+  }
+  .ag-icon-tree-closed, .ag-icon-tree-open{
+    font-weight: bold;
+    color: #11A34F;
+  }
+  .ag-theme-alpine .ag-row.ag-row-level-1 {
+    background-color: #f8f9fa !important;
+}

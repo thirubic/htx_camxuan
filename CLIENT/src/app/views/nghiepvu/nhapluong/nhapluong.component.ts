@@ -11,6 +11,18 @@ import { PhanxuongService } from "@app/_services/danhmuc/phanxuong.service";
 import { NhapluongService } from '@app/_services/danhmuc/nhapluong.service';
 import { DuongService } from '@app/_services/danhmuc/a_duong.service';
 import { LuongphanService } from '@app/_services/danhmuc/luongphan.service';
+import { AgGridModule } from 'ag-grid-angular';
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import 'ag-grid-enterprise';
+import {
+  ColDef,
+  ColGroupDef,
+  GridReadyEvent,
+  ICellRendererParams,
+  RowGroupingDisplayType,
+} from 'ag-grid-community';
+
 @Component({
   selector: 'app-nhapluong',
   templateUrl: './nhapluong.component.html',
@@ -19,6 +31,84 @@ import { LuongphanService } from '@app/_services/danhmuc/luongphan.service';
   ]
 })
 export class NhapluongComponent implements OnInit {
+
+  columnDefs: (ColDef| ColGroupDef)[] = [
+    
+    { headerName:"Loại phân", field: 'ten_loaiphan',rowGroup: true,hide: true, openByDefault: true },
+    { headerName:"Trạng thái", field: 'ten_trangthai', rowGroup: true, hide: true },
+    { headerName:"Lần xủ lý", field: 'ten_lanxl', rowGroup: true, hide: true },
+    {
+      headerName: "",
+      field: "edit",
+      minWidth: 30,
+      
+      cellRenderer: (params) => {
+        if(params.data != undefined){
+          var dataString = encodeURIComponent(JSON.stringify(params.data.trangthai));
+        }
+        
+        
+        if (params.node.group) {
+          return '';
+        } else {
+          if(dataString != '3')
+          return `
+          <a href="javascript:void(0);">
+          <span class="glyphicon glyphicon-plus" style="color: #11A34F;" aria-hidden="true"></span>
+        </a>
+          `;
+        }
+      },
+    },    
+    {
+      headerName: "",
+      field: "edit_phuongtien",
+      minWidth: 55,
+      
+      cellRenderer: (params) => {
+        if(params.data != undefined){
+          var dataString = encodeURIComponent(JSON.stringify(params.data.trangthai));
+        }
+        
+        
+        if (params.node.group) {
+          return '';
+        } else {
+          if(dataString != '3')
+          return `
+          <a href="javascript:void(0);">
+          <img src="../../../../assets/images/slider/pick-up-truck.png" style="margin-left: 8px;" width="25px" height="25px" />
+        </a>
+          `;
+        }
+      },
+    },
+    {
+      headerName:"Mã luống",
+      field: 'ma_luong',
+      minWidth: 150,
+    },
+    { headerName:"Tên luống", field: 'ten_luong', minWidth: 300 },
+    { headerName:"Tên đường", field: 'ten_duong' },
+    { headerName:"Trọng lượng", field: 'trongluong' , minWidth: 150,
+   },
+    { headerName:"Vị trí luống", field: 'vitri_luong' },
+    { headerName:"Mô tả", field: 'mota' }, 
+    { headerName:"Số lượng nguyên liệu", field: 'soluong_nguyenlieu', minWidth: 500 },
+  ];
+  
+  groupDefaultExpanded: -1;
+  defaultColDef: ColDef = {
+    flex: 1,
+    minWidth: 200,
+    sortable: true,
+    resizable: true,
+    
+    cellRenderer: 'agGroupCellRenderer',
+  };
+  
+  groupDisplayType: RowGroupingDisplayType = 'groupRows';
+
   donvis: any[];
   sokho: "10";
   totalItems = 0;
@@ -63,6 +153,16 @@ export class NhapluongComponent implements OnInit {
     this.getluong_trongduong();
     this.getValueWithAsync().then(() =>
       this.isDataAvailable = true);      
+  }
+
+
+  onCellClicked(event){
+    if(event.colDef.field =="edit"){
+      this.edit(event.data);
+    }
+    if(event.colDef.field =="edit_phuongtien"){
+      this.edit_phuongtien(event.data);
+    }
   }
 
   async getValueWithAsync() {

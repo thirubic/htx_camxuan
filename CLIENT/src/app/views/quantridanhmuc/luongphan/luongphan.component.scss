@@ -264,3 +264,12 @@
   .prop {
     font-weight: bold;
   }
+  .hide-move-3, .hide-move-1{
+    display: none;
+  }
+  .hide-move-2{
+    display: block;
+  }
+  .ag-group-child-count, .ag-theme-alpine .ag-ltr .ag-group-child-count{
+    font-weight: bold !important;
+  }

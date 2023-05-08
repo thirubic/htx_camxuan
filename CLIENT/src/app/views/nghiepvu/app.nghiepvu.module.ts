@@ -25,7 +25,7 @@ import { Edit_Phuongtien_luongComponent } from './nhapluong/edit_phuongtien_luon
 // xuất thành phẩm
 import { Edit_Xuat_thanhphamComponent } from './xuat_thanhpham/edit_xuat_thanhpham.component';
 import { Xuat_thanhphamComponent } from './xuat_thanhpham/xuat_thanhpham.component';
-
+import { AgGridModule } from 'ag-grid-angular';
 @NgModule({
     imports: [
         CommonModule,
@@ -41,7 +41,7 @@ import { Xuat_thanhphamComponent } from './xuat_thanhpham/xuat_thanhpham.compone
         NgSelectModule,
         HttpClientModule,
         AngularEditorModule,
-
+        AgGridModule
         // QuillModule.forRoot(),
         // QuillModule
     ],
