@@ -46,15 +46,15 @@
                 <table class="table table-condensed table-striped table-bordered">
                   <thead>
                     <tr>
-                      <th class="text-center">STT</th>
+                      <th class="text-center" style="width: 1%">STT</th>
                       <th class="col-sm-1 text-center">Chức năng</th>
                       <th class="col-sm-1">Mã vật tư</th>
-                      <th class="col-sm-3">Tên vật tư</th>
+                      <th class="col-sm-2">Tên vật tư</th>
+                      <th *ngIf="loaivt_id==2" class="col-sm-1">Tính chất</th>  
                       <th class="col-sm-1">Loại vật tư</th>
-                      <th *ngIf="loaivt_id!=2"class="col-sm-4">Mô tả</th>
-                      <th *ngIf="loaivt_id==2" class="col-sm-3">Mô tả</th>  
                       <th class="col-sm-2">Nơi cung cấp</th>
-                      <th *ngIf="loaivt_id==2" class="col-sm-1">Tính chất</th>                      
+                      <th *ngIf="loaivt_id!=2"class="col-sm-4">Mô tả</th>
+                      <th *ngIf="loaivt_id==2" class="col-sm-3">Mô tả</th> 
                     </tr>
                   </thead>
                   <tbody>
@@ -75,6 +75,9 @@
                       <td>
                         {{vattu.ten_vattu}}
                       </td>
+                      <td *ngIf="loaivt_id==2">
+                        {{vattu.ten_tinhchat}}
+                      </td>  
                       <td>
                         {{vattu.ten_loaivt}}
                       </td>
@@ -83,10 +86,7 @@
                       </td>
                       <td>
                         {{vattu.ten_trai}}
-                      </td>
-                      <td *ngIf="loaivt_id==2">
-                        {{vattu.ten_tinhchat}}
-                      </td>                     
+                      </td>            
                     </tr>
                   </tbody>
                 </table>

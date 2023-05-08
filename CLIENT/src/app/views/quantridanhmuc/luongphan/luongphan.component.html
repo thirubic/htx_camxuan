@@ -60,15 +60,14 @@
                     <tr>
                       <!-- <th class="text-center" style="width: 50px;">STT</th> -->
                       <th class="text-center col-sm-1">Chức năng</th>
-                      <th class="col-sm-1">Số lần xử lý</th>
-                      <th class="col-sm-1">Mã luống</th>
-                      <th class="col-sm-2">Tên luống</th>
-                      <th class="col-sm-1">Tên đường</th>
-                      <th class="col-sm-1">Trọng lượng</th>
-                      <th class="col-sm-1">Vị trí luống</th>
-                      <th class="col-sm-1">Mô tả</th>
-                      <th class="col-sm-2">Số lượng NL</th>                      
-                      <th class="col-sm-2">Loại phân</th>
+                      <th class="col-sm-1" style="width: 100px;">Số lần xử lý</th>
+                      <th class="col-sm-2" style="width: 400px;">Tên luống</th>
+                      <th class="col-sm-1" style="width: 100px;">Tên đường</th>
+                      <th class="col-sm-1" style="width: 150px;">Trọng lượng</th>
+                      <th class="col-sm-1" style="width: 100px;">Vị trí luống</th>
+                      <th class="col-sm-2">Số lượng NL</th>  
+                      <th class="col-sm-2">Loại phân</th> 
+                      <th class="col-sm-1">Mô tả</th>      
                       <th ></th>
                     </tr>
                   </thead>
@@ -99,10 +98,7 @@
                         <i *ngIf="luongphan.trangthai == 3" style=" padding-right: 10px; color: #28a745;" class="fa fa-circle"></i>
                         <i *ngIf="luongphan.trangthai == 1" style=" padding-right: 10px; color: red;" class="fa fa-circle"></i>
                         <i *ngIf="luongphan.trangthai == 2" style=" padding-right: 10px; color: #ffc107  ;" class="fa fa-circle"></i>
-                        <strong>{{luongphan.ma_luong}}</strong>
-                      </td>
-                      <td>
-                        {{luongphan.ten_luong}}
+                        <strong>{{luongphan.ma_luong}}</strong> - {{luongphan.ten_luong}}
                       </td>
                       <td>
                         {{luongphan.ten_duong}}
@@ -113,10 +109,7 @@
                       </td>
 
                       <td>
-                        {{luongphan.ma_duong}} - Vị trí {{luongphan.stt}}
-                      </td>
-                       <td>
-                        {{luongphan.mota}}
+                        Vị trí {{luongphan.stt}}
                       </td>
                       <td>
                         {{luongphan.soluong_nguyenlieu}}
@@ -124,6 +117,9 @@
                       <td>
                         {{luongphan.ten_loaiphan}}
                       </td>   
+                       <td>
+                        {{luongphan.mota}}
+                      </td>
                     </tr>
 
                     <!-- Đang xử lý -->
@@ -150,10 +146,7 @@
                         <i *ngIf="luongphan.trangthai == 3" style=" padding-right: 10px; color: #28a745;" class="fa fa-circle"></i>
                         <i *ngIf="luongphan.trangthai == 1" style=" padding-right: 10px; color: red;" class="fa fa-circle"></i>
                         <i *ngIf="luongphan.trangthai == 2" style=" padding-right: 10px; color: #ffc107  ;" class="fa fa-circle"></i>
-                        <strong>{{luongphan.ma_luong}}</strong>
-                      </td>
-                      <td>
-                        {{luongphan.ten_luong}}
+                        <strong>{{luongphan.ma_luong}}</strong> - {{luongphan.ten_luong}}
                       </td>
                       <td>
                         {{luongphan.ten_duong}}
@@ -162,20 +155,20 @@
                         {{luongphan.trongluong}}
                       </td>
                       <td>
-                        {{luongphan.ma_duong}} - Vị trí {{luongphan.stt}} 
+                        Vị trí {{luongphan.stt}} 
                         <a href="javascript:void(0);" (click)="Chuyenvitri(luongphan)">
                           <i class="fa fa-arrow-right" style="color: red; font-size: 20px;"></i>
                         </a>
-                      </td>
-                       <td>
-                        {{luongphan.mota}}
                       </td>
                       <td>
                         {{luongphan.soluong_nguyenlieu}}
                       </td>    
                       <td>
                         {{luongphan.ten_loaiphan}}
-                      </td>   
+                      </td> 
+                       <td>
+                        {{luongphan.mota}}
+                      </td>
                     </tr>
                      <!-- Hoàn thành -->
                      <tr>
@@ -201,10 +194,7 @@
                         <i *ngIf="luongphan.trangthai == 3" style=" padding-right: 10px; color: #28a745;" class="fa fa-circle"></i>
                         <i *ngIf="luongphan.trangthai == 1" style=" padding-right: 10px; color: red;" class="fa fa-circle"></i>
                         <i *ngIf="luongphan.trangthai == 2" style=" padding-right: 10px; color: #ffc107  ;" class="fa fa-circle"></i>
-                        <strong>{{luongphan.ma_luong}}</strong>
-                      </td>
-                      <td>
-                        {{luongphan.ten_luong}}
+                        <strong>{{luongphan.ma_luong}}</strong> - {{luongphan.ten_luong}}
                       </td>
                       <td>
                         {{luongphan.ten_duong}}
@@ -213,17 +203,17 @@
                         {{luongphan.trongluong}}
                       </td>
                       <td>
-                        {{luongphan.ma_duong}} - Vị trí {{luongphan.stt}}
+                        Vị trí {{luongphan.stt}}
                       </td>
                        <td>
-                        {{luongphan.mota}}
-                      </td>
-                      <td>
                         {{luongphan.soluong_nguyenlieu}}
                       </td>
                       <td>
                         {{luongphan.ten_loaiphan}}
-                      </td>   
+                      </td> 
+                       <td>
+                        {{luongphan.mota}}
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -263,9 +253,10 @@
             </div>
           </div>
           <ag-grid-angular
-          style="width: 100%; height: 500px;"
+          style="width: 100%; height: 700px;"
           class="ag-theme-alpine"
           [columnDefs]="columnDefs"
+          [groupDefaultExpanded]="3" 
           [defaultColDef]="defaultColDef"
           [groupDisplayType]="groupDisplayType"
           [animateRows]="true"

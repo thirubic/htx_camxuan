@@ -37,7 +37,6 @@
                   <thead>
                     <tr>
                       <th class="col-sm-1 text-center">STT</th>
-                      <th class="col-sm-1">Mã loại phân</th>
                       <th class="col-sm-2">Tên loại phân</th>
                       <th class="col-sm-1">Ghi chú</th>
                       <th class="col-sm-2"></th>
@@ -48,10 +47,7 @@
                       *ngFor="let loaiphan of loaiphans | filter:term | paginate: { itemsPerPage: 15, currentPage: p };let i = index">
                       <td class="text-center">{{i + 1 }}</td>
                       <td>
-                        <strong>{{loaiphan.ma_loaiphan}}</strong>
-                      </td>
-                      <td>
-                        {{loaiphan.ten_loaiphan}}
+                        <strong>{{loaiphan.ma_loaiphan}} - {{loaiphan.ten_loaiphan}}</strong>
                       </td>
                       <td>
                         {{loaiphan.ghichu}}

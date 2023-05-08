@@ -17,6 +17,7 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import 'ag-grid-enterprise';
 import {
   ColDef,
+  ColGroupDef,
   GridReadyEvent,
   ICellRendererParams,
   RowGroupingDisplayType,
@@ -28,10 +29,58 @@ import {
   providers: [
   ]
 })
+
+
 export class LuongphanComponent implements OnInit  {
-  columnDefs: ColDef[] = [
-    { headerName:"Trạng thái", field: 'ten_trangthai', rowGroup: true, hide: true,minWidth: 250 },
+  
+  editrow(luongphan) {    
+    console.log(luongphan)
+    const decodedData = decodeURIComponent(luongphan);
+    const objectData = JSON.parse(decodedData);
+      const initialState = { title: GlobalConstants.DIEUCHINH + " luống phân", data:objectData, ma_duong: this.ma_duong_select};
+      this.modalRef = this.modalService.show(
+        Edit_LuongphanComponent,
+        Object.assign({}, {
+          animated: true, keyboard: false, backdrop: false, ignoreBackdropClick: true
+        }, {
+          class: 'modal-lg xlg', initialState
+        }));
+
+      this.modalRef.content.event
+        .subscribe(arg => {
+          if (arg) {
+            this.getValueWithAsync().then(() =>            
+                this.isDataAvailable = true
+            );
+          }
+        });
+    
+  }
+  columnDefs: (ColDef| ColGroupDef)[] = [
+    
+    { headerName:"Loại phân", field: 'ten_loaiphan',rowGroup: true,hide: true,minWidth: 300,openByDefault: true },
+    { headerName:"Trạng thái", field: 'ten_trangthai', rowGroup: true, hide: true},
     { headerName:"Lần xủ lý", field: 'ten_lanxl', rowGroup: true, hide: true },
+    {
+      headerName: "",
+      minWidth: 120,
+      cellRenderer: (params) => {
+        const rowDataJson = params.data;
+        var dataString = encodeURIComponent(JSON.stringify(params.data));
+        if (params.node.group) {
+          return '';
+        } else {
+          return `
+            <a href="javascript:void(0);" class="edit-row" onclick="this.editrow('${(dataString)}')">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="javascript:void(0);" onclick="this.deleteluongphan('${dataString}')">
+              <i class="fa fa-times-circle" style="color: red; font-size: 20px;"></i>
+            </a>
+          `;
+        }
+      },
+    },
     {
       headerName:"Mã luống",
       field: 'ma_luong',
@@ -44,17 +93,19 @@ export class LuongphanComponent implements OnInit  {
     { headerName:"Vị trí luống", field: 'vitri_luong' },
     { headerName:"Mô tả", field: 'mota' }, 
     { headerName:"Số lượng nguyên liệu", field: 'soluong_nguyenlieu' },
-    { headerName:"Loại phân", field: 'ten_loaiphan' }
   ];
+  
   groupDefaultExpanded: -1;
   defaultColDef: ColDef = {
     flex: 1,
-    minWidth: 100,
+    minWidth: 200,
     sortable: true,
     resizable: true,
+    
     cellRenderer: 'agGroupCellRenderer',
   };
-  groupDisplayType: RowGroupingDisplayType = 'groupRows';
+  
+  groupDisplayType: RowGroupingDisplayType = 'multipleColumns';
   donvis: any[];
   soluongphan: "10";
   totalItems = 0;
@@ -105,7 +156,8 @@ export class LuongphanComponent implements OnInit  {
     this.ma_xuong_select = this.ma_xuong_user;
     this.get_danhsachxuong()
     this.getValueWithAsync().then(() =>
-      this.isDataAvailable = true);      
+      this.isDataAvailable = true);   
+       
   }
 
   async getValueWithAsync() {
@@ -205,26 +257,7 @@ export class LuongphanComponent implements OnInit  {
         });
   }
 
-  edit(luongphan) {    
-      const initialState = { title: GlobalConstants.DIEUCHINH + " luống phân", data:luongphan, ma_duong: this.ma_duong_select};
-      this.modalRef = this.modalService.show(
-        Edit_LuongphanComponent,
-        Object.assign({}, {
-          animated: true, keyboard: false, backdrop: false, ignoreBackdropClick: true
-        }, {
-          class: 'modal-lg xlg', initialState
-        }));
-
-      this.modalRef.content.event
-        .subscribe(arg => {
-          if (arg) {
-            this.getValueWithAsync().then(() =>            
-                this.isDataAvailable = true
-            );
-          }
-        });
-    
-  }
+  
   tinhtong_khoiluong(list : any){
     var tong = 0;
     list.forEach(element => {

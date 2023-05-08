@@ -55,15 +55,23 @@
         </div>
       </div>
     </div>
-    <ejs-kanban locale='vi' keyField='keyfield' [dataSource]='data' [cardSettings]='cardSettings'
+    <ejs-kanban locale='vi' keyField='keyfield' [dataSource]='data' [cardSettings]='cardSettings' style="color: aliceblue !important;"
       [swimlaneSettings]='swimlaneSettings' (dragStop)='onKanbanBDragStop($event)' (dialogOpen)="dialogOpen($event)">
       <e-columns>
-        <e-column style="font-weight: bold;" headerText='Mới' keyField='1'>
+        <e-column headerText='Mới' style="color: aliceblue !important;" keyField='1' >
         </e-column>
         <e-column headerText='Đang xử lý' keyField='2'></e-column>
         <e-column headerText='Hoàn thành' keyField='3'></e-column>
       </e-columns>
-
+      <ng-template #swimlaneSettingsTemplate let-data>
+        <div id="swimlaneTemplate">
+          <div class="swimlane-template e-swimlane-template-table">
+              <div class="e-swimlane-row-text" >
+                  <img style="height:30px;width: 30px; margin-right: 5px;" src="../../../../assets/images/slider/seed.png"/><span style="color:black !important;font-size: 14px;font-weight: bold;">{{data.textField}}</span>
+              </div>
+          </div>
+      </div>
+    </ng-template>
       <ng-template #cardSettingsTemplate let-data>
         <div class='e-card-content'>
           <div>
