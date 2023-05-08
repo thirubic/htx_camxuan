@@ -305,7 +305,6 @@ export class Edit_NhapluongComponent implements OnInit {
               const formData = {}
               obj['MA_LUONG'] = this.f.ma_luong.value;
               obj['MA_KHO'] = this.ma_kho;
-              obj['MA_PT'] = this.f.ma_pt.value;
               obj['MA_VT'] = this.f.ma_vattu.value;
               obj['SOLUONG'] = this.f.soluong.value;
               obj['DONVI_TINH'] = this.f.donvi_tinh.value;

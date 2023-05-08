@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, Input} from '@angular/core';
 import { AuthService } from '@app/_services';
-import { CardSettingsModel, SwimlaneSettingsModel, DialogSettingsModel, DialogEventArgs, DragEventArgs } from '@syncfusion/ej2-angular-kanban';
+import { CardSettingsModel, SwimlaneSettingsModel, DialogEventArgs, DragEventArgs } from '@syncfusion/ej2-angular-kanban';
 import { DataManager, UrlAdaptor } from '@syncfusion/ej2-data';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 // import { Ins_gsluongComponent } from './ins_gsluongi.component';
@@ -61,6 +61,7 @@ export class GsluongComponent {
     keyField: 'lan_xuly',
     text: 'Lần xử lý'
   }
+  thu:'thu';
   content = false;
   ma_xuong_select = '';
   ma_duong_select: '';
@@ -98,31 +99,17 @@ export class GsluongComponent {
   public data_search: any[] = [
 
   ];
+  public swimlaneSettings: SwimlaneSettingsModel = { keyField: 'ten_loaiphan',textField:'loai_luongphan',template: '#swimlaneSettingsTemplate' };
   public cardSettings: CardSettingsModel = {
     contentField: 'mota',
     headerField: 'ma_luong',
     showHeader: false,
-    //noCardsMessage: "Không có thẻ để hiển thị"
   };
-  public swimlaneSettings: SwimlaneSettingsModel = {
-    keyField: '',
-  };
-  dialogOpen(args: DialogEventArgs): void {
+  dialogOpen(args: DialogEventArgs): void { 
     args.cancel = true;
   }
-  viewbyboard() {
-    this.swimlaneSettings = {
-      keyField: '',
-    };
-    console.log('Assignee');
-  }
 
-  viewbynhansu() {
-    this.swimlaneSettings = {
-      keyField: 'ngay_batdau',
-      textField: 'ngay_batdau'
-    };
-  }
+  
 
   EnableDropdown(){
     this.content = !this.content
